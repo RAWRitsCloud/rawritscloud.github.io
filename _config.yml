@@ -1,5 +1,3 @@
-
-
 title: RAWRitsCloud
 description: >- # this means to ignore newlines until "baseurl:"
   Just a guy blogging about his journey in the cloud,
@@ -11,8 +9,8 @@ site-twitter: rawritscloud #if your site has a twitter account, enter it here
 
 # Author Settings
 author: James Murray-Ferris # add your name
-author-img: /assets/img/logo.png # add your photo
-about-author: I am a web developer focusing on front-end development. Always hungry to keep learning. # add description
+author-img: logo.png # add your photo
+about-author: Just a guy blogging about his journey in the cloud, writting about Terraform, Azure DevOps, Azure and sometimes AWS. # add description
 social-twitter: rawritscloud # add your Twitter handle
 social-facebook: rawritscloud # add your Facebook handle
 social-github: rawritscloud # add your Github handle
