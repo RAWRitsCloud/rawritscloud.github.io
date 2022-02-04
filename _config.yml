@@ -23,7 +23,6 @@ email: james@rawritscloud.com
 description: >- # this means to ignore newlines until "baseurl:"
   Just a guy blogging about his journey in the cloud,
   writting about Terraform, Azure DevOps, Azure and sometimes AWS
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.rawritscloud.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: rawritscloud
 github_username:  rawritscloud
