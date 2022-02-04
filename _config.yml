@@ -30,7 +30,7 @@ twitter_username: rawritscloud
 github_username:  rawritscloud
 
 # Build settings
-theme: jekyll-theme-minimal
+remote_theme: artemsheludko/flexible-jekyll
 plugins:
   - jekyll-feed
 
