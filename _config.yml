@@ -27,7 +27,7 @@ twitter_username: rawritscloud
 github_username:  rawritscloud
 
 # Build settings
-theme: jekyll-theme-cayman
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
