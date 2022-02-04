@@ -29,7 +29,7 @@ twitter_username: rawritscloud
 github_username:  rawritscloud
 
 # Build settings
-theme: minima
+theme: jekyll-theme-slate
 plugins:
   - jekyll-feed
 
