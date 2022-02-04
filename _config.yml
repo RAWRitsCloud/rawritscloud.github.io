@@ -1,55 +1,31 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you: 
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+
 
 title: RAWRitsCloud
-email: james@rawritscloud.com
 description: >- # this means to ignore newlines until "baseurl:"
   Just a guy blogging about his journey in the cloud,
   writting about Terraform, Azure DevOps, Azure and sometimes AWS
 url: https://www.rawritscloud.com
+permalink: ':title/'
 baseurl: ""
-logo: /assets/img/logo.png
-twitter_username: rawritscloud
-github_username:  rawritscloud
+site-twitter: rawritscloud #if your site has a twitter account, enter it here
+
+# Author Settings
+author: James Murray-Ferris # add your name
+author-img: /assets/img/logo.png # add your photo
+about-author: I am a web developer focusing on front-end development. Always hungry to keep learning. # add description
+social-twitter: rawritscloud # add your Twitter handle
+social-facebook: rawritscloud # add your Facebook handle
+social-github: rawritscloud # add your Github handle
+social-linkedin: jrmurray86 # add your Linkedin handle
+social-email: james@rawritscloud.com # add your Email address
 
 # Build settings
 remote_theme: artemsheludko/flexible-jekyll
+markdown: kramdown
 plugins:
-  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jemoji
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+paginate: 8
+paginate_path: "/page/:num"
