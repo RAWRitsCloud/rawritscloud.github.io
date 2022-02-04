@@ -8,8 +8,9 @@ layout: default
 
 {% for post in site.posts %}
 
-[{{ post.title }}](/_posts/{{ post.url }})
-{{ post.categories }}
+## [{{ post.title }}](/_posts/{{ post.url }})
+
+Category: {{ post.categories }}
 {{ post.excerpt }}
 
 {% endfor %}
