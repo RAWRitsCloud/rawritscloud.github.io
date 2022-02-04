@@ -4,13 +4,11 @@
 
 layout: default
 ---
-# My Posts
+# A Cloud guy just blogging his journey
+RAWR (that means Hi in Dinosaur), I'm James...I'm just a guy blogging cloud and hopefully dropping some useful information along the way!
 
 {% for post in site.posts %}
-
 ## [{{ post.title }}]({{ post.url }})
-
 Category: {{ post.categories }}
 {{ post.excerpt }}
-
 {% endfor %}
