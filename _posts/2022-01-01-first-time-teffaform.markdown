@@ -6,7 +6,8 @@ tags: [Terraform, IaC, Azure, IaaS]
 categories: [Terraform, IaC, Azure, IaaS]
 image: assets/images/terraform.png 
 description: "How to start using IaaS Services in Azure."
-featured: true
+excerpt: "How to start using IaaS Services in Azure."
+featured: false
 ---
 
 ## Install Terraform
