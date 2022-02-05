@@ -2,7 +2,8 @@
 layout: post
 title:  "Building a Virtual Machine in Azure using Terraform"
 author: james
-tags: [Terraform, IaC, Azure, VMs]
+tags: [Terraform, IaC, Azure, IaaS]
+categories: [Terraform, IaC, Azure, IaaS]
 image: assets/images/terraform.png 
 description: "How to start using IaaS Services in Azure."
 featured: true
