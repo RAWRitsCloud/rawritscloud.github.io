@@ -3,7 +3,7 @@ name: "RAWRitsCloud"
 title: "RAWRitsCloud"
 description: "A guy blogging cloud!"
 logo: 'assets/img/logo.png'
-favicon: 'assets/img/logo.png'
+favicon: 'assets/images/logo.png'
 baseurl: /
 disqus: 'rawritscloud'
 include: ["_pages"]
