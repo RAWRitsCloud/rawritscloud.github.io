@@ -13,5 +13,5 @@ However going into Tech it was apparent I was going to need a work handle as wel
 
 ## RAWRitsJ(ames)
 
-![Picture of James](assets/images/james.jpg | width=125)
+![Picture of James](assets/images/james.jpg|width=125)
 Hi I'm James! I'm a 30 somthing Cloud Consultant who currently works for BT, I've been working with Azure for nearly 6 years and been dabling with AWS for about 3. I'm married to my Husabnd Donal and we have 2 boys.
