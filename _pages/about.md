@@ -1,35 +1,17 @@
 ---
 layout: page
-title: Mediumish Template for Jekyll
+title: About Me
 permalink: /about
-comments: true
+comments: false
 ---
 
-<div class="row justify-content-between">
-<div class="col-md-8 pr-5">
+## What's with the Dinosaurs?
 
-<p>This website is built with Jekyll and Mediumish template for Jekyll. It's for demonstration purposes, no real content can be found. Mediumish template for Jekyll is compatible with Github pages, in fact even this demo is created with Github Pages and hosted with Github.</p>
+Many moons ago when first starting on Twitter I needed a username, I was young and stupid and decided that RAWR meant Hi in Dinosaur (especially since I was told this as a child) so I went with RAWRitsJ which is still my personal handle today.
 
-<p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/mediumish-jekyll-template.png" alt="jekyll template mediumish" /></p>
-<h4>Documentation</h4>
+However going into Tech it was apparent I was going to need a work handle as well to focus my timeline and tweet more relavant tech and RAWRitsCloud became that handle continuing on the notion that RAWR means Hi in Dinosaur...and that is why we have the Dinosaurs everywhere!
 
-<p>Please, read the docs <a href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/">here</a>.</p>
+## RAWRitsJ(ames)
 
-<h4>Questions or bug reports?</h4>
-
-<p>Head over to our <a href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Github repository</a>!</p>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="sticky-top sticky-top-80">
-<h5>Buy me a coffee</h5>
-
-<p>Thank you for your support! Your donation helps me to maintain and improve <a target="_blank" href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Mediumish <i class="fab fa-github"></i></a>.</p>
-
-<a target="_blank" href="https://www.wowthemes.net/donate/" class="btn btn-danger">Buy me a coffee</a> <a target="_blank" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/" class="btn btn-warning">Documentation</a>
-
-</div>
-</div>
-</div>
+![Picture of James](assets/images/james.jpeg =125px)
+Hi I'm James! I'm a 30 somthing Cloud Consultant who currently works for BT, I've been working with Azure for nearly 6 years and been dabling with AWS for about 3. I'm married to my Husabnd Donal and we have 2 boys.
