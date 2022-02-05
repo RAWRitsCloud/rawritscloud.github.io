@@ -45,6 +45,11 @@ paginate_path: /page:num/
 # Other
 markdown: kramdown
 
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+
 # Lazy Images ("enabled" or "disabled")
 lazyimages: "disabled"
 
