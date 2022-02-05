@@ -1,29 +1,62 @@
-title: RAWRitsCloud
-description: >- # this means to ignore newlines until "baseurl:"
-  Just a guy blogging about his journey in the cloud,
-  writting about Terraform, Azure DevOps, Azure and sometimes AWS
-url: https://www.rawritscloud.com
-permalink: ':title/'
-baseurl: ""
-site-twitter: rawritscloud #if your site has a twitter account, enter it here
+# Site
+name: "RAWRitsCloud"
+title: "RAWRitsCloud"
+description: "A guy blogging cloud!"
+logo: 'assets/img/logo.png'
+favicon: 'assets/img/logo.png'
+baseurl: /
+disqus: 'rawritscloud'
+include: ["_pages"]
+permalink: /:title/
 
-# Author Settings
-author: James Murray-Ferris # add your name
-author-img: logo.png # add your photo
-about-author: Just a guy blogging about his journey in the cloud, writting about Terraform, Azure DevOps, Azure and sometimes AWS. # add description
-social-twitter: rawritscloud # add your Twitter handle
-social-facebook: rawritscloud # add your Facebook handle
-social-github: rawritscloud # add your Github handle
-social-linkedin: jrmurray86 # add your Linkedin handle
-social-email: james@rawritscloud.com # add your Email address
+# Authors
+authors:
+  james:
+    name: James Murray-Ferris
+    display_name: James
+    gravatar: 276438a1f866f154bb25afba1226a359
+    email: james@rawritscloud.com
+    twitter: https://twitter.com/rawritscloud
+    description: "Author of Mediumish, a Bootstrap Medium styled template available for WordPress, HTML, Ghost and Jekyll. You are currently previewing Jekyll template demo."
 
-# Build settings
-remote_theme: wowthemesnet/jekyll-theme-memoirs
-markdown: kramdown
+# Plugins
 plugins:
-  - jekyll-sitemap
   - jekyll-paginate
-  - jemoji
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
+    
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+  layout: archive
+  permalinks:
+    category: '/category/:name/'
+    
+# Pagination 
+paginate: 6
+paginate_path: /page:num/
+    
+# Other
+markdown: kramdown
 
-paginate: 8
-paginate_path: "/page/:num"
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
+# Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
+adsense: "disabled"
+adsense-data-ad-client: "ca-pub-3412143450191416"
+adsense-data-ad-slot: "1363087678"
+
+# Lazy Images ("enabled" or "disabled")
+lazyimages: "disabled"
+
+exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
+# Build settings
+remote_theme: wowthemesnet/mediumish-theme-jekyll
