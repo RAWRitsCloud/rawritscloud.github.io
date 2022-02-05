@@ -8,6 +8,7 @@ baseurl: /
 disqus: 'rawritscloud'
 include: ["_pages"]
 permalink: /:title/
+google_analytics: G-KF3S06QS9L
 
 # Authors
 authors:
