@@ -660,7 +660,7 @@ ul.tags li a:hover {
     margin: 1rem 0;
 }
 
-.sociallinks a {
+.sociallinks {
     background: #666;
     color: #fff;
     width: 22px;
@@ -672,35 +672,35 @@ ul.tags li a:hover {
     font-size: 12px;
 }
 
-.socialtwitter a {
+.socialtwitter {
     color: #1DA1F2 !important;
     width: 22px;
     padding-right: 2px;
     padding-left: 2px;
 }
 
-.sociallinkedin a {
+.sociallinkedin {
     color: #2867B2 !important;
     width: 22px;
     padding-right: 2px;
     padding-left: 2px;
 }
 
-.socialfacebook a {
+.socialfacebook {
     color: #4267B2 !important;
     width: 22px;
     padding-right: 2px;
     padding-left: 2px;
 }
 
-.socialinsta a {
+.socialinsta {
     color: #E1306C !important;
     width: 22px;
     padding-right: 2px;
     padding-left: 2px;
 }
 
-.socialemail a {
+.socialemail {
     color: #b2f31a !important;
     width: 22px;
     padding-right: 2px;
