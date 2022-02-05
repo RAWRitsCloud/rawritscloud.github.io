@@ -672,6 +672,12 @@ ul.tags li a:hover {
     font-size: 12px;
 }
 
+.social-twitter a {
+    color: #1DA1F2;
+    width: 22px;
+    padding-right: 5px;
+}
+
 #comments {
     margin-top: 3rem;
     margin-bottom: 1.5rem;
