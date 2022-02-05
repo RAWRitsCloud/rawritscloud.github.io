@@ -48,8 +48,18 @@ author: james
                     <h5 class="card-title">Contact Me...</h5>
                     <p class="card-text">
                         You can find me on several platforms listed below.
-                        <br />
-                        <a class="btn btn-primary" href="{{$author.twitter}}"><span class="iconify" data-icon="mdi-twitter"></span> Twitter</a>
+                    <div class="btn-group" role="group" aria-label="socials">
+                        <a class="btn btn-info" href="{{$author.twitter}}"><span class="iconify"
+                                data-icon="mdi-twitter"></span> Twitter</a>
+                        <a class="btn btn-primary" href="{{$author.linkedin}}"><span class="iconify"
+                                data-icon="mdi-linkedin"></span> LinkedIn</a>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="socials">
+                        <a class="btn btn-danger" href="{{$author.instagram}}"><span class="iconify"
+                                data-icon="mdi-instagram"></span> Instagram</a>
+                        <a class="btn btn-primary" href="{{$author.facebook}}"><span class="iconify"
+                                data-icon="mdi-linkedin"></span> Facebook</a>
+                    </div>
                     </p>
                 </div>
             </div>
