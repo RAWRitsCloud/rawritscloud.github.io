@@ -673,9 +673,38 @@ ul.tags li a:hover {
 }
 
 .social-twitter a {
-    color: #1DA1F2;
+    color: #1DA1F2 !important;
     width: 22px;
-    padding-right: 5px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.social-linkedin a {
+    color: #2867B2 !important;
+    width: 22px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.social-facebook a {
+    color: #4267B2 !important;
+    width: 22px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.social-insta a {
+    color: #E1306C !important;
+    width: 22px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.social-email a {
+    color: #b2f31a !important;
+    width: 22px;
+    padding-right: 2px;
+    padding-left: 2px;
 }
 
 #comments {
