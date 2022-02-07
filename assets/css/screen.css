@@ -3,6 +3,11 @@ Template Name: Mediumish
 Copyright: Sal, WowThemes.net, https://www.wowthemes.net 
 License: https://www.wowthemes.net/freebies-license/ 
 */
+
+.certimage {
+    width: 144px;
+}
+
 @media screen and (min-width:1500px) {
     html { font-size:18px; } /* Increase the font size on higher resolutions */
     .container {max-width:80%;}
@@ -881,10 +886,6 @@ iframe {
     .share {
         margin-top: 30px;
     }
-}
-
-.certimage {
-    width: 144px;
 }
 
 .card .img-fluid {
