@@ -41,7 +41,7 @@ title: Home
     <div class="row listrecent">
 
         {% for tag in site.tags %}
-        <a class="text-capitalize" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " ","-" }}>#{{ tag[0] }}</a>
+        <a class="text-capitalize" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " ","-" }}">#{{ tag[0] }}</a>
         {% endfor %}
 
         {% for post in paginator.posts %}
