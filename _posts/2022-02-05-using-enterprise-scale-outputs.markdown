@@ -4,6 +4,7 @@ title:  "Making sense of Microsoft Enterprise Scale Terraform Module Outputs"
 author: james
 tags: [CAF, EnterpriseScale, Outputs, Locals]
 categories: [Terraform, Azure]
+permalink: /using-enterprise-scale-outputs
 image: assets/images/posts/enterprise-scale-image.jpg
 description: "Looking into how to make the outputs in Enterprise Scale a little more usable."
 excerpt: "Looking into how to make the outputs in Enterprise Scale a little more usable."

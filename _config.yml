@@ -7,7 +7,7 @@ favicon: 'assets/images/logo.png'
 baseurl: /
 disqus: 'rawritscloud'
 include: ["_pages"]
-permalink: /:title/
+permalink: /:categories/:year/:month/:day/:title
 google_analytics: G-KF3S06QS9L
 email: james@rawritscloud.com
 twitter: https://twitter.com/rawritscloud
