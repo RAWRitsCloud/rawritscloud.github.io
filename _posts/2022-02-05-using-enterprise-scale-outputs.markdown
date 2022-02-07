@@ -13,7 +13,7 @@ featured: true
 
 The [Enterprise Scale Terraform module by Microsoft](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest) has been getting alot of attention, it is Microsofts goal to try and deploy consistent environments on Azure according to their Cloud Adoption Framework model.
 
-We've been using it to deploy to customers in a repetable way however we needed to extend its functionality to include some additional monitoring configurations and some Azure Alerts. To do this our work group created some Policy definitions that we deployed in using the Microsoft module and then we assing them in our in house developed Monitoring Module.
+We've been using it to deploy to customers in a repetable way however we needed to extend its functionality to include some additional monitoring configurations and some Azure Alerts. To do this our work group created some Policy definitions that we deployed using the Microsoft module and then we assigning them in our in house developed Monitoring Module.
 
 This is when we started to run into problems!
 
