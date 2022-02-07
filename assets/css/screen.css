@@ -5,7 +5,8 @@ License: https://www.wowthemes.net/freebies-license/
 */
 
 .certimage {
-    width: 144px;
+    width: 165px;
+    padding: 5px;
 }
 
 @media screen and (min-width:1500px) {
