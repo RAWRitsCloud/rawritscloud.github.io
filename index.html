@@ -5,6 +5,10 @@ title: Home
 
 {% if page.url == "/" %}
 
+{% for tag in site.tags %}
+<span id="{{ tag[0] | replace: " ","-" }}" class="badge badge-pill badge-dark text-capitalize">{{ tag[0] }}</span>
+{% endfor %}
+
 <!-- Featured
 ================================================== -->
 <section class="featured-posts">
