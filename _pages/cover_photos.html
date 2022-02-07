@@ -1,0 +1,16 @@
+---
+layout: default
+title: Photo Credits
+permalink: /photocredits
+---
+
+<p>All the photos used on this site are obtained from <a href="https://unsplash.com">Unsplash</a>, the internet’s source of freely-usable images.</p>
+<p>Each Post contains the attributation tag in its metadata and is avaliable in the list below.</p>
+
+<ul>
+    {% for post in site.posts %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a> - {{ post.coverattribute }}
+      </li>
+    {% endfor %}
+  </ul>
