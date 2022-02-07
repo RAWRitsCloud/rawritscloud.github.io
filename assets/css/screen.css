@@ -883,6 +883,10 @@ iframe {
     }
 }
 
+.certimage {
+    width: 144px;
+}
+
 .card .img-fluid {
     width: 100%;
 }
