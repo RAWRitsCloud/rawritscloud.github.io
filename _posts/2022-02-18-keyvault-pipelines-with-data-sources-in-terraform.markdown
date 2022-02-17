@@ -17,7 +17,7 @@ There is 2 ways to manage access policies in Terraform when it comes to Key Vaul
 These 2 methods conflict with each other when you try to use them both as per the warning at the top of the Key Vault Resource page.
 ![Screenshot of Key Vault warning of Access Policies](/assets/images/posts/assets/keyvault-in-terraform-keyvaultwarning.png)
 
-## There inlyes the problem
+## Therein lies the problem
 
 What if you need to use both though? Because you're playing chicken and egg with your permissions.
 
