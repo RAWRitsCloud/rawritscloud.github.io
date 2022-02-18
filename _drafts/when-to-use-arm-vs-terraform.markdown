@@ -2,7 +2,7 @@
 layout: post
 title:  "When to use ARM templates vs Terraform code"
 author: james
-date: 2022-02-25 18:00 +0000
+date: 2022-02-25 00:01 +0000
 tags: [IaC, Templates, ARM, Bicep]
 categories: [Terraform, Azure, ARM, Bicep]
 image: assets/images/posts/when-to-use-arm-vs-terraform.jpg
