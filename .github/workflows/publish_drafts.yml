@@ -2,17 +2,7 @@ name: Publish Blog Drafts
 
 on:
   workflow_dispatch:
-    inputs:
-        logLevel:
-          description: 'Log level'     
-          required: true
-          default: 'warning' 
-          type: choice
-          options:
-          - info
-          - warning
-          - debug 
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
