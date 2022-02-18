@@ -12,7 +12,7 @@ coverattribute: Photo by <a href="https://unsplash.com/@jdent?utm_source=unsplas
 ---
 ## Access Policy Resources vs Embedded Access Policy
 
-There is 2 ways to manage access policies in Terraform when it comes to Key Vault. You either use [<https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy](azurerm_key_vault_access_policy) or you use the "access_policy" block inside the [<https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault](azurerm_key_vault)
+There is 2 ways to manage access policies in Terraform when it comes to Key Vault. You either use [azurerm_key_vault_access_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) or you use the "access_policy" block inside the [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
 
 These 2 methods conflict with each other when you try to use them both as per the warning at the top of the Key Vault Resource page.
 ![Screenshot of Key Vault warning of Access Policies](/assets/images/posts/assets/keyvault-in-terraform-keyvaultwarning.png)
