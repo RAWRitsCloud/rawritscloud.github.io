@@ -33,7 +33,13 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-archives
-    
+
+# Collections (tags)
+collections:
+  tags:
+    output: true
+    permalink: tags/:path/
+
 # Archives
 jekyll-archives:
   enabled:
@@ -41,7 +47,7 @@ jekyll-archives:
   layout: archive
   permalinks:
     category: '/category/:name/'
-    
+
 # Pagination 
 paginate: 6
 paginate_path: /page:num/
