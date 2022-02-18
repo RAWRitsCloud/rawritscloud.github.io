@@ -3,6 +3,7 @@ name: Publish Blog Drafts
 on:
   schedule:
     - cron: '1,5,10,15,20,25 * * * *'
+  workflow_dispatch
 
 jobs:
   build:
