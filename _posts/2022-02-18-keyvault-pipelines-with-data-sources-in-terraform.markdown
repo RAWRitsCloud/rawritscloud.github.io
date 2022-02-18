@@ -12,7 +12,7 @@ coverattribute: Photo by <a href="https://unsplash.com/@jdent?utm_source=unsplas
 ---
 ## Access Policy Resources vs Embedded Access Policy
 
-There is 2 ways to manage access policies in Terraform when it comes to Key Vault. You either use [azurerm_key_vault_access_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) or you use the "access_policy" block inside the [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
+There is 2 ways to manage access policies in Terraform when it comes to Key Vault. You either use [azurerm_key_vault_access_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy){:target="_blank"} or you use the "access_policy" block inside the [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault){:target="_blank"}
 
 These 2 methods conflict with each other when you try to use them both as per the warning at the top of the Key Vault Resource page.
 ![Screenshot of Key Vault warning of Access Policies](/assets/images/posts/assets/keyvault-in-terraform-keyvaultwarning.png)
@@ -35,7 +35,7 @@ By no means am I saying that is the right or recommended solution, as often with
 
 I've put the code below where I am doing exactly what we are warned we cannot do. I've used the block to the data component so that the Pipeline Service Principal will not be removed and then I've created my logic app's managed idenity as a seperate resource.
 
-How I've got around this is by using `lifecycle` condition which essentially makes Terraform ignore if there is an update to the access policies. As I have said this is not right or recommended it is simply a workaround! [Lifecycle Policies in Terraform](https://www.terraform.io/language/meta-arguments/lifecycle)
+How I've got around this is by using `lifecycle` condition which essentially makes Terraform ignore if there is an update to the access policies. As I have said this is not right or recommended it is simply a workaround! [Lifecycle Policies in Terraform](https://www.terraform.io/language/meta-arguments/lifecycle){:target="_blank"}
 
 ```hcl
 resource "azurerm_key_vault" "mgmt_keyvault" {
