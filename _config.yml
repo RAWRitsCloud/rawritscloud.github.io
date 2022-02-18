@@ -34,12 +34,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-archives
 
-# Collections (tags)
-collections:
-  tags:
-    output: true
-    permalink: tags/:path/
-
 # Archives
 jekyll-archives:
   enabled:
