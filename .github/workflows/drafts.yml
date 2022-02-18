@@ -15,5 +15,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         jekyll_path: ./
-        branch: main
+        branch: gh-pages
         
