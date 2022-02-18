@@ -1,0 +1,21 @@
+- name: Jekyll Publish Drafts
+  uses: soywiz-archive/github-action-jekyll-publish-drafts@v2
+
+name: Publish Blog Drafts
+
+on:
+  schedule:
+    - cron: '30 */1 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Jekyll Publish Drafts
+      uses: soywiz/github-action-jekyll-publish-drafts@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        jekyll_path: ./
+        branch: main
