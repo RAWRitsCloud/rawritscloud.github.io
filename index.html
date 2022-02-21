@@ -11,16 +11,24 @@ title: Home
     <div class="section-title">
         <h2><span>Featured</span></h2>
     </div>
+    <div class="section-title">
+        <h2><span>Tags</span></h2>
+    </div>
     <div class="row">
+        <div class="col-md-6 mb-30px">
 
-        {% assign fp = site.posts | where: 'featured', true %}
+            {% assign fp = site.posts | where: 'featured', true %}
 
-        {% for fp in site.posts limit:1 %}
+            {% for fp in site.posts limit:1 %}
 
             {% include featuredbox.html %}
 
-        {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="col-md-6 mb-30px">
 
+            
+        </div>
     </div>
 </section>
 
