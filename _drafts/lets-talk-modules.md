@@ -37,6 +37,10 @@ As with everything you need some process to make sure your modules are needed an
 - Circle the Design document to the users
 - Create Git Repo from Template (we'll talk about that in a later blog!)
 
+With these simple steps what you will have is a rich documentation library that can be turned into Markdown pages and logged within the module itself or as Word Documents kept in your collaboration envrionment (like Teams or Confluence). 
+
+By implementing the processes you are showing value to the business and how they will help your business units moving forward, if that is to implement a module via a Service Desk ticket or Consultancy Projects.
+
 ## Module Sprawl
 
 Creating a module is easy enough and I'm sure you will soon have a library of 100's, however like many thinks you might suffer with module sprawl. I've seen modules created that only include 1 resource making it a very pointless module in my option.
