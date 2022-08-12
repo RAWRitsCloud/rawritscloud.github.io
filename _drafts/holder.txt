@@ -1,3 +1,0 @@
-Empty File
-
-This is here so Actions don't fail as folders can't be empty
