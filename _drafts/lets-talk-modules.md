@@ -13,9 +13,9 @@ coverattribute: Photo by <a href="https://unsplash.com/@sigmund?utm_source=unspl
 ---
 ## What is a Module?
 
-Modules is one of the buzzwords you hear around Terraform and for good reason! Modules are a folder for all intensive purposes that contain your everyday Terraform code, however they serve a different purpose to your normal Terraform files as there aim to be deployed in a repetable fashion.
+Modules is one of the buzzwords you hear around Terraform and for good reason! Modules are a folder for all intensive purposes that contain your everyday Terraform code, however they serve a different purpose to your normal Terraform files as there aim to be deployed in a repeatable fashion.
 
-An excellent example of a module is the Microsoft Enterprise Scale\Landing Zones Module that I've talked about on this blog before. That deploys Policy and Management in Microsofts recommended pattern but at the same time allows you to complete customise almost every aspect of it.
+An excellent example of a module is the Microsoft Enterprise Scale\Landing Zones Module that I've talked about on this blog before. That deploys Policy and Management in Microsoft's recommended pattern but at the same time allows you to complete customise almost every aspect of it.
 
 Another example from BT is we have a module to deploy the Service Desk Monitoring items which include Policy assignments, Alerts, Logic Apps, Roles, Key Vaults, Log Analytics Gateway and Monitoring configuration profile for SQL Insights.
 
@@ -37,7 +37,7 @@ As with everything you need some process to make sure your modules are needed an
 - Circle the Design document to the users
 - Create Git Repo from Template (we'll talk about that in a later blog!)
 
-With these simple steps what you will have is a rich documentation library that can be turned into Markdown pages and logged within the module itself or as Word Documents kept in your collaboration envrionment (like Teams or Confluence). 
+With these simple steps what you will have is a rich documentation library that can be turned into Markdown pages and logged within the module itself or as Word Documents kept in your collaboration environment (like Teams or Confluence).
 
 By implementing the processes you are showing value to the business and how they will help your business units moving forward, if that is to implement a module via a Service Desk ticket or Consultancy Projects.
 
