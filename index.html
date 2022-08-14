@@ -8,63 +8,62 @@ title: Home
 <!-- Featured
 ================================================== -->
 <section class="featured-posts">
-    <div class="row">
-        <div class="col-md-12 mb-30px">
-            <div class="section-title">
-                <h2><span>Featured</span></h2>
-            </div>
-
-            {% assign fp = site.posts | where: 'featured', true %}
-
-            {% for fp in site.posts limit:2 %}
-
-            {% include featuredbox.html %}
-
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-{% endif %}
-
-<!-- Posts Index
-================================================== -->
-<section class="recent-posts">
-
     <div class="section-title">
-
-        <h2><span>All Stories</span></h2>
-
+        <h2><span>Featured</span></h2>
     </div>
-
     <div class="row">
-        <ul class="tags">
-            {% for tag in site.tags %}
-            <li>
-                <a class="text-capitalize" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " "," -" }}" class="">#{{
-                    tag[0] }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
 
-    <div class="row listrecent">
+        {% assign fp = site.posts | where: 'featured', true %}
 
-        {% for post in paginator.posts %}
+        {% for fp in site.posts limit:2 %}
 
-        {% include postbox.html %}
+        {% include featuredbox.html %}
 
         {% endfor %}
 
     </div>
 
-</section>
+    {% endif %}
 
-<!-- Pagination
+    <!-- Posts Index
 ================================================== -->
-<div class="bottompagination">
-    <div class="pointerup"><i class="fa fa-caret-up"></i></div>
-    <span class="navigation" role="navigation">
-        {% include pagination.html %}
-    </span>
-</div>
+    <section class="recent-posts">
+
+        <div class="section-title">
+
+            <h2><span>All Stories</span></h2>
+
+        </div>
+
+        <div class="row">
+            <ul class="tags">
+                {% for tag in site.tags %}
+                <li>
+                    <a class="text-capitalize" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " "," -" }}"
+                        class="">#{{
+                        tag[0] }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="row listrecent">
+
+            {% for post in paginator.posts %}
+
+            {% include postbox.html %}
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- Pagination
+================================================== -->
+    <div class="bottompagination">
+        <div class="pointerup"><i class="fa fa-caret-up"></i></div>
+        <span class="navigation" role="navigation">
+            {% include pagination.html %}
+        </span>
+    </div>
