@@ -35,17 +35,14 @@ title: Home
 
         </div>
 
-        <div class="row">
-            <ul class="tags">
-                {% for tag in site.tags %}
-                <li>
-                    <a class="text-capitalize" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " "," -" }}"
-                        class="">#{{
-                        tag[0] }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <ul class="tags">
+            {% for tag in site.tags %}
+            <li>
+                <a class="text-capitalize" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " "," -" }}" class="">#{{
+                    tag[0] }}</a>
+            </li>
+            {% endfor %}
+        </ul>
 
         <div class="row listrecent">
 
