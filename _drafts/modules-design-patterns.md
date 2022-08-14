@@ -16,7 +16,6 @@ coverattribute: Photo by <a href="https://unsplash.com/@medbadrc?utm_source=unsp
 
 When you are building modules its always good to think about making them available on the Terraform Modules directory however we all know that simply isn't practical especially if that might form some sort of IP for your product/service that your business offers.
 
-The answer on where to store them though is dependant on your Source Control systems, the way we do it at BT is using our Azure DevOps instance. We have a single Project with multiple Git repos that store each module. 
+The answer on where to store them though is dependant on your Source Control systems, the way we do it at BT is using our Azure DevOps instance. We have a single Project with multiple Git repos that store each module.
 
 This pattern doesn't work in GitHub of course and would just be independent repos in GitHub or you could create a single Repo with a folder structure for each module.
-
