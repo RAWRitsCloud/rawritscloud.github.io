@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Terraform Modules, design patterns"
+title:  "Terraform Modules, organising the modules"
 author: james
 date: 2022-08-26 00:01 +0000
 tags: [IaC, Templates, Terraform]
@@ -19,3 +19,4 @@ When you are building modules its always good to think about making them availab
 The answer on where to store them though is dependant on your Source Control systems, the way we do it at BT is using our Azure DevOps instance. We have a single Project with multiple Git repos that store each module. 
 
 This pattern doesn't work in GitHub of course and would just be independent repos in GitHub or you could create a single Repo with a folder structure for each module.
+
