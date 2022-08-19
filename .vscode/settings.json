@@ -1,5 +1,17 @@
 {
-    "cSpell.words": [
-        "coverattribute"
+    "cSpell.words": ["coverattribute"],
+    "favorites.resources": [
+        {
+            "filePath": "assets/images/posts",
+            "group": "Default"
+        },
+        {
+            "filePath": "_drafts",
+            "group": "Default"
+        },
+        {
+            "filePath": "_posts",
+            "group": "Default"
+        }
     ]
 }
