@@ -9,10 +9,22 @@ License: https://www.wowthemes.net/freebies-license/
     padding: 5px;
 }
 
-@media screen and (min-width:1500px) {
-    html { font-size:18px; } /* Increase the font size on higher resolutions */
-    .container {max-width:80%;}
+.about-socials {
+    width: 100%;
+    margin-bottom: 7px;
 }
+
+@media screen and (min-width:1500px) {
+    html {
+        font-size: 18px;
+    }
+
+    /* Increase the font size on higher resolutions */
+    .container {
+        max-width: 80%;
+    }
+}
+
 .mainheading {
     padding: 1rem 0rem;
 }
