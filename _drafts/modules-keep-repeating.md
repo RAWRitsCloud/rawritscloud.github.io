@@ -123,7 +123,7 @@ vm_policies = {
 
 The repeatability of the module is probably the most important part, the most common example of module repeating that I can think of is when you want multiple regions (there are many other reasons but pretty sure this would be the most common). For me this discounts the possibility of using Count and only makes sense to use a ``for_each`` loop with a map as the example below.
 
-#### Modules - main.tf
+### Modules - main.tf
 
 ```hcl
 module "hub" {
@@ -135,7 +135,7 @@ module "hub" {
   hub_address_prefix = each.value["hub_address_prefix"]
 ```
 
-#### Modules - terraform.tfvars
+### Modules - terraform.tfvars
 
 ```hcl
 hubs = {
