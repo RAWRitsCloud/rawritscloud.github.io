@@ -22,7 +22,10 @@
 
     <script src="//code.iconify.design/1/1.0.6/iconify.min.js"></script>
 
-    <!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/da1cc39ab0fa16a849728747/script.js"></script> <!-- End cookieyes banner -->
+    <!-- Start cookieyes banner -->
+    <script id="cookieyes" type="text/javascript"
+        src="https://cdn-cookieyes.com/client_data/da1cc39ab0fa16a849728747/script.js"></script>
+    <!-- End cookieyes banner -->
 
 </head>
 
@@ -30,11 +33,11 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KF3S06QS9L"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', '{{ site.google_analytics }}');
+    gtag('config', '{{ site.google_analytics }}');
 </script>
 {% endif %}
 
@@ -71,11 +74,21 @@
 
                 <!-- Begin Menu -->
                 <ul class="navbar-nav ml-auto">
+                    <form class="form-inline my-2 my-lg-0" action="search">
+                        <input class="form-control mr-sm-2" id="tipue_search_input" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
                     <li class="nav-item" style="padding-top:0.5em">
-                        <a class="nav-link" style="display:inline;" href="{{ site.github }}" target="_blank"><span class="iconify" data-icon="mdi-github" data-width="25" data-height="25"></span></a>
-                        <a class="nav-link" style="display:inline;" href="{{ site.linkedin }}" target="_blank"><span class="iconify" data-icon="mdi-linkedin" data-width="25" data-height="25"></span></a>
-                        <a class="nav-link" style="display:inline;" href="{{ site.twitter }}" target="_blank"><span class="iconify" data-icon="mdi-twitter" data-width="25" data-height="25"></span></a>
-                        <a class="nav-link" style="display:inline;" href="{{ site.facebook }}" target="_blank"><span class="iconify" data-icon="mdi-facebook" data-width="25" data-height="25"></span></a>
+                        <a class="nav-link" style="display:inline;" href="{{ site.github }}" target="_blank"><span
+                                class="iconify" data-icon="mdi-github" data-width="25" data-height="25"></span></a>
+                        <a class="nav-link" style="display:inline;" href="{{ site.linkedin }}" target="_blank"><span
+                                class="iconify" data-icon="mdi-linkedin" data-width="25" data-height="25"></span></a>
+                        <a class="nav-link" style="display:inline;" href="{{ site.twitter }}" target="_blank"><span
+                                class="iconify" data-icon="mdi-twitter" data-width="25" data-height="25"></span></a>
+                        <a class="nav-link" style="display:inline;" href="{{ site.facebook }}" target="_blank"><span
+                                class="iconify" data-icon="mdi-facebook" data-width="25" data-height="25"></span></a>
                     </li>
 
                     {% if page.url == "/" %}
@@ -227,9 +240,15 @@
     <script id="dsq-count-scr" src="//{{site.disqus}}.disqus.com/count.js"></script>
     {% endif %}
 
-    <script src="{{ "/assets/tipuesearch/tipuesearch_content.js" | relative_url }}"></script>
-    <script src="{{ "/assets/tipuesearch/tipuesearch_set.js" | relative_url }}"></script>
-    <script src="{{ "/assets/tipuesearch/tipuesearch.min.js" | relative_url }}"></script>
+    <script src="{{ " /assets/tipuesearch/tipuesearch_content.js" | relative_url }}"></script>
+    <script src="{{ " /assets/tipuesearch/tipuesearch_set.js" | relative_url }}"></script>
+    <script src="{{ " /assets/tipuesearch/tipuesearch.min.js" | relative_url }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tipue_search_input').tipuesearch();
+        });
+    </script>
 
 </body>
 
