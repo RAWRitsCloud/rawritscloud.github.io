@@ -60,18 +60,165 @@ There are plenty of ways to automate Testing, one of the more popular ways is to
 
 The way I have found not only the easiest but is a real test by actually standing up the resources, a generic pipeline in our modules project and a connection to a single developer subscription that solely used for modules to  ``apply`` and ``destroy``.
 
-Calling the same Pipeline we use in our Customer projects and then as part of our documentation we have an ``example.tf`` and this is used as the code that should be applied, the example contains blank values for anything that is reliant on previous modules. The example also has all variables specified with their "default" example values.
+Calling a modified Pipeline we use in our Customer projects and then as part of our documentation we have an ``example.tf`` and this is used as the code that should be applied, the example contains blank values for anything that is reliant on previous modules. The example also has all variables specified with their "default" example values.
 
-You can see we only trigger on ``main`` branch as we don't want it constantly going off when developing the module, we also have it set to be run when a Pull Request is started.
+You can see we only trigger on ``main`` branch as we don't want it constantly going off when developing the module, we also have it set to be run when a Pull Request is started. We Run in stages and in Environments so that we can add guard rails in the Customer environments.
 
 ```yml
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
-steps:
-- script: echo This pipeline runs first and will trigger a second pipeline !
-- template: 2_azure-pipelines-template.yml
+variables:
+- group: bte-management-platform
+- group: customer-variables
+
+stages:
+- stage: plan
+  displayName: 'Terraform Initilize and Plan an Apply'
+  jobs:
+  - job: init_and_plan
+    displayName: 'Initilize and Plan Deployment' 
+    steps:
+    - checkout: self
+      persistCredentials: true
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+      displayName: 'Install Terraform latest'
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+      displayName: 'Terraform: init'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)/examples'
+        commandOptions: '-reconfigure -upgrade'
+        backendServiceArm: 'Azure DevOps - AzureRM Connection'
+        backendAzureRmResourceGroupName: '$(storage-account-resource-group)'
+        backendAzureRmStorageAccountName: '$(storage-account-name)'
+        backendAzureRmContainerName: terraform
+        backendAzureRmKey: $(Build.Repository.Name).tfstate
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+      displayName: 'Terraform: plan'
+      inputs:
+        command: plan
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        commandOptions: '-out $(Build.BuildNumber)apply.plan'
+        environmentServiceNameAzureRM: 'Azure DevOps - AzureRM Connection'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)'
+        artifact: 'terraformPlanStage'
+        publishLocation: 'pipeline'
+
+- stage: Deploy_Apply
+  displayName: 'Deploy Terraform Plan'
+  jobs:
+  - deployment: deploy
+    displayName: 'Terraform Deploy'
+    environment: $(Build.Repository.Name)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: terraformPlanStage
+
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+            displayName: 'Install Terraform latest'
+
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+            displayName: 'Terraform: init'
+            inputs:
+              workingDirectory: '$(Pipeline.Workspace)\terraformPlanStage\'
+              commandOptions: '-reconfigure -upgrade'
+              backendServiceArm: 'Azure DevOps - AzureRM Connection'
+              backendAzureRmResourceGroupName: '$(storage-account-resource-group)'
+              backendAzureRmStorageAccountName: '$(storage-account-name)'
+              backendAzureRmContainerName: terraform
+              backendAzureRmKey: $(Build.Repository.Name).tfstate
+
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+            displayName: 'Terraform : apply'
+            inputs:
+              command: apply
+              workingDirectory: '$(Pipeline.Workspace)\terraformPlanStage\'
+              commandOptions: '"$(Build.BuildNumber)apply.plan"'
+              environmentServiceNameAzureRM: 'Azure DevOps - AzureRM Connection'
+
+
+- stage: plan_destory
+  displayName: 'Terraform Initilize and Plan a Destroy'
+  condition: eq('${{ parameters.operation }}', 'destroy')
+  jobs:
+  - job: init_and_plan
+    displayName: 'Initilize and Plan a Destroy' 
+    steps:
+    - checkout: self
+      persistCredentials: true
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+      displayName: 'Install Terraform latest'
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+      displayName: 'Terraform: init'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)/examples'
+        commandOptions: '-reconfigure -upgrade'
+        backendServiceArm: 'Azure DevOps - AzureRM Connection'
+        backendAzureRmResourceGroupName: '$(storage-account-resource-group)'
+        backendAzureRmStorageAccountName: '$(storage-account-name)'
+        backendAzureRmContainerName: terraform
+        backendAzureRmKey: $(Build.Repository.Name).tfstate
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+      displayName: 'Terraform: plan'
+      inputs:
+        command: plan
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        commandOptions: '-destroy -out $(Build.BuildNumber)destroy.plan'
+        environmentServiceNameAzureRM: 'Azure DevOps - AzureRM Connection'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)'
+        artifact: 'terraformPlanStage'
+        publishLocation: 'pipeline'
+
+- stage: Deploy_Destroy
+  displayName: 'Deploy Terraform Plan'
+  jobs:
+  - deployment: deploy
+    displayName: 'Terraform Deploy'
+    environment: $(Build.Repository.Name)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: terraformPlanStage
+
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+            displayName: 'Install Terraform latest'
+
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+            displayName: 'Terraform: init'
+            inputs:
+              workingDirectory: '$(Pipeline.Workspace)\terraformPlanStage\'
+              commandOptions: '-reconfigure -upgrade'
+              backendServiceArm: 'Azure DevOps - AzureRM Connection'
+              backendAzureRmResourceGroupName: '$(storage-account-resource-group)'
+              backendAzureRmStorageAccountName: '$(storage-account-name)'
+              backendAzureRmContainerName: terraform
+              backendAzureRmKey: $(Build.Repository.Name).tfstate
+
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV2@2
+            displayName: 'Terraform : apply'
+            inputs:
+              command: apply
+              workingDirectory: '$(Pipeline.Workspace)\terraformPlanStage\'
+              commandOptions: '"$(Build.BuildNumber)destroy.plan"'
+              environmentServiceNameAzureRM: 'Azure DevOps - AzureRM Connection'
 ```

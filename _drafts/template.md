@@ -12,3 +12,5 @@ featured: true
 coverattribute: 
 ---
 ## First section
+
+![This is an image](/assets/images/posts/assets/image.png)
