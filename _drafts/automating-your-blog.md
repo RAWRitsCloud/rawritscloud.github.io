@@ -286,4 +286,4 @@ Then the final step to get the post to publish to Facebook Pages is to use [Zapi
 
 ![Zapier Screenshot](/assets/images/posts/assets/automating-your-blog-zapier.png)
 
-I hope you have enjoyed this little artcile about how I blog!
+I hope you have enjoyed this little article about how I blog!

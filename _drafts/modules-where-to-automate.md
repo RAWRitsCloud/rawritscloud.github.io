@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Terraform Modules, lets make some automations"
+title:  "Terraform Modules, lets make some automation's"
 author: james
 date: 2022-09-09 00:01 +0000
 tags: [IaC, Terraform, Automation,terraform-docs,pipelines]
