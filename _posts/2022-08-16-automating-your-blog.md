@@ -54,7 +54,7 @@ The clever but is dealing with the ``workflow_dispatch`` action which you can tr
 
 ### Logic App
 
-The logic App I host in Azure costs less than a 1p a month to run every single day, I have a simple Trigger at 6pm. I've uploaded the full template to a [Git Repo](https://github.com/RAWRitsCloud/blog-logic-app/blob/main/README.md), however I've snipped it up into little bits in this blog.
+The logic App I host in Azure costs less than a 1p a month to run every single day, I have a simple Trigger at 6pm. I've uploaded the full template to a [Git Repo](https://github.com/RAWRitsCloud/blog-logic-app/automating-your-blog/), however I've snipped it up into little bits in this blog.
 
 ```json
    "triggers":{
