@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "template draft"
+title:  "Logic Apps to Automate Cost Savings"
 author: james
 date: 2022-09-23 00:01 +0000
 tags: [CostManagement, Automation, LogicApps, ARM, PIP, Disks, Snapshots]
