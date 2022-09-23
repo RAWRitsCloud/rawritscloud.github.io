@@ -28,7 +28,7 @@ The Logic apps uses the ARM connecter using a Managed Identity so the Logic App 
 
 ### Unattached Disks Flow Chart
 
-![Unattached Disks Flow Chart](/assets/images/posts/assets/cost-managment-logic-apps-diskla.svg) 
+![Unattached Disks Flow Chart](/assets/images/posts/assets/cost-managment-logic-apps-diskla.svg)
 
 ## Assign Logic App Permissions to Subscription
 
