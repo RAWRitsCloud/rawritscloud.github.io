@@ -37,7 +37,7 @@ title: Home
 
         <ul class="tags">
             {% for tag in site.tags %}
-            <li>
+            <li class="rawr-homepagetag">
                 <a class="text-capitalize" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " "," -" }}" class="">#{{
                     tag[0] }}</a>
             </li>
