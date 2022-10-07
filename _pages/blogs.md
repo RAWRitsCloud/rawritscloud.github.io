@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Colleague Blogs
+title: Community Blogs
 permalink: /blogs
 ---
-I work with some amazing people and they also blog and steam. Below is a list of my colleagues that are worth checking out:
+I've had the pleasure to work with some amazing people and some of them blog and stream. Ive tried to keep it Azure focused blogs and I hope you enjoy them as much as I do:
 
 - [JonnyChipz](https://jonnychipz.com){:target="_blank"}
 - [DevOps Rich](https://www.devopsrich.com){:target="_blank"}
