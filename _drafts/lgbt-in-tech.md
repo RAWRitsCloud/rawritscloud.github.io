@@ -20,4 +20,4 @@ I know what you are thinking, this is a tech blog! And it 100% is but its also h
 
 I'm fortunate enough that my employer was 
 
-| ![Picture of me and Donal](/assets/images/posts/assets/lgbt-in-tech-donal.jpg) | ![Picture of my family](/assets/images/posts/assets/lgbt-in-tech-family.jpg) |
+| ![Picture of me and Donal](/assets/images/posts/assets/lgbt-in-tech-donal.jpg){:max-height="466px"} | ![Picture of my family](/assets/images/posts/assets/lgbt-in-tech-family.jpg){:max-height="466px"} |
