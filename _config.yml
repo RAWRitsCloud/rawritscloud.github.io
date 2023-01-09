@@ -2,10 +2,10 @@
 name: "RAWRitsCloud"
 title: "RAWRitsCloud"
 description: "A guy blogging cloud!"
-logo: 'assets/images/logo.png'
-favicon: 'assets/images/logo.png'
+logo: "assets/images/logo.png"
+favicon: "assets/images/logo.png"
 baseurl: /
-disqus: 'rawritscloud'
+disqus: "rawritscloud"
 include: ["_pages"]
 permalink: /:categories/:year/:month/:day/:title
 google_analytics: G-KF3S06QS9L
@@ -24,7 +24,7 @@ authors:
     name: James Murray-Ferris
     display_name: James
     gravatar: 276438a1f866f154bb25afba1226a359
-    description: "Cloud Consultant working mainly in Azure and blogging his journey and hopefully dropping some useful bits of information on the way."
+    description: "Cloud Architect working mainly in Azure and blogging his journey and hopefully dropping some useful bits of information on the way."
 
 # Plugins
 plugins:
@@ -40,17 +40,17 @@ jekyll-archives:
     - categories
   layout: archive
   permalinks:
-    category: '/category/:name/'
+    category: "/category/:name/"
 
 # Search
 tipue_search:
   include:
     pages: true
-    
-# Pagination 
+
+# Pagination
 paginate: 6
 paginate_path: /page:num/
-    
+
 # Other
 markdown: kramdown
 
