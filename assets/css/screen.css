@@ -701,6 +701,13 @@ ul.tags li a:hover {
     padding-left: 2px;
 }
 
+.socialbluesky {
+    color: #1185fe !important;
+    width: 22px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
 .sociallinkedin {
     color: #2867B2 !important;
     width: 22px;
