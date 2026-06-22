@@ -1,258 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png">
+  <title>{{ page.title }} | {{ site.name }}</title>
 
-    <link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png">
+  {% seo %}
 
-    <title>{{ page.title }} | {{site.name}}</title>
+  <!-- Bootstrap 5 (grid + utilities) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {% seo %}
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet">
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
 
-    <link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet">
+  <!-- RAWRitsCloud Theme -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/rawr-theme.css">
 
-    <link href="{{ site.baseurl }}/assets/css/tipuesearch.css" rel="stylesheet">
-
-    <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
-
-    <script src="//code.iconify.design/3/3.1.1/iconify.min.js"></script>
-
-    <!-- Start cookieyes banner -->
-    <script id="cookieyes" type="text/javascript"
-        src="https://cdn-cookieyes.com/client_data/da1cc39ab0fa16a849728747/script.js"></script>
-    <!-- End cookieyes banner -->
-
+  <!-- CookieYes -->
+  <script id="cookieyes" type="text/javascript"
+    src="https://cdn-cookieyes.com/client_data/da1cc39ab0fa16a849728747/script.js"></script>
 </head>
 
 {% if jekyll.environment == 'production' %}
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KF3S06QS9L"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', '{{ site.google_analytics }}');
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', '{{ site.google_analytics }}');
 </script>
 {% endif %}
 
-{% capture layout %}{% if page.layout %}layout-{{ page.layout }}{% endif %}{% endcapture %}
+<body>
 
-<body class="{{layout}}">
-    <!-- defer loading of font and font awesome -->
-    <noscript id="deferred-styles">
-        <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
-            rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    </noscript>
+  <!-- ===== Navigation ===== -->
+  <nav class="rawr-nav">
+    <div class="rawr-nav-container">
 
+      <a href="{{ site.baseurl }}/" class="rawr-nav-logo">
+        <img src="{{ site.baseurl }}/assets/images/logo.png" alt="{{ site.name }}">
+        <span>{{ site.name }}</span>
+      </a>
 
-    <!-- Begin Menu Navigation
-================================================== -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+      <div class="rawr-nav-links" id="navLinks">
+        <a href="{{ site.baseurl }}/" class="rawr-nav-link{% if page.url == '/' %} active{% endif %}">Home</a>
+        <a href="{{ site.baseurl }}/articles" class="rawr-nav-link{% if page.url contains 'articles' %} active{% endif %}">Articles</a>
+        <a href="{{ site.baseurl }}/learning-paths" class="rawr-nav-link{% if page.url contains 'learning-paths' %} active{% endif %}">Learning Paths</a>
+        <a href="{{ site.baseurl }}/certifications" class="rawr-nav-link{% if page.url contains 'certifications' %} active{% endif %}">Certifications</a>
+        <a href="{{ site.baseurl }}/uses" class="rawr-nav-link{% if page.url contains '/uses' %} active{% endif %}">Uses</a>
+        <a href="{{ site.baseurl }}/about" class="rawr-nav-link{% if page.url contains 'about' %} active{% endif %}">About</a>
+      </div>
 
-        <div class="container pr-0">
-
-            <!-- Begin Logo -->
-            <a class="navbar-brand" href="{{ site.baseurl }}/">
-                <h2 class="sitetitle">{{ site.name }}</h2>
-            </a>
-            <!-- End Logo -->
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarMediumish">
-
-                <!-- Begin Menu -->
-                <ul class="navbar-nav ml-auto">
-                    <form class="form-inline my-2 my-lg-0" action="search">
-                        <input class="form-control mr-sm-2" name="q" pattern=".{3,}" title="At least 3 characters"
-                            id="tipue_search_input" type="search" placeholder="Search" aria-label="Search">
-                    </form>
-
-                    <li class="nav-item" style="padding-top:0.5em">
-                        <a class="nav-link" style="display:inline;" href="{{ site.github }}" target="_blank"><span
-                                class="iconify" data-icon="mdi-github" data-width="25" data-height="25"></span></a>
-                        <a class="nav-link" style="display:inline;" href="{{ site.linkedin }}" target="_blank"><span
-                                class="iconify" data-icon="mdi-linkedin" data-width="25" data-height="25"></span></a>
-                        <a class="nav-link" style="display:inline;" href="{{ site.twitter }}" target="_blank"><span
-                                class="iconify" data-icon="mdi-twitter" data-width="25" data-height="25"></span></a>
-                        <a class="nav-link" style="display:inline;" href="{{ site.bluesky }}" target="_blank"><span
-                                class="iconify" data-icon="ri-bluesky-fill" data-width="25" data-height="25"></span></a>
-                        <a class="nav-link" style="display:inline;" href="{{ site.facebook }}" target="_blank"><span
-                                class="iconify" data-icon="mdi-facebook" data-width="25" data-height="25"></span></a>
-                    </li>
-
-                    {% if page.url == "/" %}
-                    <li class="nav-item active">
-                        {% else %}
-                    <li class="nav-item">
-                        {% endif %}
-                        <a class="nav-link" href="{{ site.baseurl }}/index.html">Blog</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.baseurl }}/about">About Me</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="{{ site.baseurl }}/blogs">Community Blogs</a>
-                    </li> -->
-
-                </ul>
-
-                <!-- End Menu -->
-
-            </div>
-
+      <div class="rawr-nav-actions">
+        <div class="rawr-search-wrap">
+          <i class="fas fa-search rawr-search-icon"></i>
+          <input type="search" class="rawr-search" placeholder="Search articles, topics..." id="navSearchInput"
+            onkeydown="if(event.key==='Enter'){ window.location='{{ site.baseurl }}/search?q='+this.value; }">
         </div>
-    </nav>
-    <!-- End Navigation
-================================================== -->
-
-    <div class="site-content">
-
-        <div class="container">
-
-            <!-- Site Title
-================================================== -->
-            <div class="mainheading">
-                <div style="float: left; max-width:100px; padding-right:15px">
-                    <img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{site.title}}">
-                </div>
-                <div>
-                    <h1 class="sitetitle">{{ site.name }}</h1>
-                    <p class="lead">
-                        {{ site.description }}
-                    </p>
-                </div>
-            </div>
-
-            <!-- Content
-================================================== -->
-            <div class="main-content">
-                {{ content }}
-            </div>
-
-            {% if site.mailchimp-list %}
-            <!-- Bottom Alert Bar
-================================================== -->
-            <div class="alertbar">
-                <div class="container text-center">
-                    <span><img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{site.title}}"> &nbsp; Never miss a
-                        <b>story</b> from us, subscribe to our newsletter</span>
-                    <form action="{{site.mailchimp-list}}" method="post" name="mc-embedded-subscribe-form"
-                        class="wj-contact-form validate" target="_blank" novalidate>
-                        <div class="mc-field-group">
-                            <input type="email" placeholder="Email" name="EMAIL" class="required email" id="mce-EMAIL"
-                                autocomplete="on" required>
-                            <input type="submit" value="Subscribe" name="subscribe" class="heart">
-                        </div>
-                    </form>
-                </div>
-            </div>
-            {% endif %}
-
+        <div class="rawr-social-icons">
+          <a href="{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+          <button class="rawr-theme-toggle" id="themeToggle" aria-label="Toggle colour theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+          </button>
         </div>
+      </div>
 
-        <!-- Categories Jumbotron
-================================================== -->
-        <div class="jumbotron fortags">
-            <div class="d-md-flex h-100">
-                <div class="col-md-4 transpdark align-self-center text-center h-100">
-                    <div class="d-md-flex align-items-center justify-content-center h-100">
-                        <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore Article Categories <span
-                                class="d-none d-md-inline">→</span></h2>
-                    </div>
-                </div>
-                <div class="col-md-8 p-5 align-self-center text-center">
-                    {% assign categories_list = site.categories %}
-                    {% if categories_list.first[0] == null %}
-                    {% for category in categories_list %}
-                    <a class="mt-1 mb-1"
-                        href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}">{{
-                        category | camelcase }} ({{ site.tags[category].size }})</a>
-                    {% endfor %}
-                    {% else %}
-                    {% for category in categories_list %}
-                    <a class="mt-1 mb-1"
-                        href="{{site.baseurl}}/categories#{{ category[0] | url_escape | strip | replace: ' ', '-' }}">{{
-                        category[0] | camelcase }} ({{ category[1].size }})</a>
-                    {% endfor %}
-                    {% endif %}
-                    {% assign categories_list = nil %}
-                </div>
-            </div>
-        </div>
+      <button class="rawr-nav-toggle" id="navToggle" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
 
-        <!-- Begin Footer
-================================================== -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center text-lg-left">
-                        Copyright © {{ site.time | date: "%Y" }} {{ site.name }}
-                    </div>
-                    <div class="col-md-6 col-sm-6 text-center text-lg-right">
-                        <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish
-                            Jekyll Theme</a> by WowThemes.net
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 text-center text-lg-right">
-                        <a target="_blank" href="{{site.baseurl}}/photocredits">Photo Credits</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- End Footer
-================================================== -->
+    </div>
+  </nav>
 
-    </div> <!-- /.site-content -->
+  <!-- ===== Main ===== -->
+  <main class="rawr-main">
+    {{ content }}
+  </main>
 
-    <!-- Scripts
-================================================== -->
+  <!-- ===== Footer ===== -->
+  <footer class="rawr-footer">
+    <div class="rawr-footer-inner">
+      <div class="rawr-footer-brand">
+        <img src="{{ site.baseurl }}/assets/images/logo.png" alt="{{ site.name }}">
+        <span>{{ site.name }}</span>
+      </div>
+      <nav class="rawr-footer-links" aria-label="Footer navigation">
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/articles">Articles</a>
+        <a href="{{ site.baseurl }}/learning-paths">Learning Paths</a>
+        <a href="{{ site.baseurl }}/certifications">Certifications</a>
+        <a href="{{ site.baseurl }}/uses">Uses</a>
+        <a href="{{ site.baseurl }}/about">About</a>
+        <a href="{{ site.baseurl }}/feed.xml">RSS</a>
+      </nav>
+      <div class="rawr-footer-socials">
+        <a href="{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="{{ site.bluesky }}" target="_blank" rel="noopener" aria-label="Bluesky">
+          <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:1rem;"></span>
+        </a>
+      </div>
+      <p class="rawr-footer-copy">
+        &copy; {{ site.time | date: "%Y" }} {{ site.name }} &mdash; Cloud Solutions Consultant
+      </p>
+    </div>
+  </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+  <script>
+    // Theme toggle
+    (function () {
+      const html = document.documentElement;
+      const stored = localStorage.getItem('rawr-theme') || 'dark';
+      html.setAttribute('data-theme', stored);
 
-    <script src="{{ site.baseurl }}/assets/js/mediumish.js"></script>
+      function updateIcon(theme) {
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      }
 
-    {% if site.lazyimages == "enabled" %}
-    <script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
-    {% endif %}
+      updateIcon(stored);
 
-    <script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
+      document.getElementById('themeToggle').addEventListener('click', function () {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('rawr-theme', next);
+        updateIcon(next);
+      });
+    })();
 
-    {% if page.layout == 'post' %}
-    <script id="dsq-count-scr" src="//{{site.disqus}}.disqus.com/count.js"></script>
-    {% endif %}
+    // Mobile nav
+    document.getElementById('navToggle').addEventListener('click', function () {
+      const links = document.getElementById('navLinks');
+      links.classList.toggle('open');
+      this.querySelector('i').className = links.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+    });
 
-    <script src="{{ site.baseurl }}/assets/js/tipuesearch_content.js"></script>
-    <script src="{{ site.baseurl }}/assets/js/tipuesearch_set.js"></script>
-    <script src="{{ site.baseurl }}/assets/js/tipuesearch.min.js"></script>
+    // Close mobile nav on link click
+    document.querySelectorAll('.rawr-nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.getElementById('navLinks').classList.remove('open');
+        document.querySelector('.rawr-nav-toggle i').className = 'fas fa-bars';
+      });
+    });
+  </script>
 
-    <script>
-        $(document).ready(function () {
-            $('#tipue_search_input').tipuesearch();
-        });
-    </script>
+  {% if page.layout == 'post' %}
+  <script id="dsq-count-scr" src="//{{ site.disqus }}.disqus.com/count.js" async></script>
+  {% endif %}
 
 </body>
-
 </html>

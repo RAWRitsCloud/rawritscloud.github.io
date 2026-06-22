@@ -1,0 +1,169 @@
+---
+layout: default
+title: Learning Paths
+permalink: /learning-paths
+---
+
+<div class="rawr-container">
+
+  <div class="page-header">
+    <h1>Learning Paths</h1>
+    <p>Curated journeys to help you learn and grow.</p>
+  </div>
+
+  <div class="filter-tabs" id="lpFilter">
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="azure">Azure</button>
+    <button class="filter-tab" data-filter="terraform">Terraform</button>
+    <button class="filter-tab" data-filter="automation">Automation</button>
+    <button class="filter-tab" data-filter="cost">Cost Optimisation</button>
+  </div>
+
+  <div class="card-grid card-grid-2" id="lpGrid">
+
+    <!-- Azure Landing Zone & Governance -->
+    <div class="rawr-card lp-card" data-filter="azure" id="azure">
+      <div class="lp-card-header">
+        <div class="lp-card-icon icon-azure">
+          <span class="iconify" data-icon="devicon:azure"></span>
+        </div>
+        <div>
+          <div class="lp-card-title">Azure Landing Zone &amp; Governance</div>
+        </div>
+      </div>
+      <p class="lp-card-desc">
+        How to build enterprise-ready landing zones and govern your Azure environment.
+        Covers management groups, policies, role assignments and the Enterprise Scale framework.
+      </p>
+      <div class="lp-card-footer">
+        {% assign azure_lz = site.posts | where_exp: "p", "p.categories contains 'Azure'" %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ azure_lz.size }} Articles</span>
+        <span class="lp-badge lp-badge-beginner">Beginner</span>
+      </div>
+    </div>
+
+    <!-- Terraform Modules Mastery -->
+    <div class="rawr-card lp-card" data-filter="terraform" id="terraform">
+      <div class="lp-card-header">
+        <div class="lp-card-icon icon-terraform">
+          <span class="iconify" data-icon="devicon:terraform"></span>
+        </div>
+        <div>
+          <div class="lp-card-title">Terraform Modules Mastery</div>
+        </div>
+      </div>
+      <p class="lp-card-desc">
+        A deep dive into Terraform modules, patterns and best practices.
+        Learn how to structure reusable modules, manage state, and build scalable IaC workflows.
+      </p>
+      <div class="lp-card-footer">
+        {% assign tf_posts = site.posts | where_exp: "p", "p.categories contains 'Terraform'" %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ tf_posts.size }} Articles</span>
+        <span class="lp-badge lp-badge-intermediate">Intermediate</span>
+      </div>
+    </div>
+
+    <!-- GitHub Actions Automation -->
+    <div class="rawr-card lp-card" data-filter="automation" id="automation">
+      <div class="lp-card-header">
+        <div class="lp-card-icon icon-github">
+          <span class="iconify" data-icon="devicon:github"></span>
+        </div>
+        <div>
+          <div class="lp-card-title">GitHub Actions Automation</div>
+        </div>
+      </div>
+      <p class="lp-card-desc">
+        Automate everything with GitHub Actions and improve your DevOps workflows.
+        Covers reusable workflows, secrets management, and Terraform CI/CD pipelines.
+      </p>
+      <div class="lp-card-footer">
+        {% assign gh_posts = site.posts | where_exp: "p", "p.categories contains 'GitHub Actions'" %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ gh_posts.size }} Articles</span>
+        <span class="lp-badge lp-badge-beginner">Beginner</span>
+      </div>
+    </div>
+
+    <!-- Cost Optimisation Playbook -->
+    <div class="rawr-card lp-card" data-filter="cost" id="cost">
+      <div class="lp-card-header">
+        <div class="lp-card-icon icon-cost">
+          <span class="iconify" data-icon="mdi:currency-usd-circle-outline"></span>
+        </div>
+        <div>
+          <div class="lp-card-title">Cost Optimisation Playbook</div>
+        </div>
+      </div>
+      <p class="lp-card-desc">
+        Practical strategies to reduce Azure costs and get the most out of your budget.
+        Right-sizing, reserved instances, Azure Policy guardrails and automated alerts.
+      </p>
+      <div class="lp-card-footer">
+        {% assign cost_posts = site.posts | where_exp: "p", "p.categories contains 'Cost'" %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ cost_posts.size }} Articles</span>
+        <span class="lp-badge lp-badge-all">All Levels</span>
+      </div>
+    </div>
+
+    <!-- Azure Policy -->
+    <div class="rawr-card lp-card" data-filter="azure">
+      <div class="lp-card-header">
+        <div class="lp-card-icon icon-azure" style="background:rgba(0,120,212,0.1);color:#93c5fd;">
+          <span class="iconify" data-icon="mdi:shield-check-outline"></span>
+        </div>
+        <div>
+          <div class="lp-card-title">Azure Policy &amp; Compliance</div>
+        </div>
+      </div>
+      <p class="lp-card-desc">
+        Using Azure Policy to enforce standards, audit deployments and keep your
+        environment compliant at scale. Deploy-If-Not-Exists, auditing, and policy initiatives.
+      </p>
+      <div class="lp-card-footer">
+        {% assign policy_posts = site.posts | where_exp: "p", "p.categories contains 'Policy'" %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ policy_posts.size }} Articles</span>
+        <span class="lp-badge lp-badge-intermediate">Intermediate</span>
+      </div>
+    </div>
+
+    <!-- Logic Apps & Automation -->
+    <div class="rawr-card lp-card" data-filter="automation">
+      <div class="lp-card-header">
+        <div class="lp-card-icon icon-automation">
+          <span class="iconify" data-icon="mdi:lightning-bolt"></span>
+        </div>
+        <div>
+          <div class="lp-card-title">Azure Logic Apps &amp; Workflows</div>
+        </div>
+      </div>
+      <p class="lp-card-desc">
+        Low-code automation with Logic Apps for cost management alerts, ticketing integrations,
+        and workflow orchestration across your Azure environment.
+      </p>
+      <div class="lp-card-footer">
+        {% assign la_posts = site.posts | where_exp: "p", "p.categories contains 'Azure' and p.tags contains 'Logic Apps'" %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ la_posts.size }} Articles</span>
+        <span class="lp-badge lp-badge-beginner">Beginner</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('#lpFilter .filter-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#lpFilter .filter-tab').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      var filter = this.dataset.filter;
+      document.querySelectorAll('#lpGrid [data-filter]').forEach(function(card) {
+        if (filter === 'all' || card.dataset.filter === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

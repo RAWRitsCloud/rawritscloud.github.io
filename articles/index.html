@@ -1,0 +1,68 @@
+---
+layout: default
+title: Articles
+permalink: /articles/
+---
+
+<div class="rawr-container">
+
+  <div class="page-header">
+    <h1>Articles</h1>
+    <p>Cloud architecture, Terraform, Azure, and more — written from the field.</p>
+  </div>
+
+  <div class="card-grid card-grid-3" style="padding-bottom:1rem;">
+    {% for post in paginator.posts %}
+    <article class="rawr-card article-card">
+      {% if post.image %}
+      <div class="article-card-image">
+        <a href="{{ site.baseurl }}{{ post.url }}">
+          <img src="{{ site.baseurl }}/{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+        </a>
+      </div>
+      {% endif %}
+      <div class="article-card-body">
+        <div class="article-card-category">
+          {% for cat in post.categories %}{{ cat | upcase }}{% unless forloop.last %} &bull; {% endunless %}{% endfor %}
+        </div>
+        <h2 class="article-card-title">
+          <a href="{{ site.baseurl }}{{ post.url }}" style="color:inherit;">{{ post.title }}</a>
+        </h2>
+        <p class="article-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+        <div class="article-card-meta">
+          <time>{{ post.date | date: "%d %b %Y" }}</time>
+          {% if post.read_time %}<span class="sep">&bull;</span><span>{{ post.read_time }} min read</span>{% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if paginator.total_pages > 1 %}
+  <nav class="rawr-pagination" aria-label="Article pages">
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Newer</a>
+    {% else %}
+    <span>&laquo; Newer</span>
+    {% endif %}
+
+    {% for i in (1..paginator.total_pages) %}
+    {% if i == paginator.page %}
+    <span class="current">{{ i }}</span>
+    {% elsif i == 1 %}
+    <a href="{{ site.baseurl }}/articles/">{{ i }}</a>
+    {% else %}
+    <a href="{{ site.baseurl }}/articles/page{{ i }}/">{{ i }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older &raquo;</a>
+    {% else %}
+    <span>Older &raquo;</span>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+</div>

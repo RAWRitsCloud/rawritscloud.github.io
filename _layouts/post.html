@@ -1,176 +1,169 @@
 ---
 layout: default
-disqus: false
-archive: false
-post_class: post-template
 ---
 
-<!-- Begin Article
-================================================== -->
-<div class="container">
-    <div class="row">
+{% assign author = site.authors[page.author] %}
 
-        <!-- Post Share -->
-        <div class="col-md-2 pl-0">
-            {% include share.html %}
+<div class="rawr-container">
+  <div class="article-layout">
+
+    <!-- Main Article Content -->
+    <article class="article-main">
+
+      <!-- Category breadcrumb -->
+      <div class="article-category" style="margin-top:2rem;">
+        <a href="{{ site.baseurl }}/articles">Articles</a>
+        {% for cat in page.categories %}
+        <span>&rsaquo;</span>
+        <a href="{{ site.baseurl }}/categories#{{ cat | slugify }}">{{ cat }}</a>
+        {% endfor %}
+      </div>
+
+      <!-- Title -->
+      <h1 class="article-title">{{ page.title }}</h1>
+
+      <!-- Meta -->
+      <div class="article-meta">
+        {% if author %}
+        <img class="article-author-avatar"
+          src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=72&d=mm&r=x"
+          alt="{{ author.display_name }}">
+        <div class="article-meta-info">
+          <span class="article-meta-author">{{ author.display_name }}</span>
+          <time class="article-meta-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+            {{ page.date | date: "%d %b %Y" }}
+          </time>
         </div>
+        {% endif %}
+        {% if page.read_time %}
+        <span class="article-meta-read">{{ page.read_time }} min read</span>
+        {% endif %}
+      </div>
 
-        <!-- Post -->
-        {% assign author = site.authors[page.author] %}
+      <!-- Hero image -->
+      {% if page.image %}
+      <img class="article-hero-image"
+        src="{% if page.image contains '://' %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}"
+        alt="{{ page.title }}">
+      {% endif %}
 
-        <div class="col-md-9 flex-first flex-md-unordered">
-            <div class="mainheading">
-                <div class="jumbotron" style="background-image: url({% if page.image contains " ://" %}{{ page.image
-                    }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %});background-size:cover;background-repeat:
-                    no-repeat;">
-                    <!-- Post Title -->
-                    <div>
-                        <h1 class="posttitle" style="background-color: rgba(255, 255, 255, 0.5);">{{ page.title }}</h1>
-                    </div>
-                </div>
-            </div>
+      <!-- Table of contents (inline on mobile) -->
+      {% if page.toc %}
+      <div class="sidebar-widget" style="display:none;" id="toc-mobile">
+        <span class="sidebar-widget-title">On this page</span>
+        {% include toc.html html=content %}
+      </div>
+      {% endif %}
 
-            <!-- Author Box -->
-            {% if page.author %}
-            <div class="row post-top-meta">
-                <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
-                    {% if author.avatar %}
-                    <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}"
-                        alt="{{ author.display_name }}">
-                    {% else %}
-                    <img class="author-thumb" src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x"
-                        alt="{{ author.display_name }}">
-                    {% endif %}
-                </div>
-                <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                    <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a
-                        target="_blank" href="mailto:{{ site.email }}" class="socialemail"><span class="iconify"
-                            data-icon="mdi-email"></span></a> <a class="socialbluesky" href="{{ site.bluesky }}"
-                        target="_blank"><span class="iconify" data-icon="ri-bluesky-fill"></span></a> <a target="_blank"
-                        href="{{ site.twitter }}" class="socialtwitter"><span class="iconify"
-                            data-icon="mdi-twitter"></span></a><a target="_blank" href="{{ site.insta }}"
-                        class="socialinsta"><span class="iconify" data-icon="mdi-instagram"></span></a><a
-                        target="_blank" href="{{ site.linkedin }}" class="sociallinkedin"><span class="iconify"
-                            data-icon="mdi-linkedin"></span></a>
-                    <span class="author-description">{{ author.description }}</span>
-                </div>
-            </div>
-            {% endif %}
+      <!-- Body -->
+      <div class="article-body">
+        {% if page.toc and page.beforetoc %}
+        <p><em>{{ page.beforetoc }}</em></p>
+        {% endif %}
+        {{ content }}
+      </div>
 
-            <!-- Post Content -->
-            <div class="article-post">
-                <!-- Toc if any -->
-                {% if page.toc %}
-                {% if page.beforetoc %}
-                <p><em>{{page.beforetoc}}</em></p>
-                {% endif %}
-                <div class="toc mt-4 mb-4 lead">
-                    <h3 class="font-weight-bold">Summary</h3>
-                    {% include toc.html html=content %}
-                </div>
-                {% endif %}
-                <!-- End Toc -->
-                {{content}}
-            </div>
-
-            <!-- Post Date -->
-            <p>
-                <small>
-                    <span class="post-date"><time class="post-date" datetime="{{ page.date | date:" %Y-%m-%d" }}">{{
-                            page.date | date_to_string }}</time></span>
-                    {% if page.last_modified_at %}
-                    (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}"
-                        itemprop="dateModified">{{ page.last_modified_at | date: "%b %-d, %Y" }}</time>)
-                    {% endif %}
-                </small>
-            </p>
-
-            <!-- Post Categories -->
-            <div class="after-post-cats">
-                <ul class="tags mb-4">
-                    {% assign sortedCategories = page.categories | sort %}
-                    {% for category in sortedCategories %}
-                    <li>
-                        <a class="smoothscroll" href="{{site.baseurl}}/categories#{{ category | replace: " "," -" }}">{{
-                            category }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- End Categories -->
-
-            <!-- Post Tags -->
-            <div class="after-post-tags">
-                <ul class="tags">
-                    {% assign sortedTags = page.tags | sort %}
-                    {% for tag in sortedTags %}
-                    <li>
-                        <a class="smoothscroll" href="{{site.baseurl}}/tags#{{ tag | replace: " "," -" }}">#{{ tag
-                            }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- End Tags -->
-
-            <!-- Prev/Next -->
-            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
-                {% if page.previous.url %}
-                <a class="prev d-block col-md-6" href="{{ site.url }}{{ site.baseurl }}{{page.previous.url}}"> &laquo;
-                    {{page.previous.title}}</a>
-                {% endif %}
-                {% if page.next.url %}
-                <a class="next d-block col-md-6 text-lg-right"
-                    href="{{ site.url }}{{ site.baseurl }}{{page.next.url}}">{{page.next.title}} &raquo; </a>
-                {% endif %}
-                <div class="clearfix"></div>
-            </div>
-            <!-- End Categories -->
-
+      <!-- Tags -->
+      {% if page.tags.size > 0 %}
+      <div class="article-tags">
+        <span class="sidebar-widget-title">Tags</span>
+        <div class="tag-list">
+          {% assign sorted_tags = page.tags | sort %}
+          {% for tag in sorted_tags %}
+          <a class="tag-pill" href="{{ site.baseurl }}/tags#{{ tag | slugify }}">#{{ tag }}</a>
+          {% endfor %}
         </div>
-        <!-- End Post -->
+      </div>
+      {% endif %}
 
-    </div>
+      <!-- Author box -->
+      {% if author %}
+      <div class="author-box">
+        <img class="author-box-avatar"
+          src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=120&d=mm&r=x"
+          alt="{{ author.display_name }}">
+        <div>
+          <div class="author-box-name">{{ author.display_name }}</div>
+          <p class="author-box-bio">{{ author.description }}</p>
+          <div class="author-box-socials">
+            <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="{{ site.bluesky }}" target="_blank" rel="noopener" aria-label="Bluesky">
+              <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:1rem;"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Prev / Next -->
+      <nav class="post-nav" aria-label="Post navigation">
+        {% if page.previous.url %}
+        <a class="post-nav-item prev" href="{{ site.baseurl }}{{ page.previous.url }}">
+          <span class="post-nav-label"><i class="fas fa-arrow-left" style="font-size:0.7em;"></i> Previous</span>
+          <span class="post-nav-title">{{ page.previous.title }}</span>
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+        {% if page.next.url %}
+        <a class="post-nav-item next" href="{{ site.baseurl }}{{ page.next.url }}">
+          <span class="post-nav-label">Next <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></span>
+          <span class="post-nav-title">{{ page.next.title }}</span>
+        </a>
+        {% endif %}
+      </nav>
+
+      <!-- Comments -->
+      {% if page.comments != false %}
+      <div id="comments" style="margin-top:3rem;">
+        {% include disqus.html %}
+      </div>
+      {% endif %}
+
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="article-sidebar">
+
+      <!-- TOC -->
+      {% if page.toc %}
+      <div class="sidebar-widget">
+        <span class="sidebar-widget-title">On this page</span>
+        {% include toc.html html=content %}
+      </div>
+      {% endif %}
+
+      <!-- Share -->
+      <div class="sidebar-widget">
+        <span class="sidebar-widget-title">Share</span>
+        <div class="share-btns">
+          <a class="share-btn" title="Share on Bluesky" target="_blank" rel="noopener"
+            href="https://bsky.app/intent/compose?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}">
+            <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:0.9rem;"></span>
+          </a>
+          <a class="share-btn" title="Share on Twitter" target="_blank" rel="noopener"
+            href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a class="share-btn" title="Share on LinkedIn" target="_blank" rel="noopener"
+            href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}&title={{ page.title | url_encode }}">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a class="share-btn" title="Share on Facebook" target="_blank" rel="noopener"
+            href="https://facebook.com/sharer.php?u={{ page.url | absolute_url | url_encode }}">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
 </div>
-<!-- End Article
-================================================== -->
 
-<!-- Begin Comments
-================================================== -->
-{% if page.comments != false %}
-<div class="container">
-    <div id="comments" class="row justify-content-center mb-5">
-        <div class="col-md-8">
-            {% include disqus.html %}
-        </div>
-    </div>
-</div>
-{% endif %}
-<!--End Comments
-================================================== -->
-
-<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
-https://search.google.com/structured-data/testing-tool/u/0/
-================================================== -->
-{% if page.rating %}
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org/",
-  "@type": "Review",
-  "itemReviewed": {
-    "@type": "Thing",
-    "name": "{{ page.title }}"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "{{ author.display_name }}"
-  },
-  "datePublished": "{{ page.date | date:"%Y-%m-%d" }}",
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": "{{ page.rating }}",
-    "bestRating": "5"
+<style>
+  @media (max-width: 768px) {
+    #toc-mobile { display: block !important; margin-bottom: 1.5rem; }
   }
-}
-</script>
-{% endif %}
+</style>
