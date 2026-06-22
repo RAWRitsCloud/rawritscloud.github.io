@@ -10,7 +10,6 @@ include: ["_pages"]
 permalink: /:categories/:year/:month/:day/:title
 google_analytics: G-KF3S06QS9L
 email: james@rawritscloud.com
-twitter: https://twitter.com/rawritscloud
 facebook: https://www.facebook.com/rawritscloud
 insta: https://www.instagram.com/rawritscloud
 linkedin: https://www.linkedin.com/in/jrmurray86

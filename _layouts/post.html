@@ -87,7 +87,6 @@ layout: default
           <p class="author-box-bio">{{ author.description }}</p>
           <div class="author-box-socials">
             <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
             <a href="{{ site.bluesky }}" target="_blank" rel="noopener" aria-label="Bluesky">
               <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:1rem;"></span>
             </a>
@@ -141,10 +140,6 @@ layout: default
           <a class="share-btn" title="Share on Bluesky" target="_blank" rel="noopener"
             href="https://bsky.app/intent/compose?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}">
             <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:0.9rem;"></span>
-          </a>
-          <a class="share-btn" title="Share on Twitter" target="_blank" rel="noopener"
-            href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}">
-            <i class="fab fa-x-twitter"></i>
           </a>
           <a class="share-btn" title="Share on LinkedIn" target="_blank" rel="noopener"
             href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}&title={{ page.title | url_encode }}">
