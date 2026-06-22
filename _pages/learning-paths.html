@@ -141,7 +141,7 @@ permalink: /learning-paths
         and workflow orchestration across your Azure environment.
       </p>
       <div class="lp-card-footer">
-        {% assign la_posts = site.posts | where_exp: "p", "p.categories contains 'Azure' and p.tags contains 'Logic Apps'" %}
+        {% assign la_posts = site.posts | where_exp: "p", "p.tags contains 'Logic Apps'" %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ la_posts.size }} Articles</span>
         <span class="lp-badge lp-badge-beginner">Beginner</span>
       </div>
