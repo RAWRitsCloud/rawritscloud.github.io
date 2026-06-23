@@ -4,48 +4,31 @@ title: About
 permalink: /about
 ---
 
+{% assign about = site.data.about %}
+
 <div class="rawr-container">
 
-  <!-- Hero -->
   <div class="about-layout">
     <div class="about-content">
-      <h1 class="about-title">Meet James</h1>
+      <h1 class="about-title">{{ about.title }}</h1>
       <p class="about-role">
-        Cloud enthusiast. Problem solver. Dinosaur wrangler.<br>
-        Cloud Solutions Consultant at <a href="https://www.bt.com" target="_blank" rel="noopener">BT</a>
-      </p>
-      <p class="about-bio">
-        I'm a Cloud Solutions Consultant at BT with nearly a decade of experience working with Azure.
-        I love automation, infrastructure as code and helping organisations build secure, scalable and
-        cost-effective solutions in the cloud.
-      </p>
-      <p class="about-bio" style="margin-top:1rem;">
-        Away from the keyboard I'm a dad of 2 boys and a passionate advocate for diversity in tech.
-        The dinosaurs? Long story — RAWR means Hi in dinosaur (at least, that's what I was told as a kid
-        and I'm sticking with it).
+        {{ about.role }}<br>
+        Cloud Solutions Consultant at <a href="{{ about.company_url }}" target="_blank" rel="noopener">{{ about.company_name }}</a>
       </p>
 
-      <!-- Stats -->
+      {% for para in about.bio %}
+      <p class="about-bio"{% if forloop.index > 1 %} style="margin-top:1rem;"{% endif %}>{{ para }}</p>
+      {% endfor %}
+
       <div class="about-stats">
+        {% for stat in about.stats %}
         <div class="about-stat">
-          <span class="about-stat-value">10+</span>
-          <span class="about-stat-label">Years in IT</span>
+          <span class="about-stat-value">{{ stat.value }}</span>
+          <span class="about-stat-label">{{ stat.label }}</span>
         </div>
-        <div class="about-stat">
-          <span class="about-stat-value">9+</span>
-          <span class="about-stat-label">Years with Azure</span>
-        </div>
-        <div class="about-stat">
-          <span class="about-stat-value">Multiple</span>
-          <span class="about-stat-label">Certifications</span>
-        </div>
-        <div class="about-stat">
-          <span class="about-stat-value">2</span>
-          <span class="about-stat-label">Awesome kids</span>
-        </div>
+        {% endfor %}
       </div>
 
-      <!-- Certifications preview -->
       <div class="cert-section-header">
         <h2>Certifications</h2>
         <a href="{{ site.baseurl }}/certifications" class="cert-view-all">
@@ -54,37 +37,22 @@ permalink: /about
       </div>
 
       <div class="cert-grid">
+        {% for cert in about.cert_highlights %}
         <div class="cert-item">
-          <img src="{{ site.baseurl }}/assets/images/certs/azure-fundamentals-600x600.png" alt="Azure Fundamentals">
-          <div class="cert-item-name">Azure Fundamentals</div>
-          <div class="cert-item-issuer">Microsoft</div>
+          <img src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}" alt="{{ cert.name }}">
+          <div class="cert-item-name">{{ cert.name }}</div>
+          <div class="cert-item-issuer">{{ cert.issuer }}</div>
         </div>
-        <div class="cert-item">
-          <img src="{{ site.baseurl }}/assets/images/certs/azure-administrator-associate.png" alt="Azure Administrator">
-          <div class="cert-item-name">Azure Administrator</div>
-          <div class="cert-item-issuer">Microsoft</div>
-        </div>
-        <div class="cert-item">
-          <img src="{{ site.baseurl }}/assets/images/certs/azure-solutions-architect-expert-600x600.png" alt="Azure Solutions Architect Expert">
-          <div class="cert-item-name">Solutions Architect Expert</div>
-          <div class="cert-item-issuer">Microsoft</div>
-        </div>
-        <div class="cert-item">
-          <img src="{{ site.baseurl }}/assets/images/certs/hashicorp-terraform-professional.png" alt="Terraform Professional">
-          <div class="cert-item-name">Terraform Professional</div>
-          <div class="cert-item-issuer">HashiCorp</div>
-        </div>
+        {% endfor %}
       </div>
 
     </div>
 
-    <!-- Profile photo -->
     <div class="about-photo-wrap">
       <img class="about-photo" src="{{ site.baseurl }}/assets/images/james.jpg" alt="James Murray-Ferris">
     </div>
   </div>
 
-  <!-- Connect section -->
   <section class="rawr-section">
     <div class="section-header">
       <h2>Connect</h2>
@@ -110,7 +78,6 @@ permalink: /about
           <div class="start-card-desc" style="font-size:0.78rem;">rawritscloud.com</div>
         </div>
       </a>
-
 
       <a href="{{ site.github }}" target="_blank" rel="noopener" class="rawr-card" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;">
         <div class="start-card-icon icon-github" style="flex-shrink:0;">

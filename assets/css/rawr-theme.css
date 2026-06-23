@@ -1538,6 +1538,11 @@ button { font-family: inherit; }
 }
 .cv-earlier-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); }
 
+/* Mobile-only elements — hidden by default, revealed in mobile breakpoint */
+.cv-mobile-stats-bar { display: none; }
+.cv-mobile-view-all  { display: none; }
+.cv-section-row { display: block; }
+
 /* Sidebar */
 .cv-sidebar { position: sticky; top: calc(var(--nav-h) + 1.5rem); display: flex; flex-direction: column; gap: 1rem; }
 
@@ -1621,6 +1626,87 @@ button { font-family: inherit; }
   .cv-job-details { text-align: left; }
   .cv-cta-bar { flex-direction: column; text-align: center; }
   .cv-cta-btns { margin-left: 0; justify-content: center; }
+
+  /* Hide sidebar — stats shown in inline bar instead */
+  .cv-sidebar { display: none; }
+
+  /* Mobile stats bar */
+  .cv-mobile-stats-bar {
+    display: flex;
+    justify-content: space-around;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 0.5rem;
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  .cv-mobile-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .cv-mobile-stat-item .iconify { font-size: 1.5rem; color: var(--accent-blue); }
+
+  /* Section row: label + optional view-all on same line */
+  .cv-section-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  /* Section titles become small uppercase labels on mobile */
+  .cv-section-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  /* View all button (mobile only) */
+  .cv-mobile-view-all {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--accent-blue);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 600;
+  }
+
+  /* Current role: detach from timeline, show as prominent highlighted card */
+  .cv-job--current { margin-left: -2rem; margin-bottom: 1.75rem; }
+  .cv-job--current .cv-job-dot { display: none; }
+  .cv-job--current::before {
+    content: 'CURRENT ROLE';
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--accent-blue);
+    margin-bottom: 0.5rem;
+  }
+  .cv-job--current .cv-job-card {
+    border-color: rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, var(--bg-card), rgba(59, 130, 246, 0.04));
+  }
+
+  /* Highlights as 2-col checklist */
+  .cv-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 1rem;
+    list-style: none;
+    padding-left: 0;
+  }
+  .cv-highlights li::before { content: '✓ '; color: var(--accent-blue); font-weight: 700; }
 }
 
 @media (max-width: 480px) {

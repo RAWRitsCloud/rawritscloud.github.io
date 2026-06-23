@@ -1,0 +1,32 @@
+title: "Meet James"
+role: "Cloud enthusiast. Problem solver. Dinosaur wrangler."
+company_name: "BT"
+company_url: "https://www.bt.com"
+
+bio:
+  - "I'm a Cloud Solutions Consultant at BT with nearly a decade of experience working with Azure. I love automation, infrastructure as code and helping organisations build secure, scalable and cost-effective solutions in the cloud."
+  - "Away from the keyboard I'm a dad of 2 boys and a passionate advocate for diversity in tech. The dinosaurs? Long story — RAWR means Hi in dinosaur (at least, that's what I was told as a kid and I'm sticking with it)."
+
+stats:
+  - value: "10+"
+    label: "Years in IT"
+  - value: "9+"
+    label: "Years with Azure"
+  - value: "Multiple"
+    label: "Certifications"
+  - value: "2"
+    label: "Awesome kids"
+
+cert_highlights:
+  - image: "azure-fundamentals-600x600.png"
+    name: "Azure Fundamentals"
+    issuer: "Microsoft"
+  - image: "azure-administrator-associate.png"
+    name: "Azure Administrator"
+    issuer: "Microsoft"
+  - image: "azure-solutions-architect-expert-600x600.png"
+    name: "Solutions Architect Expert"
+    issuer: "Microsoft"
+  - image: "hashicorp-terraform-professional.png"
+    name: "Terraform Professional"
+    issuer: "HashiCorp"

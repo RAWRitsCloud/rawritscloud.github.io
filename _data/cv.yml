@@ -177,6 +177,54 @@ jobs:
       - "Delivered follow-me printing services"
       - "Provided 1st to 3rd line support across UK Athletics and England Athletics systems"
 
+  - title: "ICT Technician"
+    company: "Perry Beeches School"
+    period: "Sep 2008 – Aug 2011"
+    location: "Birmingham, UK"
+    logo_icon: "mdi:school-outline"
+    logo_color: "#f59e0b"
+
+    description: >
+      Supporting the school's infrastructure and user estate while managing
+      the School Management Information System and leading hardware refresh
+      projects during term breaks.
+
+    focus_areas:
+      - "Infrastructure"
+      - "Desktop Support"
+      - "Education"
+      - "Systems Administration"
+
+    highlights:
+      - "Supported management of the school's computer and user estate"
+      - "Managed the School Management Information System"
+      - "Led hardware refresh projects during school holidays"
+      - "Provided infrastructure and end-user support"
+
+  - title: "Facilities Supervisor"
+    company: "New Horizons"
+    period: "Jul 2007 – Sep 2008"
+    location: "Birmingham, UK"
+    logo_icon: "mdi:office-building-outline"
+    logo_color: "#64748b"
+
+    description: >
+      Managed the day-to-day operation of training centre IT systems supporting
+      15 staff and 100 classroom delegates, including Terminal Servers,
+      SQL Server and Microsoft Exchange.
+
+    focus_areas:
+      - "Infrastructure"
+      - "Windows Server"
+      - "SQL Server"
+      - "Exchange"
+
+    highlights:
+      - "Managed IT systems supporting 15 staff and 100 classroom delegates"
+      - "Administered Terminal Server environments"
+      - "Supported SQL Server infrastructure"
+      - "Managed Microsoft Exchange services"
+
 projects:
   - title: "Azure Deployment for PKI Solution"
     description: >
