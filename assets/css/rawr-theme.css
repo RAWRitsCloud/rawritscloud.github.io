@@ -647,7 +647,7 @@ button { font-family: inherit; }
 
 /* ===== About Page ===== */
 
-/* Show/hide layouts: desktop ≥1101px, tablet 768-1100px, mobile ≤767px */
+/* Show/hide layouts: desktop ≥1201px, tablet 768-1200px, mobile ≤767px */
 .about-desktop { display: grid; grid-template-columns: 260px 1fr 280px; gap: 2rem; padding: 3rem 0 4rem; align-items: start; }
 .about-tablet  { display: none; }
 .about-mobile  { display: none; }
@@ -1545,8 +1545,8 @@ button { font-family: inherit; }
   .rawr-search:focus { width: 190px; }
 }
 
-/* Tablet about layout (768–1100px) */
-@media (min-width: 768px) and (max-width: 1100px) {
+/* Tablet about layout (768–1200px, covers iPad landscape at 1180px) */
+@media (min-width: 768px) and (max-width: 1200px) {
   .about-desktop { display: none; }
   .about-tablet  { display: grid; }
 }
