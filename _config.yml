@@ -1,0 +1,70 @@
+# Site
+name: "RAWRitsCloud"
+title: "RAWRitsCloud"
+description: "A guy blogging cloud!"
+logo: "assets/images/logo.png"
+favicon: "assets/images/logo.png"
+baseurl: ""
+disqus: "rawritscloud"
+include: ["_pages"]
+permalink: /:categories/:year/:month/:day/:title
+google_analytics: G-KF3S06QS9L
+email: james@rawritscloud.com
+facebook: https://www.facebook.com/rawritscloud
+insta: https://www.instagram.com/rawritscloud
+linkedin: https://www.linkedin.com/in/jrmurray86
+github: https://github.com/rawritscloud
+bluesky: https://bsky.app/profile/rawritscloud.com
+
+show_drafts: false
+
+# Authors
+authors:
+  james:
+    name: James Murray-Ferris
+    display_name: James
+    gravatar: 276438a1f866f154bb25afba1226a359
+    description: "Cloud Architect working mainly in Azure and blogging his journey and hopefully dropping some useful bits of information on the way."
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
+
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+  layout: archive
+  permalinks:
+    category: "/category/:name/"
+
+# Search
+tipue_search:
+  include:
+    pages: true
+
+# Pagination
+paginate: 9
+paginate_path: /articles/page:num/
+
+# Other
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: coderay
+
+# Lazy Images ("enabled" or "disabled")
+lazyimages: "disabled"
+
+exclude:
+  - changelog.md
+  - LICENSE.txt
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

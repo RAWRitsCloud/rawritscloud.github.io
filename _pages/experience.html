@@ -1,0 +1,228 @@
+---
+layout: default
+title: Experience
+permalink: /experience
+---
+
+{% assign cv = site.data.cv %}
+
+<div class="rawr-container">
+  <div class="page-header">
+    <h1>Experience &amp; Projects</h1>
+    <p>{{ cv.tagline }}</p>
+    {% if cv.cv_pdf %}
+    <a href="{{ cv.cv_pdf }}" class="btn-outline-rawr" style="margin-top:1rem;display:inline-flex;align-items:center;gap:0.4rem;" download>
+      <i class="fas fa-file-alt"></i> Download CV (PDF)
+    </a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="rawr-container cv-body">
+  <div class="cv-main">
+
+    <!-- ===== Work Experience ===== -->
+    <section>
+      <h2 class="cv-section-title">Work Experience</h2>
+
+      <div class="cv-timeline">
+        {% assign visible_jobs = cv.jobs | where_exp: "j", "j.earlier != true" %}
+        {% assign earlier_jobs = cv.jobs | where_exp: "j", "j.earlier == true" %}
+
+        {% for job in visible_jobs %}
+        <div class="cv-job{% if job.current %} cv-job--current{% endif %}">
+          <div class="cv-job-dot"></div>
+          <div class="cv-job-card">
+            <div class="cv-job-header" onclick="this.closest('.cv-job-card').classList.toggle('expanded')">
+              <div class="cv-job-logo" style="background:{{ job.logo_color }}22; color:{{ job.logo_color }};">
+                {% if job.logo_initials %}
+                  <span>{{ job.logo_initials }}</span>
+                {% else %}
+                  <span class="iconify" data-icon="{{ job.logo_icon }}" style="font-size:1.3rem;"></span>
+                {% endif %}
+              </div>
+              <div class="cv-job-meta">
+                <div class="cv-job-title-row">
+                  <span class="cv-job-title">{{ job.title }}</span>
+                  {% if job.current %}<span class="cv-current-badge">Current</span>{% endif %}
+                </div>
+                <span class="cv-job-company" style="color:{{ job.logo_color }};">{{ job.company }}</span>
+              </div>
+              <div class="cv-job-details">
+                <span><i class="fas fa-calendar-alt"></i> {{ job.period }}</span>
+                <span><i class="fas fa-map-marker-alt"></i> {{ job.location }}</span>
+              </div>
+              <i class="fas fa-chevron-down cv-job-chevron"></i>
+            </div>
+
+            <div class="cv-job-body">
+              <p class="cv-job-desc">{{ job.description }}</p>
+              {% if job.focus_areas %}
+              <div class="cv-job-section">
+                <span class="cv-job-section-label" style="color:{{ job.logo_color }};">Focus Areas</span>
+                <div class="cv-focus-tags">
+                  {% for area in job.focus_areas %}
+                  <span class="cv-tag">
+                    <span class="iconify" data-icon="mdi:circle-small" style="font-size:1rem;"></span>
+                    {{ area }}
+                  </span>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+              {% if job.highlights %}
+              <div class="cv-job-section">
+                <span class="cv-job-section-label" style="color:var(--accent-blue);">Key Highlights</span>
+                <ul class="cv-highlights">
+                  {% for h in job.highlights %}
+                  <li>{{ h }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% if earlier_jobs.size > 0 %}
+        <div id="earlierRoles" style="display:none;">
+          {% for job in earlier_jobs %}
+          <div class="cv-job">
+            <div class="cv-job-dot"></div>
+            <div class="cv-job-card">
+              <div class="cv-job-header" onclick="this.closest('.cv-job-card').classList.toggle('expanded')">
+                <div class="cv-job-logo" style="background:{{ job.logo_color }}22; color:{{ job.logo_color }};">
+                  {% if job.logo_initials %}
+                    <span>{{ job.logo_initials }}</span>
+                  {% else %}
+                    <span class="iconify" data-icon="{{ job.logo_icon }}" style="font-size:1.3rem;"></span>
+                  {% endif %}
+                </div>
+                <div class="cv-job-meta">
+                  <div class="cv-job-title-row">
+                    <span class="cv-job-title">{{ job.title }}</span>
+                  </div>
+                  <span class="cv-job-company" style="color:{{ job.logo_color }};">{{ job.company }}</span>
+                </div>
+                <div class="cv-job-details">
+                  <span><i class="fas fa-calendar-alt"></i> {{ job.period }}</span>
+                  <span><i class="fas fa-map-marker-alt"></i> {{ job.location }}</span>
+                </div>
+                <i class="fas fa-chevron-down cv-job-chevron"></i>
+              </div>
+              <div class="cv-job-body">
+                <p class="cv-job-desc">{{ job.description }}</p>
+                {% if job.highlights %}
+                <ul class="cv-highlights">
+                  {% for h in job.highlights %}
+                  <li>{{ h }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="cv-earlier-btn" id="earlierBtn" onclick="toggleEarlier()">
+          View earlier roles <i class="fas fa-chevron-down"></i>
+        </button>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section style="margin-top: 3rem;">
+      <div class="cv-section-header">
+        <h2 class="cv-section-title">Selected Projects</h2>
+      </div>
+      <div class="card-grid card-grid-2">
+        {% for project in cv.projects %}
+        <div class="rawr-card cv-project-card">
+          <div class="cv-project-icon" style="color:{{ project.icon_color }}; background:{{ project.icon_color }}22;">
+            <span class="iconify" data-icon="{{ project.icon }}" style="font-size:2rem;"></span>
+          </div>
+          <h3 class="cv-project-title">{{ project.title }}</h3>
+          <p class="cv-project-desc">{{ project.description }}</p>
+          <div class="cv-project-tags">
+            {% for tag in project.tags %}
+            <span class="cv-tag cv-tag-sm">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="cv-sidebar">
+    <div class="cv-widget">
+      <h3 class="cv-widget-title">At a Glance</h3>
+      <div class="cv-stats">
+        {% for stat in cv.stats %}
+        <div class="cv-stat">
+          <span class="iconify cv-stat-icon" data-icon="{{ stat.icon }}"></span>
+          <div>
+            <div class="cv-stat-value">{{ stat.value }}</div>
+            <div class="cv-stat-label">{{ stat.label }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="cv-widget">
+      <h3 class="cv-widget-title">Core Expertise</h3>
+      <ul class="cv-expertise-list">
+        {% for skill in cv.expertise %}
+        <li><span class="iconify" data-icon="mdi:check-circle-outline" style="color:var(--accent);"></span> {{ skill }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% if cv.quote %}
+    <div class="cv-widget cv-quote-widget">
+      <span class="iconify" data-icon="mdi:format-quote-open" style="font-size:2rem;color:var(--accent-blue);"></span>
+      <p class="cv-quote-text">{{ cv.quote }}</p>
+      <span class="cv-quote-attr">– James</span>
+    </div>
+    {% endif %}
+  </aside>
+</div>
+
+<!-- ===== CTA ===== -->
+{% if cv.cv_pdf %}
+<div class="rawr-container" style="padding-bottom: 3rem;">
+  <div class="cv-cta-bar">
+    <div class="cv-cta-icon">
+      <span class="iconify" data-icon="mdi:rocket-launch-outline" style="font-size:2.5rem;color:var(--accent-blue);"></span>
+    </div>
+    <div>
+      <h3 style="margin:0 0 0.25rem;">Want the full details?</h3>
+      <p style="margin:0;color:var(--text-secondary);">Download my CV for a complete overview or get in touch to chat.</p>
+    </div>
+    <div class="cv-cta-btns">
+      <a href="{{ cv.cv_pdf }}" class="btn-primary-rawr" download>
+        <i class="fas fa-file-alt"></i> Download CV (PDF)
+      </a>
+      <a href="{{ site.linkedin }}" target="_blank" rel="noopener" class="btn-outline-rawr">Get in touch</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<script>
+  // Expand current job by default
+  document.querySelector('.cv-job--current .cv-job-card')?.classList.add('expanded');
+
+  function toggleEarlier() {
+    var el = document.getElementById('earlierRoles');
+    var btn = document.getElementById('earlierBtn');
+    var open = el.style.display !== 'none';
+    el.style.display = open ? 'none' : 'block';
+    btn.innerHTML = (open ? 'View earlier roles' : 'Hide earlier roles') + ' <i class="fas fa-chevron-' + (open ? 'down' : 'up') + '"></i>';
+  }
+</script>

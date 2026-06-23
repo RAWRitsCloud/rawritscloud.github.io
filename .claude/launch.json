@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jekyll",
+      "runtimeExecutable": "C:/Source/rawritscloud.github.io/.claude/jekyll-serve.bat",
+      "runtimeArgs": [],
+      "port": 4000
+    }
+  ]
+}

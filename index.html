@@ -1,0 +1,163 @@
+---
+layout: default
+title: Home
+---
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="rawr-container">
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <h1>Hey, I'm <span class="hero-name">James</span> 👋</h1>
+        <p class="hero-subtitle">
+          Cloud Solutions Consultant at <strong>BT</strong> helping organisations
+          build on Azure.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge-pill badge-azure">
+            <span class="iconify" data-icon="devicon:azure" data-width="14"></span>
+            Azure
+          </span>
+          <span class="badge-pill badge-terraform">
+            <span class="iconify" data-icon="devicon:terraform" data-width="14"></span>
+            Terraform
+          </span>
+          <span class="badge-pill badge-automation">
+            <span class="iconify" data-icon="carbon:automated-pipeline" data-width="14"></span>
+            Automation
+          </span>
+          <span class="badge-pill badge-cost">
+            <span class="iconify" data-icon="mdi:currency-gbp" data-width="14"></span>
+            Cost Optimisation
+          </span>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="{{ site.baseurl }}/articles" class="btn-primary-rawr">Read Articles</a>
+          <a href="{{ site.baseurl }}/certifications" class="btn-outline-rawr">View Certifications</a>
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener" class="btn-link-rawr">
+            Connect on LinkedIn <i class="fas fa-arrow-right" style="font-size:0.75em;"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="{{ site.baseurl }}/assets/images/logo.png" alt="RAWRitsCloud">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Start Here ===== -->
+<section class="rawr-section">
+  <div class="rawr-container">
+    <div class="section-header">
+      <div>
+        <span class="section-label">Start Here</span>
+        <h2>New to the site? These learning paths are a great place to begin.</h2>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-3">
+
+      <a href="{{ site.baseurl }}/articles/?cat=azure" class="rawr-card start-card">
+        <div class="start-card-icon icon-azure">
+          <span class="iconify" data-icon="devicon:azure"></span>
+        </div>
+        <div class="start-card-title">Azure Learning Path</div>
+        <p class="start-card-desc">Everything you need to know about Azure, from landing zones to governance.</p>
+        <div class="start-card-count">
+          {% assign azure_posts = site.posts | where_exp: "post", "post.categories contains 'Azure'" %}
+          <i class="fas fa-file-alt"></i> {{ azure_posts.size }} Articles
+        </div>
+      </a>
+
+      <a href="{{ site.baseurl }}/articles/?cat=terraform" class="rawr-card start-card">
+        <div class="start-card-icon icon-terraform">
+          <span class="iconify" data-icon="devicon:terraform"></span>
+        </div>
+        <div class="start-card-title">Terraform Series</div>
+        <p class="start-card-desc">Step-by-step guides to Terraform, modules, patterns and best practices.</p>
+        <div class="start-card-count">
+          {% assign tf_posts = site.posts | where_exp: "post", "post.categories contains 'Terraform'" %}
+          <i class="fas fa-file-alt"></i> {{ tf_posts.size }} Articles
+        </div>
+      </a>
+
+      <a href="{{ site.baseurl }}/articles/?cat=cost" class="rawr-card start-card">
+        <div class="start-card-icon icon-cost">
+          <span class="iconify" data-icon="mdi:currency-usd-circle-outline"></span>
+        </div>
+        <div class="start-card-title">Cost Optimisation</div>
+        <p class="start-card-desc">Practical ways to reduce cloud costs and optimise your Azure environment.</p>
+        <div class="start-card-count">
+          {% assign cost_posts = site.posts | where_exp: "post", "post.categories contains 'Cost'" %}
+          <i class="fas fa-file-alt"></i> {{ cost_posts.size }} Articles
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Latest Articles ===== -->
+<section class="rawr-section">
+  <div class="rawr-container">
+    <div class="section-header">
+      <h2>Latest Articles</h2>
+      <a href="{{ site.baseurl }}/articles" class="section-view-all">
+        View all articles <i class="fas fa-arrow-right" style="font-size:0.8em;"></i>
+      </a>
+    </div>
+
+    <div class="card-grid card-grid-4">
+      {% for post in site.posts limit:4 %}
+      {% if post.hero_image %}
+        {% assign _fc = post.hero_image | slice: 0 %}
+        {% if _fc == "/" or post.hero_image contains "://" %}
+          {% assign card_src = post.hero_image %}
+        {% else %}
+          {% assign card_src = "/" | append: post.hero_image %}
+        {% endif %}
+      {% else %}
+        {% assign card_hero = "projects" %}
+        {% assign first_cat = post.categories.first | downcase %}
+        {% if first_cat contains "terraform" %}
+          {% assign card_hero = "terraform" %}
+        {% elsif first_cat contains "azure" %}
+          {% assign card_hero = "azure" %}
+        {% elsif first_cat contains "cost" %}
+          {% assign card_hero = "cost-op" %}
+        {% elsif first_cat contains "automation" or first_cat contains "github" or first_cat contains "logic" %}
+          {% assign card_hero = "automation" %}
+        {% endif %}
+        {% assign card_src = "/assets/images/posts/" | append: card_hero | append: ".png" %}
+      {% endif %}
+      <article class="rawr-card article-card">
+        <div class="article-card-image">
+          <a href="{{ site.baseurl }}{{ post.url }}">
+            <img src="{{ site.baseurl }}{{ card_src }}" alt="{{ post.title }}" loading="lazy">
+          </a>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-category">
+            {% for cat in post.categories %}{{ cat | upcase }}{% unless forloop.last %} &bull; {% endunless %}{% endfor %}
+          </div>
+          <h3 class="article-card-title">
+            <a href="{{ site.baseurl }}{{ post.url }}" style="color:inherit;">{{ post.title }}</a>
+          </h3>
+          <p class="article-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+          <div class="article-card-meta">
+            <time>{{ post.date | date: "%d %b %Y" }}</time>
+            {% if post.read_time %}<span class="sep">&bull;</span><span>{{ post.read_time }} min read</span>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

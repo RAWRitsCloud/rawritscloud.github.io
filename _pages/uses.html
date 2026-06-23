@@ -1,0 +1,204 @@
+---
+layout: default
+title: Uses
+permalink: /uses
+---
+
+<div class="rawr-container">
+
+  <div class="page-header">
+    <h1>My Setup &amp; Tools</h1>
+    <p>The tools and tech I use every day.</p>
+  </div>
+
+  <div class="filter-tabs" id="usesFilter">
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="hardware">Hardware</button>
+    <button class="filter-tab" data-filter="editor">Editor</button>
+    <button class="filter-tab" data-filter="terminal">Terminal</button>
+    <button class="filter-tab" data-filter="cloud">Cloud</button>
+    <button class="filter-tab" data-filter="software">Software</button>
+  </div>
+
+  <!-- Hardware -->
+  <p class="cert-category-title" data-category="hardware">Hardware</p>
+  <div class="uses-grid card-grid-2" id="uses-hardware">
+
+    <div class="uses-card" data-category="hardware">
+      <div class="uses-card-icon">🖥️</div>
+      <div>
+        <div class="uses-card-category">Hardware</div>
+        <div class="uses-card-name">Custom Windows Desktop (SCAN PERF)</div>
+        <div class="uses-card-desc">My main machine, built by SCAN Computers. Intel Core i7-14700F (20 cores), NVIDIA GeForce RTX 5060, 16GB RAM, Windows 11 Pro. Handles everything from Azure Portal to Hyper-V lab work without breaking a sweat.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="hardware">
+      <div class="uses-card-icon">🖱️</div>
+      <div>
+        <div class="uses-card-category">Hardware</div>
+        <div class="uses-card-name">Hannspree HL274HPB PLUS 27"</div>
+        <div class="uses-card-desc">27-inch 1080p monitor for the home office setup. Plenty of room for splitting the Azure Portal, VS Code, and terminal side by side.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Editor -->
+  <p class="cert-category-title" data-category="editor">Editor</p>
+  <div class="uses-grid card-grid-2" id="uses-editor">
+
+    <div class="uses-card" data-category="editor">
+      <div class="uses-card-icon">
+        <span class="iconify" data-icon="vscode-icons:file-type-vscode" data-width="28"></span>
+      </div>
+      <div>
+        <div class="uses-card-category">Editor</div>
+        <div class="uses-card-name">Visual Studio Code</div>
+        <div class="uses-card-desc">My main editor for everything — Terraform, YAML, Python, Markdown. Extensions: Terraform, Azure Tools, GitLens, and GitHub Copilot.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="editor">
+      <div class="uses-card-icon">🎨</div>
+      <div>
+        <div class="uses-card-category">Editor Theme</div>
+        <div class="uses-card-name">GitHub Dark Default</div>
+        <div class="uses-card-desc">Clean, familiar dark theme that matches GitHub's interface. Easy on the eyes for long coding sessions.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Terminal -->
+  <p class="cert-category-title" data-category="terminal">Terminal</p>
+  <div class="uses-grid card-grid-2" id="uses-terminal">
+
+    <div class="uses-card" data-category="terminal">
+      <div class="uses-card-icon">⬛</div>
+      <div>
+        <div class="uses-card-category">Terminal</div>
+        <div class="uses-card-name">Windows Terminal</div>
+        <div class="uses-card-desc">Tabbed terminal with PowerShell, Azure Cloud Shell, and WSL all in one place. Customised with Oh My Posh for a nice prompt.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="terminal">
+      <div class="uses-card-icon">🐧</div>
+      <div>
+        <div class="uses-card-category">Terminal</div>
+        <div class="uses-card-name">WSL (Windows Subsystem for Linux)</div>
+        <div class="uses-card-desc">Linux environment without leaving Windows. Handy for running Linux-native toolchains and shell scripts alongside PowerShell in the same Terminal window.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Cloud & IaC -->
+  <p class="cert-category-title" data-category="cloud">Cloud &amp; IaC</p>
+  <div class="uses-grid card-grid-2" id="uses-cloud">
+
+    <div class="uses-card" data-category="cloud">
+      <div class="uses-card-icon">
+        <span class="iconify" data-icon="devicon:azure" data-width="28"></span>
+      </div>
+      <div>
+        <div class="uses-card-category">Cloud</div>
+        <div class="uses-card-name">Microsoft Azure</div>
+        <div class="uses-card-desc">Primary cloud platform. I live in the Azure Portal, Azure CLI, and ARM/Bicep templates daily — plus Terraform for everything I can manage as code.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="cloud">
+      <div class="uses-card-icon">
+        <span class="iconify" data-icon="devicon:terraform" data-width="28"></span>
+      </div>
+      <div>
+        <div class="uses-card-category">IaC</div>
+        <div class="uses-card-name">Terraform</div>
+        <div class="uses-card-desc">Infrastructure as code for everything cloud-related. Modules, workspaces, remote state in Azure Storage — it's the backbone of how I deploy.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="cloud">
+      <div class="uses-card-icon">
+        <span class="iconify" data-icon="devicon:github" data-width="28"></span>
+      </div>
+      <div>
+        <div class="uses-card-category">Cloud</div>
+        <div class="uses-card-name">GitHub Actions</div>
+        <div class="uses-card-desc">CI/CD pipelines for Terraform deployments, blog publishing, and automated testing. Reusable workflows make scaling across repos straightforward.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="cloud">
+      <div class="uses-card-icon">☁️</div>
+      <div>
+        <div class="uses-card-category">Cloud</div>
+        <div class="uses-card-name">Azure CLI &amp; PowerShell</div>
+        <div class="uses-card-desc">Both in daily rotation. Azure CLI for quick resource management and scripting; Az PowerShell module when I need richer objects and pipeline integration.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Software -->
+  <p class="cert-category-title" data-category="software">Software</p>
+  <div class="uses-grid card-grid-2" id="uses-software">
+
+    <div class="uses-card" data-category="software">
+      <div class="uses-card-icon">📝</div>
+      <div>
+        <div class="uses-card-category">Software</div>
+        <div class="uses-card-name">Notion</div>
+        <div class="uses-card-desc">Where my notes, article drafts, and project docs live. The database views are great for tracking blog post ideas and their status.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="software">
+      <div class="uses-card-icon">🐳</div>
+      <div>
+        <div class="uses-card-category">Software</div>
+        <div class="uses-card-name">Docker Desktop</div>
+        <div class="uses-card-desc">Local container development and testing before pushing to Azure Container Apps or AKS. Also used for running local toolchains consistently.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="software">
+      <div class="uses-card-icon">🦁</div>
+      <div>
+        <div class="uses-card-category">Software</div>
+        <div class="uses-card-name">Brave</div>
+        <div class="uses-card-desc">Primary browser. Fast, blocks ads and trackers by default, and handles multiple Azure tenant sign-ins cleanly across profiles.</div>
+      </div>
+    </div>
+
+    <div class="uses-card" data-category="software">
+      <div class="uses-card-icon">🔧</div>
+      <div>
+        <div class="uses-card-category">Software</div>
+        <div class="uses-card-name">PowerToys</div>
+        <div class="uses-card-desc">Essential Windows utility. FancyZones for window snapping, PowerRename for bulk file ops, and the Quick Access launcher for jumping between tools fast.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('#usesFilter .filter-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#usesFilter .filter-tab').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      var filter = this.dataset.filter;
+      document.querySelectorAll('[data-category]').forEach(function(el) {
+        if (filter === 'all' || el.dataset.category === filter) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

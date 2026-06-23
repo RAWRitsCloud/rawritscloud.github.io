@@ -1,0 +1,75 @@
+---
+layout: default
+title: Search
+permalink: /search
+---
+
+<div class="rawr-container" style="padding-top: 2rem; padding-bottom: 4rem;">
+  <div class="page-header">
+    <h1>Search</h1>
+  </div>
+
+  <div style="max-width: 600px; margin-bottom: 2rem;">
+    <div class="rawr-search-wrap" style="width: 100%;">
+      <i class="fas fa-search rawr-search-icon"></i>
+      <input type="search" class="rawr-search" id="searchInput" placeholder="Search articles, topics..."
+        style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; font-size: 1rem;">
+    </div>
+  </div>
+
+  <div id="searchStatus" style="color: var(--text-muted); margin-bottom: 1.5rem;"></div>
+  <div id="searchResults" class="card-grid card-grid-3"></div>
+</div>
+
+<script src="{{ site.baseurl }}/assets/js/lunr.js"></script>
+<script src="{{ site.baseurl }}/assets/js/search-index.js"></script>
+<script>
+  var idx = lunr(function () {
+    this.ref('id');
+    this.field('title', { boost: 10 });
+    this.field('body');
+    this.field('categories');
+    documents.forEach(function(doc) { this.add(doc); }, this);
+  });
+
+  function doSearch(term) {
+    var status = document.getElementById('searchStatus');
+    var results = document.getElementById('searchResults');
+    results.innerHTML = '';
+    if (!term) { status.textContent = ''; return; }
+
+    var hits = idx.search(term + ' ' + term + '*');
+    status.textContent = hits.length + ' result' + (hits.length !== 1 ? 's' : '') + ' for “' + term + '”';
+
+    if (hits.length === 0) {
+      results.innerHTML = '<p style="color:var(--text-muted)">No results found. Try a different search term.</p>';
+      return;
+    }
+
+    hits.slice(0, 12).forEach(function(hit) {
+      var doc = documents[hit.ref];
+      var excerpt = doc.body.substring(0, 140) + '…';
+      results.innerHTML += '<a href="' + doc.url + '" class="rawr-card article-card" style="text-decoration:none;">'
+        + '<div class="article-card-body">'
+        + '<div class="article-card-category">' + (doc.categories || '') + '</div>'
+        + '<h3 class="article-card-title" style="color:inherit;">' + doc.title + '</h3>'
+        + '<p class="article-card-excerpt">' + excerpt + '</p>'
+        + '</div></a>';
+    });
+  }
+
+  // Read ?q= on load
+  var q = new URLSearchParams(window.location.search).get('q') || '';
+  if (q) {
+    document.getElementById('searchInput').value = q;
+    doSearch(q);
+  }
+
+  // Live search as user types
+  document.getElementById('searchInput').addEventListener('input', function() {
+    var url = new URL(window.location);
+    if (this.value) { url.searchParams.set('q', this.value); } else { url.searchParams.delete('q'); }
+    history.replaceState(null, '', url);
+    doSearch(this.value);
+  });
+</script>

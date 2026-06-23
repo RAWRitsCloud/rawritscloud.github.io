@@ -1,0 +1,19 @@
+name: Publish Blog Drafts
+
+on:
+  schedule:
+    - cron: "0 7 * * 5"  # Every Friday at 07:00 UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Jekyll Publish Drafts
+        uses: soywiz/github-action-jekyll-publish-drafts@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          jekyll_path: ./
+          branch: gh-pages

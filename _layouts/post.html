@@ -1,0 +1,207 @@
+---
+layout: default
+---
+
+{% assign author = site.authors[page.author] %}
+
+{% if page.hero_image %}
+  {% assign _first_char = page.hero_image | slice: 0 %}
+  {% if _first_char == "/" or page.hero_image contains "://" %}
+    {% assign hero_src = page.hero_image %}
+  {% else %}
+    {% assign hero_src = "/" | append: page.hero_image %}
+  {% endif %}
+{% else %}
+  {% assign hero_img = "projects" %}
+  {% assign first_cat = page.categories.first | downcase %}
+  {% if first_cat contains "terraform" %}
+    {% assign hero_img = "terraform" %}
+  {% elsif first_cat contains "azure" %}
+    {% assign hero_img = "azure" %}
+  {% elsif first_cat contains "cost" %}
+    {% assign hero_img = "cost-op" %}
+  {% elsif first_cat contains "automation" or first_cat contains "github" or first_cat contains "logic" %}
+    {% assign hero_img = "automation" %}
+  {% endif %}
+  {% assign hero_src = "/assets/images/posts/" | append: hero_img | append: ".png" %}
+{% endif %}
+
+<!-- Full-width hero banner -->
+<div class="article-hero-banner" style="background-image: url('{{ site.baseurl }}{{ hero_src }}');">
+  <div class="article-hero-content">
+    <div class="article-hero-crumb">
+      <a href="{{ site.baseurl }}/articles">Articles</a>
+      {% for cat in page.categories %}
+      <span>&rsaquo;</span>
+      <a href="{{ site.baseurl }}/categories#{{ cat | slugify }}">{{ cat }}</a>
+      {% endfor %}
+    </div>
+    <h1 class="article-hero-title">{{ page.title }}</h1>
+  </div>
+</div>
+
+<div class="rawr-container">
+  <div class="article-layout">
+
+    <!-- Main Article Content -->
+    <article class="article-main">
+
+      <!-- Meta -->
+      <div class="article-meta" style="margin-top:2rem;">
+        {% if author %}
+        <img class="article-author-avatar"
+          src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=72&d=mm&r=x"
+          alt="{{ author.display_name }}">
+        <div class="article-meta-info">
+          <span class="article-meta-author">{{ author.display_name }}</span>
+          <time class="article-meta-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+            {{ page.date | date: "%d %b %Y" }}
+          </time>
+        </div>
+        {% endif %}
+        {% if page.read_time %}
+        <span class="article-meta-read">{{ page.read_time }} min read</span>
+        {% endif %}
+      </div>
+
+      <!-- Table of contents (inline on mobile) -->
+      {% if page.toc %}
+      <div class="sidebar-widget" style="display:none;" id="toc-mobile">
+        <span class="sidebar-widget-title">On this page</span>
+        {% include toc.html html=content %}
+      </div>
+      {% endif %}
+
+      <!-- Body -->
+      <div class="article-body">
+        {% if page.toc and page.beforetoc %}
+        <p><em>{{ page.beforetoc }}</em></p>
+        {% endif %}
+        {{ content }}
+      </div>
+
+      <!-- Tags -->
+      {% if page.tags.size > 0 %}
+      <div class="article-tags">
+        <span class="sidebar-widget-title">Tags</span>
+        <div class="tag-list">
+          {% assign sorted_tags = page.tags | sort %}
+          {% for tag in sorted_tags %}
+          <a class="tag-pill" href="{{ site.baseurl }}/tags#{{ tag | slugify }}">#{{ tag }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Author box -->
+      {% if author %}
+      <div class="author-box">
+        <img class="author-box-avatar"
+          src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=120&d=mm&r=x"
+          alt="{{ author.display_name }}">
+        <div>
+          <div class="author-box-name">{{ author.display_name }}</div>
+          <p class="author-box-bio">{{ author.description }}</p>
+          <div class="author-box-socials">
+            <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="{{ site.bluesky }}" target="_blank" rel="noopener" aria-label="Bluesky">
+              <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:1rem;"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Prev / Next -->
+      <nav class="post-nav" aria-label="Post navigation">
+        {% if page.previous.url %}
+        <a class="post-nav-item prev" href="{{ site.baseurl }}{{ page.previous.url }}">
+          <span class="post-nav-label"><i class="fas fa-arrow-left" style="font-size:0.7em;"></i> Previous</span>
+          <span class="post-nav-title">{{ page.previous.title }}</span>
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+        {% if page.next.url %}
+        <a class="post-nav-item next" href="{{ site.baseurl }}{{ page.next.url }}">
+          <span class="post-nav-label">Next <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></span>
+          <span class="post-nav-title">{{ page.next.title }}</span>
+        </a>
+        {% endif %}
+      </nav>
+
+      <!-- Comments -->
+      {% if page.comments != false %}
+      <div id="comments" style="margin-top:3rem;">
+        {% include disqus.html %}
+      </div>
+      {% endif %}
+
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="article-sidebar">
+
+      <!-- TOC -->
+      {% if page.toc %}
+      <div class="sidebar-widget">
+        <span class="sidebar-widget-title">On this page</span>
+        {% include toc.html html=content %}
+      </div>
+      {% endif %}
+
+      <!-- Share -->
+      <div class="sidebar-widget">
+        <span class="sidebar-widget-title">Share</span>
+        <div class="share-btns">
+          <a class="share-btn" title="Share on Bluesky" target="_blank" rel="noopener"
+            href="https://bsky.app/intent/compose?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}">
+            <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:0.9rem;"></span>
+          </a>
+          <a class="share-btn" title="Share on LinkedIn" target="_blank" rel="noopener"
+            href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}&title={{ page.title | url_encode }}">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a class="share-btn" title="Share on Facebook" target="_blank" rel="noopener"
+            href="https://facebook.com/sharer.php?u={{ page.url | absolute_url | url_encode }}">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<style>
+  @media (max-width: 768px) {
+    #toc-mobile { display: block !important; margin-bottom: 1.5rem; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.article-body pre, .CodeRay').forEach(function(block) {
+    var wrap = document.createElement('div');
+    wrap.className = 'code-block-wrap';
+    block.parentNode.insertBefore(wrap, block);
+    wrap.appendChild(block);
+
+    var btn = document.createElement('button');
+    btn.className = 'code-copy-btn';
+    btn.textContent = 'Copy';
+    wrap.appendChild(btn);
+
+    btn.addEventListener('click', function() {
+      var code = block.querySelector('pre') || block;
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+</script>

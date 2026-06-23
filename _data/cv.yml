@@ -1,0 +1,270 @@
+tagline: "Cloud Architect with 18+ years in IT helping organisations design secure, scalable and governed cloud platforms using Azure, Terraform, Kubernetes and automation."
+
+cv_pdf: "/assets/JamesMFCV.pdf"
+
+stats:
+  - value: "18+"
+    label: "Years in IT"
+    icon: "mdi:calendar-outline"
+
+  - value: "10+"
+    label: "Years with Azure"
+    icon: "mdi:cloud-outline"
+
+  - value: "9"
+    label: "Active Certifications"
+    icon: "mdi:shield-check-outline"
+
+expertise:
+  - "Azure Architecture"
+  - "Infrastructure as Code (Terraform)"
+  - "Kubernetes Platforms (AKS)"
+  - "Cloud Governance & Security"
+  - "Azure Landing Zones"
+  - "Automation & DevOps"
+  - "Cost Optimisation"
+  - "Cloud Migrations"
+  - "Identity & Access Management"
+
+quote: "I love solving complex problems, automating the boring stuff, and helping teams build awesome things in the cloud."
+
+jobs:
+  - title: "Lead Cloud Architect"
+    company: "BT"
+    period: "Nov 2022 – Present"
+    location: "Birmingham, UK"
+    current: true
+    logo_initials: "BT"
+    logo_color: "#6f2da8"
+
+    description: >
+      Leading architecture engagements and cloud transformation programmes
+      helping enterprise customers adopt Azure using secure, scalable and
+      governed landing zone designs aligned to Microsoft's Cloud Adoption Framework.
+
+    focus_areas:
+      - "Azure Architecture"
+      - "Terraform & IaC"
+      - "Cloud Adoption Framework"
+      - "Governance"
+      - "Automation"
+      - "Cost Optimisation"
+
+    highlights:
+      - "Leading Azure Landing Zone and governance engagements for enterprise customers"
+      - "Running customer strategy and vision workshops"
+      - "Helping customers architect long-term technology roadmaps"
+      - "Presenting cloud propositions and services to customers and sales teams"
+      - "Mentoring and developing architects and consultants"
+
+  - title: "Lead Cloud Consultant"
+    company: "BT"
+    period: "Jul 2021 – Nov 2022"
+    location: "Birmingham, UK"
+    logo_initials: "BT"
+    logo_color: "#6f2da8"
+
+    description: >
+      Delivering Azure consulting engagements and helping define BT's managed
+      cloud offerings through reusable architectures, Terraform modules and
+      platform standards.
+
+    focus_areas:
+      - "Azure"
+      - "Terraform"
+      - "Consulting"
+      - "Landing Zones"
+      - "Pre-Sales"
+
+    highlights:
+      - "Developed enterprise Terraform templates aligned to the Cloud Adoption Framework"
+      - "Worked with product teams to develop managed service offerings and procedures"
+      - "Led technical conversations with customers and pre-sales teams"
+      - "Helped wider BT teams adopt Azure best practices"
+
+  - title: "Cloud Consultant"
+    company: "ANS Group"
+    period: "Dec 2018 – Aug 2021"
+    location: "Manchester, UK"
+    logo_icon: "mdi:cloud-outline"
+    logo_color: "#0078d4"
+
+    description: >
+      Designing and delivering Azure cloud solutions for public and private
+      sector organisations including migration, security, infrastructure and
+      automation projects.
+
+    focus_areas:
+      - "Azure"
+      - "Terraform"
+      - "Migrations"
+      - "Office 365"
+      - "Security"
+
+    highlights:
+      - "Implemented and improved Infrastructure as Code libraries"
+      - "Designed Azure IaaS solutions covering networking, security and availability"
+      - "Delivered cloud migration projects from traditional datacentres"
+      - "Gathered requirements and designed greenfield cloud environments"
+      - "Delivered Office 365 migration projects including Exchange, SharePoint and Teams"
+
+  - title: "Microsoft Technical Consultant"
+    company: "BT"
+    period: "Jan 2016 – Nov 2018"
+    location: "Chesterfield, UK"
+    logo_initials: "BT"
+    logo_color: "#6f2da8"
+
+    description: >
+      Providing Microsoft platform consulting services covering Azure,
+      Office 365, identity management, migration and infrastructure solutions.
+
+    focus_areas:
+      - "Azure"
+      - "Office 365"
+      - "Identity"
+      - "Infrastructure"
+
+    highlights:
+      - "Delivered Azure migration, backup and disaster recovery solutions"
+      - "Designed Azure identity solutions using Azure AD, MFA and SSO"
+      - "Delivered Office 365 migrations including Exchange and SharePoint"
+      - "Worked with support teams to transition projects into service"
+
+  - title: "SharePoint Consultant"
+    company: "Ridgian – A Ricoh Company"
+    period: "May 2013 – Jan 2016"
+    location: "Birmingham, UK"
+    logo_icon: "mdi:account-group-outline"
+    logo_color: "#0ea5e9"
+
+    description: >
+      Delivering SharePoint, Azure and Office 365 consulting projects while
+      helping organisations modernise collaboration and document management platforms.
+
+    focus_areas:
+      - "SharePoint"
+      - "Azure"
+      - "SQL Server"
+      - "Office 365"
+
+    highlights:
+      - "Led SharePoint 2010 and 2013 infrastructure projects"
+      - "Designed AD RMS and ADFS environments"
+      - "Consulted on SQL Server infrastructure and performance"
+      - "Delivered Azure Infrastructure as a Service projects"
+      - "Led onboarding and health-check assessments for support customers"
+
+  - title: "IT Support Analyst"
+    company: "British Athletics"
+    period: "Aug 2011 – May 2013"
+    location: "Birmingham, UK"
+    logo_icon: "mdi:stadium"
+    logo_color: "#22c55e"
+
+    description: >
+      Providing infrastructure and user support for the governing body of athletics
+      in the UK, supporting national events and day-to-day business operations.
+
+    focus_areas:
+      - "Infrastructure"
+      - "End User Support"
+      - "Networking"
+
+    highlights:
+      - "Implemented stadium-wide Wi-Fi for televised athletics events"
+      - "Supported journalists, photographers and officials during national events"
+      - "Delivered follow-me printing services"
+      - "Provided 1st to 3rd line support across UK Athletics and England Athletics systems"
+
+projects:
+  - title: "Azure Deployment for PKI Solution"
+    description: >
+      Supported a national service provider in deploying Kubernetes workloads
+      into a secure Azure platform aligned to the Microsoft Landing Zone Framework.
+      Designed reusable Terraform modules, secure networking patterns, private
+      endpoints and governance controls across 12 Azure subscriptions while
+      integrating FortiGate security services.
+
+    icon: "mdi:kubernetes"
+    icon_color: "#0ea5e9"
+
+    tags:
+      - "AKS"
+      - "Terraform"
+      - "Landing Zones"
+      - "FortiGate"
+
+  - title: "Intelligent Cloud Deployment"
+    description: >
+      Designed and built enterprise Terraform modules aligned to Microsoft's
+      Enterprise Scale Architecture and Cloud Adoption Framework.
+
+    icon: "mdi:cloud-upload-outline"
+    icon_color: "#14b8a6"
+
+    tags:
+      - "Terraform"
+      - "Azure"
+      - "CAF"
+      - "Automation"
+
+  - title: "SAP Azure Landing Zone"
+    description: >
+      Delivered a secure Azure Landing Zone for a government SAP deployment
+      using Terraform, Azure Policy, ExpressRoute, FortiGate security and
+      enterprise monitoring standards.
+
+    icon: "mdi:server-outline"
+    icon_color: "#7b42bc"
+
+    tags:
+      - "Azure"
+      - "ExpressRoute"
+      - "Azure Policy"
+      - "SAP"
+
+  - title: "Application Modernisation"
+    description: >
+      Modernised a major car park operator's platform using Azure Virtual Desktop,
+      Azure App Services, SQL modernisation and Palo Alto integration while
+      supporting a datacentre exit strategy for 350 staff.
+
+    icon: "mdi:application-outline"
+    icon_color: "#0ea5e9"
+
+    tags:
+      - "AVD"
+      - "SQL"
+      - "App Service"
+      - "Palo Alto"
+
+  - title: "Office 365 & Azure Enablement"
+    description: >
+      Supported a large NHS Trust cloud transformation programme, migrating
+      over 17,000 staff to Microsoft 365, improving connectivity through
+      ExpressRoute and enabling flexible working through modern cloud services.
+
+    icon: "mdi:microsoft-office"
+    icon_color: "#f59e0b"
+
+    tags:
+      - "O365"
+      - "Azure AD"
+      - "Migration"
+      - "ExpressRoute"
+
+  - title: "Disaster Recovery in Azure"
+    description: >
+      Implemented Azure Site Recovery for over 250 servers for a Higher
+      Education institution, replacing a costly replication solution and
+      improving disaster recovery capabilities.
+
+    icon: "mdi:backup-restore"
+    icon_color: "#22c55e"
+
+    tags:
+      - "Azure Site Recovery"
+      - "Disaster Recovery"
+      - "ExpressRoute"
+      - "Infrastructure"

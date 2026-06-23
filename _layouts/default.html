@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png">
+  <title>{{ page.title }} | {{ site.name }}</title>
+
+  {% seo %}
+
+  <!-- Bootstrap 5 (grid + utilities) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+
+  <!-- RAWRitsCloud Theme -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/rawr-theme.css">
+
+  <!-- CookieYes -->
+  <script id="cookieyes" type="text/javascript"
+    src="https://cdn-cookieyes.com/client_data/da1cc39ab0fa16a849728747/script.js"></script>
+</head>
+
+{% if jekyll.environment == 'production' %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', '{{ site.google_analytics }}');
+</script>
+{% endif %}
+
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="rawr-nav">
+    <div class="rawr-nav-container">
+
+      <a href="{{ site.baseurl }}/" class="rawr-nav-logo">
+        <img src="{{ site.baseurl }}/assets/images/logo.png" alt="{{ site.name }}">
+        <span>{{ site.name }}</span>
+      </a>
+
+      <div class="rawr-nav-links" id="navLinks">
+        <a href="{{ site.baseurl }}/" class="rawr-nav-link{% if page.url == '/' %} active{% endif %}">Home</a>
+        <a href="{{ site.baseurl }}/articles" class="rawr-nav-link{% if page.url contains 'articles' %} active{% endif %}">Articles</a>
+        <a href="{{ site.baseurl }}/learning-paths" class="rawr-nav-link{% if page.url contains 'learning-paths' %} active{% endif %}">Learning Paths</a>
+        <a href="{{ site.baseurl }}/experience" class="rawr-nav-link{% if page.url contains 'experience' %} active{% endif %}">Experience</a>
+        <a href="{{ site.baseurl }}/certifications" class="rawr-nav-link{% if page.url contains 'certifications' %} active{% endif %}">Certifications</a>
+        <a href="{{ site.baseurl }}/uses" class="rawr-nav-link{% if page.url contains '/uses' %} active{% endif %}">Uses</a>
+        <a href="{{ site.baseurl }}/about" class="rawr-nav-link{% if page.url contains 'about' %} active{% endif %}">About</a>
+      </div>
+
+      <div class="rawr-nav-actions">
+        <div class="rawr-search-wrap">
+          <i class="fas fa-search rawr-search-icon"></i>
+          <input type="search" class="rawr-search" placeholder="Search articles, topics..." id="navSearchInput"
+            onkeydown="if(event.key==='Enter'){ window.location='{{ site.baseurl }}/search?q='+this.value; }">
+        </div>
+        <div class="rawr-social-icons">
+          <a href="{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <button class="rawr-theme-toggle" id="themeToggle" aria-label="Toggle colour theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="rawr-nav-toggle" id="navToggle" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ===== Main ===== -->
+  <main class="rawr-main">
+    {{ content }}
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="rawr-footer">
+    <div class="rawr-footer-inner">
+      <div class="rawr-footer-brand">
+        <img src="{{ site.baseurl }}/assets/images/logo.png" alt="{{ site.name }}">
+        <span>{{ site.name }}</span>
+      </div>
+      <nav class="rawr-footer-links" aria-label="Footer navigation">
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/articles">Articles</a>
+        <a href="{{ site.baseurl }}/learning-paths">Learning Paths</a>
+        <a href="{{ site.baseurl }}/certifications">Certifications</a>
+        <a href="{{ site.baseurl }}/uses">Uses</a>
+        <a href="{{ site.baseurl }}/about">About</a>
+        <a href="{{ site.baseurl }}/feed.xml">RSS</a>
+      </nav>
+      <div class="rawr-footer-socials">
+        <a href="{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="{{ site.bluesky }}" target="_blank" rel="noopener" aria-label="Bluesky">
+          <span class="iconify" data-icon="ri:bluesky-fill" style="font-size:1rem;"></span>
+        </a>
+      </div>
+      <p class="rawr-footer-copy">
+        &copy; {{ site.time | date: "%Y" }} {{ site.name }} &mdash; Cloud Solutions Consultant
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Theme toggle
+    (function () {
+      const html = document.documentElement;
+      const stored = localStorage.getItem('rawr-theme') || 'dark';
+      html.setAttribute('data-theme', stored);
+
+      function updateIcon(theme) {
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      }
+
+      updateIcon(stored);
+
+      document.getElementById('themeToggle').addEventListener('click', function () {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('rawr-theme', next);
+        updateIcon(next);
+      });
+    })();
+
+    // Mobile nav
+    document.getElementById('navToggle').addEventListener('click', function () {
+      const links = document.getElementById('navLinks');
+      links.classList.toggle('open');
+      this.querySelector('i').className = links.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.rawr-nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.getElementById('navLinks').classList.remove('open');
+        document.querySelector('.rawr-nav-toggle i').className = 'fas fa-bars';
+      });
+    });
+  </script>
+
+  {% if page.layout == 'post' %}
+  <script id="dsq-count-scr" src="//{{ site.disqus }}.disqus.com/count.js" async></script>
+  {% endif %}
+
+</body>
+</html>
