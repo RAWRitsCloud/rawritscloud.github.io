@@ -8,34 +8,270 @@ permalink: /about
 
 <div class="rawr-container">
 
-  <div class="about-layout">
-    <div class="about-content">
-      <h1 class="about-title">{{ about.title }}</h1>
-      <p class="about-role">
-        {{ about.role }}<br>
-        Cloud Solutions Consultant at <a href="{{ about.company_url }}" target="_blank" rel="noopener">{{ about.company_name }}</a>
-      </p>
+  <!-- ===== DESKTOP LAYOUT (hidden on mobile) ===== -->
+  <div class="about-desktop">
 
+    <!-- Left sidebar -->
+    <aside class="about-left-col">
+      <div class="about-photo-wrap">
+        <img class="about-photo" src="{{ site.baseurl }}/assets/images/james.jpg" alt="James Murray-Ferris">
+      </div>
+      <h1 class="about-title">{{ about.title }}</h1>
+      <div class="about-job-title">{{ about.job_title }}</div>
+      <div class="about-skills">{{ about.skills }}</div>
+      <hr class="about-divider">
+      <div class="about-features">
+        {% for feat in about.features %}
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <span class="iconify" data-icon="{{ feat.icon }}"></span>
+          </div>
+          <div>
+            <div class="about-feature-title">{{ feat.title }}</div>
+            <div class="about-feature-desc">{{ feat.description }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="about-main-col">
+      <h2 class="about-headline">{{ about.headline }}</h2>
       {% for para in about.bio %}
-      <p class="about-bio"{% if forloop.index > 1 %} style="margin-top:1rem;"{% endif %}>{{ para }}</p>
+      <p class="about-bio-para">{{ para }}</p>
       {% endfor %}
 
-      <div class="about-stats">
+      <div class="about-stats-grid">
         {% for stat in about.stats %}
-        <div class="about-stat">
-          <span class="about-stat-value">{{ stat.value }}</span>
-          <span class="about-stat-label">{{ stat.label }}</span>
+        <div class="about-stat-card">
+          <span class="iconify about-stat-icon" data-icon="{{ stat.icon }}"></span>
+          <div class="about-stat-value">{{ stat.value }}</div>
+          <div class="about-stat-label">{{ stat.label }}</div>
         </div>
         {% endfor %}
       </div>
 
-      <div class="cert-section-header">
-        <h2>Certifications</h2>
-        <a href="{{ site.baseurl }}/certifications" class="cert-view-all">
-          View all certifications <i class="fas fa-arrow-right" style="font-size:0.8em;"></i>
+      <h3 class="about-section-title">Connect</h3>
+      <div class="about-connect-desktop">
+        <a href="{{ site.linkedin }}" target="_blank" rel="noopener" class="about-connect-item">
+          <div class="about-connect-icon" style="background:#0a66c2;color:#fff;"><i class="fab fa-linkedin-in"></i></div>
+          <div class="about-connect-info">
+            <div class="about-connect-name">LinkedIn</div>
+            <div class="about-connect-handle">jrmurray86</div>
+          </div>
+          <i class="fas fa-chevron-right about-connect-chevron"></i>
+        </a>
+        <a href="{{ site.bluesky }}" target="_blank" rel="noopener" class="about-connect-item">
+          <div class="about-connect-icon" style="background:#0085ff;color:#fff;"><span class="iconify" data-icon="ri:bluesky-fill"></span></div>
+          <div class="about-connect-info">
+            <div class="about-connect-name">Bluesky</div>
+            <div class="about-connect-handle">rawritscloud.com</div>
+          </div>
+          <i class="fas fa-chevron-right about-connect-chevron"></i>
+        </a>
+        <a href="{{ site.github }}" target="_blank" rel="noopener" class="about-connect-item">
+          <div class="about-connect-icon" style="background:#24292f;color:#fff;"><i class="fab fa-github"></i></div>
+          <div class="about-connect-info">
+            <div class="about-connect-name">GitHub</div>
+            <div class="about-connect-handle">rawritscloud</div>
+          </div>
+          <i class="fas fa-chevron-right about-connect-chevron"></i>
         </a>
       </div>
 
+      <h3 class="about-section-title">What I do</h3>
+      <div class="about-services-grid">
+        {% for svc in about.services %}
+        <div class="about-service-card">
+          <span class="iconify about-service-icon" data-icon="{{ svc.icon }}"></span>
+          <div class="about-service-title">{{ svc.title }}</div>
+          <div class="about-service-desc">{{ svc.description }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Right certifications sidebar -->
+    <aside class="about-right-col">
+      <div class="about-certs-header">
+        <h3>Certifications</h3>
+        <a href="{{ site.baseurl }}/certifications" class="about-certs-view-all">View all certifications →</a>
+      </div>
+      <div class="about-certs-list">
+        {% for cert in about.cert_sidebar %}
+        <div class="about-cert-list-item">
+          <img src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}" alt="{{ cert.name }}">
+          <div class="about-cert-list-info">
+            <div class="about-cert-list-name">{{ cert.name }}</div>
+            <div class="about-cert-list-issuer">{{ cert.issuer }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a href="{{ site.baseurl }}/certifications" class="about-certs-btn">View all certifications →</a>
+    </aside>
+
+  </div>
+
+  <!-- ===== TABLET LAYOUT (768–1100px) ===== -->
+  <div class="about-tablet">
+
+    <!-- Left: profile card + connect card -->
+    <div class="about-tablet-left">
+      <div class="about-tablet-profile-card">
+        <img class="about-tablet-photo" src="{{ site.baseurl }}/assets/images/james.jpg" alt="James Murray-Ferris">
+        <div class="about-tablet-name">James Murray-Ferris</div>
+        <div class="about-tablet-job">{{ about.job_title }}</div>
+        <div class="about-tablet-skills">{{ about.skills }}</div>
+      </div>
+
+      <div class="about-tablet-connect-card">
+        <div class="about-tablet-connect-title">Connect</div>
+        <div class="about-tablet-connect-list">
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener" class="about-tablet-connect-item">
+            <div class="about-tablet-connect-icon" style="background:#0a66c2;color:#fff;"><i class="fab fa-linkedin-in"></i></div>
+            <div class="about-tablet-connect-info">
+              <div class="about-tablet-connect-name">LinkedIn</div>
+              <div class="about-tablet-connect-handle">jrmurray86</div>
+            </div>
+            <i class="fas fa-chevron-right about-tablet-connect-chevron"></i>
+          </a>
+          <a href="{{ site.github }}" target="_blank" rel="noopener" class="about-tablet-connect-item">
+            <div class="about-tablet-connect-icon" style="background:#24292f;color:#fff;"><i class="fab fa-github"></i></div>
+            <div class="about-tablet-connect-info">
+              <div class="about-tablet-connect-name">GitHub</div>
+              <div class="about-tablet-connect-handle">rawritscloud</div>
+            </div>
+            <i class="fas fa-chevron-right about-tablet-connect-chevron"></i>
+          </a>
+          <a href="{{ site.bluesky }}" target="_blank" rel="noopener" class="about-tablet-connect-item">
+            <div class="about-tablet-connect-icon" style="background:#0085ff;color:#fff;"><span class="iconify" data-icon="ri:bluesky-fill"></span></div>
+            <div class="about-tablet-connect-info">
+              <div class="about-tablet-connect-name">Bluesky</div>
+              <div class="about-tablet-connect-handle">rawritscloud.com</div>
+            </div>
+            <i class="fas fa-chevron-right about-tablet-connect-chevron"></i>
+          </a>
+        </div>
+        <a href="{{ site.baseurl }}/about#connect" class="about-tablet-connect-footer">View all profiles →</a>
+      </div>
+    </div>
+
+    <!-- Right: bio + stats + featured certs -->
+    <div class="about-tablet-right">
+      <h2 class="about-tablet-headline">{{ about.headline }}</h2>
+      {% for para in about.bio %}
+      <p class="about-tablet-bio-para">{{ para }}</p>
+      {% endfor %}
+
+      <div class="about-tablet-stats">
+        {% for stat in about.stats %}
+        <div class="about-tablet-stat">
+          <span class="iconify about-tablet-stat-icon" data-icon="{{ stat.icon }}"></span>
+          <span class="about-tablet-stat-value">{{ stat.value }}</span>
+          <span class="about-tablet-stat-label">{{ stat.label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="about-tablet-certs-header">
+        <h3>Featured Certifications</h3>
+        <a href="{{ site.baseurl }}/certifications" class="about-tablet-certs-view-all">View all certifications →</a>
+      </div>
+      <div class="about-tablet-certs-grid">
+        {% for cert in about.cert_highlights %}
+        <div class="about-tablet-cert-item">
+          <img src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}" alt="{{ cert.name }}">
+          <div class="about-tablet-cert-name">{{ cert.name }}</div>
+          <div class="about-tablet-cert-issuer">{{ cert.issuer }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== MOBILE LAYOUT (hidden on desktop) ===== -->
+  <div class="about-mobile">
+
+    <div class="about-hero">
+      <div class="about-photo-wrap">
+        <img class="about-photo" src="{{ site.baseurl }}/assets/images/james.jpg" alt="James Murray-Ferris">
+      </div>
+      <div class="about-intro">
+        <h1 class="about-title">{{ about.title }}</h1>
+        <div class="about-job-title">{{ about.job_title }}</div>
+        <div class="about-skills">{{ about.skills }}</div>
+        <p class="about-tagline">{{ about.role }}</p>
+        <div class="about-hero-social">
+          <a href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" class="about-social-btn" style="background:#0a66c2;border-color:#0a66c2;color:#fff;">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub" class="about-social-btn" style="background:#24292f;border-color:#24292f;color:#fff;">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="{{ site.bluesky }}" target="_blank" rel="noopener" aria-label="Bluesky" class="about-social-btn" style="background:#0085ff;border-color:#0085ff;color:#fff;">
+            <span class="iconify" data-icon="ri:bluesky-fill"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-stats">
+      {% for stat in about.stats %}
+      <div class="about-stat">
+        <span class="about-stat-value">{{ stat.value }}</span>
+        <span class="about-stat-label">{{ stat.label }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <section class="about-bio-section">
+      <h2>About Me</h2>
+      {% for para in about.bio %}
+      <p>{{ para }}</p>
+      {% endfor %}
+      {% if about.read_more_url %}
+      <a href="{{ site.baseurl }}{{ about.read_more_url }}" class="about-read-more">Read more about my journey →</a>
+      {% endif %}
+    </section>
+
+    <section class="about-connect-section">
+      <h2>Connect</h2>
+      <div class="about-connect">
+        <a href="{{ site.linkedin }}" target="_blank" rel="noopener" class="about-connect-item">
+          <div class="about-connect-icon" style="background:#0a66c2;color:#fff;"><i class="fab fa-linkedin-in"></i></div>
+          <div class="about-connect-info">
+            <div class="about-connect-name">LinkedIn</div>
+            <div class="about-connect-handle">jrmurray86</div>
+          </div>
+          <i class="fas fa-chevron-right about-connect-chevron"></i>
+        </a>
+        <a href="{{ site.bluesky }}" target="_blank" rel="noopener" class="about-connect-item">
+          <div class="about-connect-icon" style="background:#0085ff;color:#fff;"><span class="iconify" data-icon="ri:bluesky-fill"></span></div>
+          <div class="about-connect-info">
+            <div class="about-connect-name">Bluesky</div>
+            <div class="about-connect-handle">rawritscloud.com</div>
+          </div>
+          <i class="fas fa-chevron-right about-connect-chevron"></i>
+        </a>
+        <a href="{{ site.github }}" target="_blank" rel="noopener" class="about-connect-item">
+          <div class="about-connect-icon" style="background:#24292f;color:#fff;"><i class="fab fa-github"></i></div>
+          <div class="about-connect-info">
+            <div class="about-connect-name">GitHub</div>
+            <div class="about-connect-handle">rawritscloud</div>
+          </div>
+          <i class="fas fa-chevron-right about-connect-chevron"></i>
+        </a>
+      </div>
+    </section>
+
+    <section class="about-certs-section">
+      <div class="about-section-row">
+        <h2>Featured Certifications</h2>
+        <a href="{{ site.baseurl }}/certifications" class="cert-view-all">View all →</a>
+      </div>
       <div class="cert-grid">
         {% for cert in about.cert_highlights %}
         <div class="cert-item">
@@ -45,51 +281,8 @@ permalink: /about
         </div>
         {% endfor %}
       </div>
+    </section>
 
-    </div>
-
-    <div class="about-photo-wrap">
-      <img class="about-photo" src="{{ site.baseurl }}/assets/images/james.jpg" alt="James Murray-Ferris">
-    </div>
   </div>
-
-  <section class="rawr-section">
-    <div class="section-header">
-      <h2>Connect</h2>
-    </div>
-    <div class="card-grid card-grid-4">
-
-      <a href="{{ site.linkedin }}" target="_blank" rel="noopener" class="rawr-card" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;">
-        <div class="start-card-icon icon-general" style="background:rgba(0,119,181,0.15);color:#0a66c2;flex-shrink:0;">
-          <i class="fab fa-linkedin-in"></i>
-        </div>
-        <div>
-          <div class="start-card-title">LinkedIn</div>
-          <div class="start-card-desc" style="font-size:0.78rem;">jrmurray86</div>
-        </div>
-      </a>
-
-      <a href="{{ site.bluesky }}" target="_blank" rel="noopener" class="rawr-card" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;">
-        <div class="start-card-icon icon-automation" style="flex-shrink:0;">
-          <span class="iconify" data-icon="ri:bluesky-fill"></span>
-        </div>
-        <div>
-          <div class="start-card-title">Bluesky</div>
-          <div class="start-card-desc" style="font-size:0.78rem;">rawritscloud.com</div>
-        </div>
-      </a>
-
-      <a href="{{ site.github }}" target="_blank" rel="noopener" class="rawr-card" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;">
-        <div class="start-card-icon icon-github" style="flex-shrink:0;">
-          <i class="fab fa-github"></i>
-        </div>
-        <div>
-          <div class="start-card-title">GitHub</div>
-          <div class="start-card-desc" style="font-size:0.78rem;">rawritscloud</div>
-        </div>
-      </a>
-
-    </div>
-  </section>
 
 </div>
