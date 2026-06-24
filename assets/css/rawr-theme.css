@@ -647,7 +647,7 @@ button { font-family: inherit; }
 
 /* ===== About Page ===== */
 
-/* Show/hide layouts: desktop ≥1101px, tablet 768-1100px, mobile ≤767px */
+/* Show/hide layouts: desktop ≥1201px, tablet 768-1200px, mobile ≤767px */
 .about-desktop { display: grid; grid-template-columns: 260px 1fr 280px; gap: 2rem; padding: 3rem 0 4rem; align-items: start; }
 .about-tablet  { display: none; }
 .about-mobile  { display: none; }
@@ -1592,15 +1592,8 @@ button { font-family: inherit; }
   .hero-inner { grid-template-columns: 1fr 280px; }
   .rawr-search { width: 150px; }
   .rawr-search:focus { width: 190px; }
-}
 
-/* Tablet about layout (768–1100px) */
-@media (min-width: 768px) and (max-width: 1100px) {
-  .about-desktop { display: none; }
-  .about-tablet  { display: grid; }
-}
-
-@media (max-width: 768px) {
+  /* Hamburger nav — 7 links don't fit below 1024px */
   .rawr-nav-links {
     display: none;
     position: fixed;
@@ -1613,10 +1606,18 @@ button { font-family: inherit; }
     z-index: 999;
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
-
   .rawr-nav-links.open { display: flex; }
   .rawr-nav-link { padding: 0.6rem 1rem; font-size: 0.95rem; }
   .rawr-nav-toggle { display: flex; }
+}
+
+/* Tablet about layout (768–1200px, covers iPad landscape at 1180px) */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .about-desktop { display: none; }
+  .about-tablet  { display: grid; }
+}
+
+@media (max-width: 768px) {
   .rawr-nav-actions { display: none; }
 
   .hero-inner { grid-template-columns: 1fr; }
