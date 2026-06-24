@@ -1024,6 +1024,55 @@ button { font-family: inherit; }
   border-bottom: 1px solid var(--border);
 }
 
+/* ---------- Legacy Cert List ---------- */
+.cert-legacy-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cert-legacy-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.cert-legacy-item--bordered {
+  border-bottom: 1px solid var(--border);
+}
+
+.cert-legacy-name {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  flex: 1;
+  min-width: 0;
+}
+
+.cert-legacy-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.cert-legacy-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.cert-legacy-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  background: rgba(139,148,158,0.1);
+  color: var(--text-muted);
+}
+
 /* ---------- Uses / Setup Page ---------- */
 .uses-grid {
   display: grid;
@@ -1867,8 +1916,29 @@ button { font-family: inherit; }
 @media (max-width: 768px) {
   .cv-hero-content h1 { font-size: 2rem; }
   .cv-hero-icon { display: none; }
-  .cv-job-header { flex-wrap: wrap; }
-  .cv-job-details { text-align: left; }
+  /* Job card header: grid layout so title gets full width and dates stack below */
+  .cv-job-header {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 0.75rem;
+    row-gap: 0;
+    align-items: start;
+    padding: 0.9rem 1rem;
+  }
+  .cv-job-logo    { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+  .cv-job-meta    { grid-column: 2; grid-row: 1; }
+  .cv-job-details {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: left;
+    white-space: normal;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+  }
+  .cv-job-chevron { grid-column: 3; grid-row: 1; align-self: center; }
   .cv-cta-bar { flex-direction: column; text-align: center; }
   .cv-cta-btns { margin-left: 0; justify-content: center; }
 
@@ -1926,8 +1996,13 @@ button { font-family: inherit; }
     font-weight: 600;
   }
 
-  /* Current role: detach from timeline, show as prominent highlighted card */
-  .cv-job--current { margin-left: -2rem; margin-bottom: 1.75rem; }
+  /* Hide timeline line and dot on mobile */
+  .cv-timeline { padding-left: 0; }
+  .cv-timeline::before { display: none; }
+  .cv-job-dot { display: none; }
+
+  /* Current role: no negative margin needed since timeline indent is gone */
+  .cv-job--current { margin-left: 0; margin-bottom: 1.75rem; }
   .cv-job--current .cv-job-dot { display: none; }
   .cv-job--current::before {
     content: 'CURRENT ROLE';

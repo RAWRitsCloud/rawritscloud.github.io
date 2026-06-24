@@ -36,29 +36,16 @@ permalink: /certifications
     Older certifications earned before the digital badge era — no longer active but part of the journey.
   </p>
 
-  <div class="rawr-card" style="padding:0;overflow:hidden;">
-    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
-      <thead>
-        <tr style="background:var(--bg-secondary);border-bottom:1px solid var(--border);">
-          <th style="padding:0.75rem 1.25rem;text-align:left;color:var(--text-muted);font-weight:600;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;">Certification</th>
-          <th style="padding:0.75rem 1.25rem;text-align:left;color:var(--text-muted);font-weight:600;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;">Earned</th>
-          <th style="padding:0.75rem 1.25rem;text-align:left;color:var(--text-muted);font-weight:600;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for cert in certs.legacy %}
-        <tr{% unless forloop.last %} style="border-bottom:1px solid var(--border-subtle);"{% endunless %}>
-          <td style="padding:0.65rem 1.25rem;color:var(--text-secondary);">{{ cert.name }}</td>
-          <td style="padding:0.65rem 1.25rem;color:var(--text-muted);">{% if cert.date != "" %}{{ cert.date }}{% else %}—{% endif %}</td>
-          <td style="padding:0.65rem 1.25rem;">
-            <span style="font-size:0.72rem;padding:0.15rem 0.55rem;border-radius:20px;background:rgba(139,148,158,0.1);color:var(--text-muted);">
-              {% if cert.status %}{{ cert.status }}{% else %}Retired{% endif %}
-            </span>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <div class="cert-legacy-list">
+    {% for cert in certs.legacy %}
+    <div class="cert-legacy-item{% unless forloop.last %} cert-legacy-item--bordered{% endunless %}">
+      <div class="cert-legacy-name">{{ cert.name }}</div>
+      <div class="cert-legacy-meta">
+        <span class="cert-legacy-date">{% if cert.date != "" %}{{ cert.date }}{% else %}—{% endif %}</span>
+        <span class="cert-legacy-status">{% if cert.status %}{{ cert.status }}{% else %}Retired{% endif %}</span>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 
 </div>
