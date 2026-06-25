@@ -1,0 +1,52 @@
+{% assign building = site.data.about.building %}
+{% if building %}
+<section class="about-building-panel">
+  <div class="about-building-hdr">
+    <div class="about-building-title">🚀 Building</div>
+    <p class="about-building-intro">{{ building.intro }}</p>
+  </div>
+  <div class="about-building-grid">
+    {% for project in building.projects %}
+    <div class="about-building-card">
+      <div class="about-building-card-top" style="background:{{ project.icon_bg | default: 'var(--bg-card)' }}">
+        {% if project.logo_url %}
+        <img src="{{ project.logo_url }}" alt="{{ project.name }}" class="about-building-card-logo">
+        {% elsif project.image %}
+        <img src="{{ site.baseurl }}/assets/images/projects/{{ project.image }}" alt="{{ project.name }}" class="about-building-card-img">
+        {% else %}
+        <span class="iconify about-building-card-icon" data-icon="{{ project.icon }}" style="color:{{ project.icon_color }}"></span>
+        {% endif %}
+        <span class="about-building-badge about-building-badge--{{ project.status }}">{{ project.status_label }}</span>
+      </div>
+      <div class="about-building-card-body">
+        <div class="about-building-card-name">{{ project.name }}</div>
+        <p class="about-building-card-desc">{{ project.description }}</p>
+        {% if project.link_url %}
+        <a href="{{ project.link_url }}" class="about-building-card-link"
+          {% unless project.link_type == "learn_more" %}target="_blank" rel="noopener"{% endunless %}>
+          {% if project.link_type == "github" %}<i class="fab fa-github"></i>
+          {% elsif project.link_type == "url" %}<span class="iconify" data-icon="mdi:web"></span>
+          {% endif %}
+          {{ project.link_label }} →
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+    <div class="about-building-card about-building-card--more">
+      <div class="about-building-more-inner">
+        <div class="about-building-more-plus">+</div>
+        <div class="about-building-more-title">More to Come</div>
+        <p class="about-building-more-desc">I've got plenty of ideas on the list. Watch this space!</p>
+      </div>
+    </div>
+  </div>
+  {% if building.github_url %}
+  <div class="about-building-footer">
+    <a href="{{ building.github_url }}" target="_blank" rel="noopener" class="about-building-footer-link">
+      <i class="fab fa-github"></i> View all projects on GitHub →
+    </a>
+  </div>
+  {% endif %}
+</section>
+{% endif %}

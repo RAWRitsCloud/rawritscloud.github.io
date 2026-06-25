@@ -2045,3 +2045,188 @@ button { font-family: inherit; }
   .filter-tabs { gap: 0.35rem; }
   .filter-tab { font-size: 0.78rem; padding: 0.3rem 0.75rem; }
 }
+
+/* ===== Building Panel ===== */
+.about-building-panel {
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.about-building-hdr { margin-bottom: 1.25rem; }
+
+.about-building-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.about-building-intro {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about-building-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+
+.about-building-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.about-building-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.about-building-card-top {
+  position: relative;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.about-building-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-building-card-logo {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+}
+
+.about-building-card-icon { font-size: 2.75rem; }
+
+.about-building-badge {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.18rem 0.55rem;
+  border-radius: 20px;
+  border: 1px solid;
+  letter-spacing: 0.01em;
+}
+
+.about-building-badge--in-development { background: rgba(88,166,255,0.15); color: #58a6ff; border-color: rgba(88,166,255,0.35); }
+.about-building-badge--active         { background: rgba(63,185,80,0.15);  color: #3fb950; border-color: rgba(63,185,80,0.35); }
+.about-building-badge--experimental   { background: rgba(210,168,255,0.15);color: #d2a8ff; border-color: rgba(210,168,255,0.35); }
+.about-building-badge--planning       { background: rgba(245,158,11,0.15); color: #f59e0b; border-color: rgba(245,158,11,0.35); }
+
+.about-building-card-body {
+  padding: 1rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.about-building-card-name {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.about-building-card-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+  flex: 1;
+}
+
+.about-building-card-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.about-building-card-link:hover { color: var(--accent); }
+
+.about-building-card--more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  min-height: 160px;
+}
+
+.about-building-card--more:hover {
+  border-color: var(--border);
+  transform: none;
+  box-shadow: none;
+}
+
+.about-building-more-inner { text-align: center; padding: 1.5rem; }
+
+.about-building-more-plus {
+  font-size: 2.5rem;
+  color: var(--text-muted);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.about-building-more-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.about-building-more-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.about-building-footer { padding-top: 0.25rem; }
+
+.about-building-footer-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.about-building-footer-link:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+@media (max-width: 767px) {
+  .about-building-panel { margin-top: 0; border-top: none; padding-top: 0; }
+  .about-building-grid { grid-template-columns: 1fr; }
+  .about-building-card--more { min-height: 110px; }
+}

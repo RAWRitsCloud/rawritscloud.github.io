@@ -67,6 +67,22 @@ cert_sidebar:
     name: "Terraform Professional"
     issuer: "HashiCorp"
 
+building:
+  intro: "I tend to build things because they sound fun. Some become genuinely useful, some teach me something new, and a few are simply an excuse to see if I can. These are the projects currently occupying my spare time."
+  github_url: "https://github.com/rawritscloud"
+  projects:
+    - name: "TripDeck"
+      status: "in-development"
+      status_label: "In Development"
+      icon: "mdi:map-marker-path"
+      icon_color: "#58a6ff"
+      icon_bg: "rgba(88, 166, 255, 0.08)"
+      image: "tripdeck.png"
+      description: "A travel planning platform to organise itineraries, attractions, bookings and trip information — all in one place."
+      link_type: "url"
+      link_url: "https://tripdeck.rawritscloud.com"
+      link_label: "View Project"
+
 cert_highlights:
   - image: "azure-fundamentals-600x600.png"
     name: "Azure Fundamentals"
