@@ -43,7 +43,7 @@ permalink: /articles/
       {% assign card_src = "/assets/images/posts/" | append: card_hero | append: ".png" %}
     {% endif %}
     <article class="rawr-card article-card"
-      data-cats="{{ post_all_terms }}">
+      data-cats="{{ post.categories | join: ' ' | downcase }}">
       <div class="article-card-image">
         <a href="{{ site.baseurl }}{{ post.url }}">
           <img src="{{ site.baseurl }}{{ card_src }}" alt="{{ post.title }}" loading="lazy">
