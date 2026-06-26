@@ -58,7 +58,7 @@ permalink: /learning-paths
         Learn how to structure reusable modules, manage state, and build scalable IaC workflows.
       </p>
       <div class="lp-card-footer">
-        {% assign tf_posts = site.posts | where_exp: "p", "p.categories contains 'Terraform'" %}
+        {% assign tf_posts = site.posts | where_exp: "p", "p.categories contains 'Terraform' or p.categories contains 'Terraform Modules'" %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ tf_posts.size }} Articles</span>
         <span class="lp-badge lp-badge-intermediate">Intermediate</span>
         <a href="{{ site.baseurl }}/articles/?cat=terraform" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
@@ -102,7 +102,7 @@ permalink: /learning-paths
         Right-sizing, reserved instances, Azure Policy guardrails and automated alerts.
       </p>
       <div class="lp-card-footer">
-        {% assign cost_posts = site.posts | where_exp: "p", "p.categories contains 'Cost'" %}
+        {% assign cost_posts = site.posts | where_exp: "p", "p.categories contains 'Cost' or p.categories contains 'CostManagement'" %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ cost_posts.size }} Articles</span>
         <span class="lp-badge lp-badge-all">All Levels</span>
         <a href="{{ site.baseurl }}/articles/?cat=cost" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
