@@ -20,7 +20,7 @@ permalink: /articles/
   </div>
 
   <div class="card-grid card-grid-3" style="padding-bottom:1rem;" id="articleGrid">
-    {% for post in paginator.posts %}
+    {% for post in site.posts %}
     {% if post.hero_image %}
       {% assign _fc = post.hero_image | slice: 0 %}
       {% if _fc == "/" or post.hero_image contains "://" %}
@@ -70,32 +70,6 @@ permalink: /articles/
     No articles found for this filter.
   </p>
 
-  <!-- Pagination -->
-  {% if paginator.total_pages > 1 %}
-  <nav class="rawr-pagination" aria-label="Article pages">
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Newer</a>
-    {% else %}
-    <span>&laquo; Newer</span>
-    {% endif %}
-
-    {% for i in (1..paginator.total_pages) %}
-    {% if i == paginator.page %}
-    <span class="current">{{ i }}</span>
-    {% elsif i == 1 %}
-    <a href="{{ site.baseurl }}/articles/">{{ i }}</a>
-    {% else %}
-    <a href="{{ site.baseurl }}/articles/page{{ i }}/">{{ i }}</a>
-    {% endif %}
-    {% endfor %}
-
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older &raquo;</a>
-    {% else %}
-    <span>Older &raquo;</span>
-    {% endif %}
-  </nav>
-  {% endif %}
 
 </div>
 

@@ -36,8 +36,8 @@ permalink: /learning-paths
         Covers management groups, policies, role assignments and the Enterprise Scale framework.
       </p>
       <div class="lp-card-footer">
-        {% assign azure_lz = site.posts | where_exp: "p", "p.categories contains 'Azure'" %}
-        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ azure_lz.size }} Articles</span>
+        {% assign azure_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "azure" %}{% assign azure_count = azure_count | plus: 1 %}{% endif %}{% endfor %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ azure_count }} Articles</span>
         <span class="lp-badge lp-badge-beginner">Beginner</span>
         <a href="{{ site.baseurl }}/articles/?cat=azure" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
       </div>
@@ -58,10 +58,8 @@ permalink: /learning-paths
         Learn how to structure reusable modules, manage state, and build scalable IaC workflows.
       </p>
       <div class="lp-card-footer">
-        {% assign tf_base = site.posts | where_exp: "p", "p.categories contains 'Terraform'" %}
-        {% assign tf_mods = site.posts | where_exp: "p", "p.categories contains 'Terraform Modules'" %}
-        {% assign tf_posts = tf_base | concat: tf_mods %}
-        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ tf_posts.size }} Articles</span>
+        {% assign tf_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "terraform" %}{% assign tf_count = tf_count | plus: 1 %}{% endif %}{% endfor %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ tf_count }} Articles</span>
         <span class="lp-badge lp-badge-intermediate">Intermediate</span>
         <a href="{{ site.baseurl }}/articles/?cat=terraform" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
       </div>
@@ -82,8 +80,8 @@ permalink: /learning-paths
         CI/CD pipelines for Terraform, reusable workflows, and event-driven cost management automations.
       </p>
       <div class="lp-card-footer">
-        {% assign auto_posts = site.posts | where_exp: "p", "p.categories contains 'Automation'" %}
-        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ auto_posts.size }} Articles</span>
+        {% assign auto_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "automation" %}{% assign auto_count = auto_count | plus: 1 %}{% endif %}{% endfor %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ auto_count }} Articles</span>
         <span class="lp-badge lp-badge-beginner">Beginner</span>
         <a href="{{ site.baseurl }}/articles/?cat=automation" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
       </div>
@@ -104,10 +102,8 @@ permalink: /learning-paths
         Right-sizing, reserved instances, Azure Policy guardrails and automated alerts.
       </p>
       <div class="lp-card-footer">
-        {% assign cost_exact = site.posts | where_exp: "p", "p.categories contains 'Cost'" %}
-        {% assign cost_mgmt = site.posts | where_exp: "p", "p.categories contains 'CostManagement'" %}
-        {% assign cost_posts = cost_exact | concat: cost_mgmt %}
-        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ cost_posts.size }} Articles</span>
+        {% assign cost_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "cost" %}{% assign cost_count = cost_count | plus: 1 %}{% endif %}{% endfor %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ cost_count }} Articles</span>
         <span class="lp-badge lp-badge-all">All Levels</span>
         <a href="{{ site.baseurl }}/articles/?cat=cost" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
       </div>
@@ -128,8 +124,8 @@ permalink: /learning-paths
         environment compliant at scale. Deploy-If-Not-Exists, auditing, and policy initiatives.
       </p>
       <div class="lp-card-footer">
-        {% assign policy_posts = site.posts | where_exp: "p", "p.categories contains 'Policy'" %}
-        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ policy_posts.size }} Articles</span>
+        {% assign policy_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "policy" %}{% assign policy_count = policy_count | plus: 1 %}{% endif %}{% endfor %}
+        <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ policy_count }} Articles</span>
         <span class="lp-badge lp-badge-intermediate">Intermediate</span>
         <a href="{{ site.baseurl }}/articles/?cat=azure" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
       </div>
