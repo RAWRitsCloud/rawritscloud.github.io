@@ -34,12 +34,16 @@ permalink: /articles/
       {% assign first_cat = post.categories.first | downcase %}
       {% if first_cat contains "terraform" %}
         {% assign card_hero = "terraform" %}
+      {% elsif first_cat contains "azure policy" %}
+        {% assign card_hero = "policy" %}
       {% elsif first_cat contains "azure" %}
         {% assign card_hero = "azure" %}
       {% elsif first_cat contains "cost" %}
         {% assign card_hero = "cost-op" %}
       {% elsif first_cat contains "automation" or first_cat contains "github" or first_cat contains "logic" %}
         {% assign card_hero = "automation" %}
+      {% elsif first_cat contains "ai" or first_cat contains "machine learning" %}
+        {% assign card_hero = "ai" %}
       {% endif %}
       {% assign card_src = "/assets/images/posts/" | append: card_hero | append: ".png" %}
     {% endif %}
