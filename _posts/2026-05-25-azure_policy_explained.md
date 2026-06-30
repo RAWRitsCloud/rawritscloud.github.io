@@ -3,12 +3,10 @@
 layout: post
 title: "Azure Policy Explained: Governance Without the Guesswork"
 date: 2026-06-25 00:00:00 +0000
-categories: [Azure, Azure Policy]
+categories: [Azure Policy, Azure]
 tags: [Azure, Governance, Policy, Terraform, LandingZones]
-image: assets/images/posts/azure_policy_explained.jpg
 author: james
 excerpt: "Azure Policy helps you enforce standards, improve governance, and prevent configuration drift across your Azure estate. Here's how it works and how to avoid the common pitfalls."
-coverattribute: Photo by <a href="https://unsplash.com/@amstram?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Scott Graham</a> on <a href="https://unsplash.com/photos/person-holding-pencil-near-laptop-computer-5fNmWej4tAA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 ---
 
 # Azure Policy Explained: Governance Without the Guesswork

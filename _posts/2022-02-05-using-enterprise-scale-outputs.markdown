@@ -6,7 +6,6 @@ date: 2022-02-05 00:01 +0000
 tags: [CAF, EnterpriseScale, Outputs, Locals]
 categories: [Azure, Terraform]
 permalink: /using-enterprise-scale-outputs
-image: assets/images/posts/enterprise-scale-image.jpg
 description: "Looking into how to make the outputs in Enterprise Scale a little more usable."
 excerpt: "Looking into how to make the outputs in Enterprise Scale a little more usable."
 featured: true

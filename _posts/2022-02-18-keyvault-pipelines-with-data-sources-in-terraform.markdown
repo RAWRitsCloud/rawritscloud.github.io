@@ -6,7 +6,6 @@ author: james
 date: 2022-02-18 00:01 +0000
 tags: [KeyVault, AccessPolicy]
 categories: [Azure, Terraform]
-image: assets/images/posts/keyvault-in-terraform.jpg
 description: "A workaround for situations where Terraform Key Vault access policies don't behave quite how you expect."
 excerpt: "A workaround for situations where Terraform Key Vault access policies don't behave quite how you expect."
 featured: true

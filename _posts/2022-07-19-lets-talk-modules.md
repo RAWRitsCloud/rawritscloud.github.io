@@ -5,7 +5,6 @@ author: james
 date: 2022-08-19 00:01 +0000
 tags: [IaC, Templates, Terraform]
 categories: [Terraform]
-image: assets/images/posts/lets-talk-modules.jpg
 description: "An overview of Terraform modules and talking about processes around them."
 excerpt: "An overview of Terraform modules and talking about processes around them."
 featured: true

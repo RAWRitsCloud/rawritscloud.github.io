@@ -5,7 +5,6 @@ author: james
 date: 2022-09-09 00:01 +0000
 tags: [Automation, IaC, Terraform, terraform-docs, pipelines]
 categories: [Terraform, Automation]
-image: assets/images/posts/modules-where-to-automate.jpg
 description: "Discussing how and what you could automate in your Terraform modules."
 excerpt: "Discussing how and what you could automate in your Terraform modules."
 featured: true

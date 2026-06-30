@@ -5,7 +5,6 @@ author: james
 date: 2022-08-26 00:01 +0000
 tags: [IaC, Templates, Terraform, Git, Design]
 categories: [Terraform]
-image: assets/images/posts/modules-design-patterns.jpg
 description: "Talking about some of the take aways from my experience of building Terraform modules."
 excerpt: "Talking about some of the take aways from my experience of building Terraform modules."
 featured: true
