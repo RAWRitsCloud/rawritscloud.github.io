@@ -4,7 +4,7 @@ title:  "Logic Apps to Automate Cost Savings"
 author: james
 date: 2022-09-23 00:01 +0000
 tags: [CostManagement, Automation, LogicApps, ARM, PIP, Disks, Snapshots]
-categories: [CostManagement, Automation, Azure]
+categories: [Cost Management, Automation, Azure]
 image: assets/images/posts/cost-managment-logic-apps.jpg
 description: "A few logic apps to help control costs of Disks and Public IP addresses."
 excerpt: "A few logic apps to help control costs of Disks and Public IP addresses. Can easily be changed to support more resources."

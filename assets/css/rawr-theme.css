@@ -590,6 +590,7 @@ button { font-family: inherit; }
 }
 
 .lp-card-count { font-size: 0.8rem; color: var(--accent-blue); font-weight: 500; }
+.lp-card-count.lp-coming-soon { color: var(--text-muted); font-style: italic; }
 
 .lp-badge {
   font-size: 0.7rem;

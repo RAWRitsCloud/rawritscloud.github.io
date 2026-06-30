@@ -25,7 +25,7 @@ title: Home
             Terraform
           </span>
           <span class="badge-pill badge-automation">
-            <span class="iconify" data-icon="carbon:automated-pipeline" data-width="14"></span>
+            <span class="iconify" data-icon="mdi:robot-outline" data-width="14"></span>
             Automation
           </span>
           <span class="badge-pill badge-cost">
@@ -94,7 +94,7 @@ title: Home
         <div class="start-card-title">Cost Optimisation</div>
         <p class="start-card-desc">Practical ways to reduce cloud costs and optimise your Azure environment.</p>
         <div class="start-card-count">
-          {% assign cost_posts = site.posts | where_exp: "post", "post.categories contains 'Cost'" %}
+          {% assign cost_posts = site.posts | where_exp: "post", "post.categories contains 'Cost Management'" %}
           <i class="fas fa-file-alt"></i> {{ cost_posts.size }} Articles
         </div>
       </a>

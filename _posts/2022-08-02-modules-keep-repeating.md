@@ -4,7 +4,7 @@ title:  "Terraform Modules, a little bit of repeating"
 author: james
 date: 2022-09-02 00:01 +0000
 tags: [IaC, Terraform]
-categories: [Terraform Modules]
+categories: [Terraform]
 image: assets/images/posts/modules-keep-repeating.jpg
 description: "Talking about how and where you create repetition with modules."
 excerpt: "Talking about how and where you create repetition with modules."

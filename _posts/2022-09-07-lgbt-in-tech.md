@@ -4,7 +4,7 @@ title:  "LGBT+ in Tech"
 author: james
 date: 2022-10-07 00:01 +0000
 tags: [Pride, LGBT]
-categories: [AboutMe]
+categories: [About Me]
 hero_image: assets/images/posts/lgbt.png
 description: "Talking about me and being proud inside the Tech world."
 excerpt: "Talking about me and being proud inside the Tech world."

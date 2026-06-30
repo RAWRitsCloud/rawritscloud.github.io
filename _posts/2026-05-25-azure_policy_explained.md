@@ -3,7 +3,7 @@
 layout: post
 title: "Azure Policy Explained: Governance Without the Guesswork"
 date: 2026-06-25 00:00:00 +0000
-categories: [Azure]
+categories: [Azure, Azure Policy]
 tags: [Azure, Governance, Policy, Terraform, LandingZones]
 image: assets/images/posts/azure_policy_explained.jpg
 author: james

@@ -37,9 +37,14 @@ permalink: /learning-paths
       </p>
       <div class="lp-card-footer">
         {% assign azure_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "azure" %}{% assign azure_count = azure_count | plus: 1 %}{% endif %}{% endfor %}
+        {% if azure_count > 0 %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ azure_count }} Articles</span>
         <span class="lp-badge lp-badge-beginner">Beginner</span>
         <a href="{{ site.baseurl }}/articles/?cat=azure" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
+        {% else %}
+        <span class="lp-card-count lp-coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+        <span class="lp-badge lp-badge-beginner">Beginner</span>
+        {% endif %}
       </div>
     </div>
 
@@ -59,9 +64,14 @@ permalink: /learning-paths
       </p>
       <div class="lp-card-footer">
         {% assign tf_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "terraform" %}{% assign tf_count = tf_count | plus: 1 %}{% endif %}{% endfor %}
+        {% if tf_count > 0 %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ tf_count }} Articles</span>
         <span class="lp-badge lp-badge-intermediate">Intermediate</span>
         <a href="{{ site.baseurl }}/articles/?cat=terraform" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
+        {% else %}
+        <span class="lp-card-count lp-coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+        <span class="lp-badge lp-badge-intermediate">Intermediate</span>
+        {% endif %}
       </div>
     </div>
 
@@ -81,9 +91,14 @@ permalink: /learning-paths
       </p>
       <div class="lp-card-footer">
         {% assign auto_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "automation" %}{% assign auto_count = auto_count | plus: 1 %}{% endif %}{% endfor %}
+        {% if auto_count > 0 %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ auto_count }} Articles</span>
         <span class="lp-badge lp-badge-beginner">Beginner</span>
         <a href="{{ site.baseurl }}/articles/?cat=automation" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
+        {% else %}
+        <span class="lp-card-count lp-coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+        <span class="lp-badge lp-badge-beginner">Beginner</span>
+        {% endif %}
       </div>
     </div>
 
@@ -103,9 +118,14 @@ permalink: /learning-paths
       </p>
       <div class="lp-card-footer">
         {% assign cost_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "cost" %}{% assign cost_count = cost_count | plus: 1 %}{% endif %}{% endfor %}
+        {% if cost_count > 0 %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ cost_count }} Articles</span>
         <span class="lp-badge lp-badge-all">All Levels</span>
         <a href="{{ site.baseurl }}/articles/?cat=cost" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
+        {% else %}
+        <span class="lp-card-count lp-coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+        <span class="lp-badge lp-badge-all">All Levels</span>
+        {% endif %}
       </div>
     </div>
 
@@ -124,10 +144,15 @@ permalink: /learning-paths
         environment compliant at scale. Deploy-If-Not-Exists, auditing, and policy initiatives.
       </p>
       <div class="lp-card-footer">
-        {% assign policy_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "policy" %}{% assign policy_count = policy_count | plus: 1 %}{% endif %}{% endfor %}
+        {% assign policy_count = 0 %}{% for post in site.posts %}{% assign _cats = post.categories | join: " " | downcase %}{% if _cats contains "azure policy" %}{% assign policy_count = policy_count | plus: 1 %}{% endif %}{% endfor %}
+        {% if policy_count > 0 %}
         <span class="lp-card-count"><i class="fas fa-file-alt"></i> {{ policy_count }} Articles</span>
         <span class="lp-badge lp-badge-intermediate">Intermediate</span>
-        <a href="{{ site.baseurl }}/articles/?cat=azure" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
+        <a href="{{ site.baseurl }}/articles/?cat=azure+policy" class="btn-link-rawr" style="margin-left:auto;font-size:0.8rem;">Browse articles <i class="fas fa-arrow-right" style="font-size:0.7em;"></i></a>
+        {% else %}
+        <span class="lp-card-count lp-coming-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+        <span class="lp-badge lp-badge-intermediate">Intermediate</span>
+        {% endif %}
       </div>
     </div>
 
