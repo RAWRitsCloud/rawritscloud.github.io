@@ -16,12 +16,16 @@ layout: default
   {% assign first_cat = page.categories.first | downcase %}
   {% if first_cat contains "terraform" %}
     {% assign hero_img = "terraform" %}
+  {% elsif first_cat contains "azure policy" %}
+    {% assign hero_img = "policy" %}
   {% elsif first_cat contains "azure" %}
     {% assign hero_img = "azure" %}
   {% elsif first_cat contains "cost" %}
     {% assign hero_img = "cost-op" %}
   {% elsif first_cat contains "automation" or first_cat contains "github" or first_cat contains "logic" %}
     {% assign hero_img = "automation" %}
+  {% elsif first_cat contains "ai" or first_cat contains "machine learning" %}
+    {% assign hero_img = "ai" %}
   {% endif %}
   {% assign hero_src = "/assets/images/posts/" | append: hero_img | append: ".png" %}
 {% endif %}
