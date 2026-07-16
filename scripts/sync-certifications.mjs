@@ -11,54 +11,104 @@ const CREDLY_URL =
   'https://www.credly.com/users/james.murray-ferris/badges/credly';
 
 const DATA_FILE = path.resolve('_data/certifications.yml');
+const IMAGE_DIR = path.resolve('assets/images/certs');
 const ARTIFACT_DIR = path.resolve('artifacts/cert-sync');
 const MAX_CREDLY_DETAIL_PAGES = 100;
 
 const clean = (value = '') => String(value).replace(/\s+/g, ' ').trim();
 
-const normaliseName = (value = '') =>
-  clean(value)
-    .replace(/[®™]/g, '')
+function displayName(value = '') {
+  return clean(value)
     .replace(/^microsoft certified:\s*/i, '')
+    .replace(/^microsoft\s+/i, '')
+    .replace(/^hashicorp certified:\s*/i, '')
+    .replace(/\s*\(\d{3}\)\s*$/i, '')
+    .trim();
+}
+
+function normaliseName(value = '') {
+  return displayName(value)
+    .replace(/[®™]/g, '')
     .replace(/&/g, 'and')
+    .replace(/\bcertified\b/gi, '')
     .replace(/[^a-z0-9]+/gi, ' ')
+    .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
+}
 
 function firstValue(object, keys) {
   for (const key of keys) {
     const value = object?.[key];
-
-    if (typeof value === 'string' && clean(value)) {
-      return clean(value);
-    }
+    if (typeof value === 'string' && clean(value)) return clean(value);
   }
-
   return '';
 }
 
 function firstMatch(text, patterns) {
   for (const pattern of patterns) {
     const match = String(text).match(pattern);
-
-    if (match?.[1]) {
-      return clean(match[1]);
-    }
+    if (match?.[1]) return clean(match[1]);
   }
-
   return '';
+}
+
+function parseDate(value) {
+  if (!value) return null;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.valueOf()) ? null : parsed;
+}
+
+function displayDate(value) {
+  if (!value) return '';
+  const parsed = parseDate(value);
+  if (!parsed) return clean(value);
+
+  return new Intl.DateTimeFormat('en-GB', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(parsed);
+}
+
+function isExpired(item) {
+  if (/expired|inactive|retired|revoked/i.test(item.status || '')) return true;
+  const expires = parseDate(item.expires);
+  return Boolean(expires && expires < new Date());
+}
+
+function inferLevel(name) {
+  if (/expert/i.test(name)) return 'Expert';
+  if (/associate/i.test(name)) return 'Associate';
+  if (/specialty/i.test(name)) return 'Specialty';
+  if (/fundamental/i.test(name)) return 'Fundamental';
+  if (/professional/i.test(name)) return 'Professional';
+  return 'Certification';
+}
+
+function targetSection(item) {
+  if (isHashiCorpCredential(item)) return 'HashiCorp';
+
+  switch (inferLevel(item.name)) {
+    case 'Expert':
+      return 'Microsoft Azure — Expert';
+    case 'Associate':
+      return 'Microsoft Azure — Associate';
+    case 'Specialty':
+      return 'Microsoft Azure — Specialty';
+    case 'Fundamental':
+      return 'Microsoft — Fundamentals';
+    default:
+      return null;
+  }
 }
 
 function isMicrosoftCertificationName(name) {
   const value = clean(name);
-
-  if (!value || value.length > 180) {
-    return false;
-  }
+  if (!value || value.length > 180) return false;
 
   const product =
     /(azure|microsoft 365|windows server|security|identity|power platform|fabric|dynamics 365|devops|cybersecurity)/i;
-
   const level =
     /(expert|associate|specialty|fundamentals?|administrator|engineer|architect|developer)/i;
 
@@ -73,70 +123,7 @@ function isHashiCorpCredential(item) {
 }
 
 function isMicrosoftCredential(item) {
-  return (
-    /microsoft/i.test(item.issuer || '') ||
-    isMicrosoftCertificationName(item.name)
-  );
-}
-
-function parseDate(value) {
-  if (!value) {
-    return null;
-  }
-
-  const parsed = new Date(value);
-  return Number.isNaN(parsed.valueOf()) ? null : parsed;
-}
-
-function displayDate(value) {
-  if (!value) {
-    return '';
-  }
-
-  const parsed = parseDate(value);
-
-  if (!parsed) {
-    return clean(value);
-  }
-
-  return new Intl.DateTimeFormat('en-GB', {
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(parsed);
-}
-
-function isExpired(item) {
-  if (/expired|inactive|retired|revoked/i.test(item.status || '')) {
-    return true;
-  }
-
-  const expires = parseDate(item.expires);
-  return Boolean(expires && expires < new Date());
-}
-
-function inferLevel(name) {
-  if (/expert/i.test(name)) return 'Expert';
-  if (/associate/i.test(name)) return 'Associate';
-  if (/specialty/i.test(name)) return 'Specialty';
-  if (/fundamental/i.test(name)) return 'Fundamental';
-  if (/professional/i.test(name)) return 'Professional';
-  return 'Certification';
-}
-
-function microsoftSection(name) {
-  switch (inferLevel(name)) {
-    case 'Expert':
-      return 'Microsoft Azure — Expert';
-    case 'Associate':
-      return 'Microsoft Azure — Associate';
-    case 'Specialty':
-      return 'Microsoft Azure — Specialty';
-    case 'Fundamental':
-      return 'Microsoft — Fundamentals';
-    default:
-      return 'Microsoft — Other';
-  }
+  return /microsoft/i.test(item.issuer || '') || isMicrosoftCertificationName(item.name);
 }
 
 function deduplicate(items) {
@@ -144,18 +131,9 @@ function deduplicate(items) {
 
   for (const item of items) {
     const key = normaliseName(item.name);
+    if (!key) continue;
 
-    if (!key) {
-      continue;
-    }
-
-    const existing = result.get(key);
-
-    if (!existing) {
-      result.set(key, item);
-      continue;
-    }
-
+    const existing = result.get(key) || {};
     result.set(key, {
       ...existing,
       ...Object.fromEntries(
@@ -168,23 +146,16 @@ function deduplicate(items) {
 }
 
 function walkJson(value, visitor, seen = new Set()) {
-  if (!value || typeof value !== 'object' || seen.has(value)) {
-    return;
-  }
-
+  if (!value || typeof value !== 'object' || seen.has(value)) return;
   seen.add(value);
   visitor(value);
 
   if (Array.isArray(value)) {
-    for (const entry of value) {
-      walkJson(entry, visitor, seen);
-    }
+    for (const entry of value) walkJson(entry, visitor, seen);
     return;
   }
 
-  for (const entry of Object.values(value)) {
-    walkJson(entry, visitor, seen);
-  }
+  for (const entry of Object.values(value)) walkJson(entry, visitor, seen);
 }
 
 function extractMicrosoftFromJson(payload, sourceUrl) {
@@ -199,9 +170,7 @@ function extractMicrosoftFromJson(payload, sourceUrl) {
       'name',
     ]);
 
-    if (!isMicrosoftCertificationName(name)) {
-      return;
-    }
+    if (!isMicrosoftCertificationName(name)) return;
 
     found.push({
       name,
@@ -240,9 +209,7 @@ function extractCredlyFromJson(payload) {
       firstValue(template, ['name', 'title']) ||
       firstValue(object, ['badgeName', 'name', 'title']);
 
-    if (!name || name.length > 180) {
-      return;
-    }
+    if (!name || name.length > 180) return;
 
     const issuerObject =
       template?.issuer?.entities?.[0]?.entity ||
@@ -254,7 +221,11 @@ function extractCredlyFromJson(payload) {
       firstValue(issuerObject, ['name', 'display_name', 'displayName']) ||
       firstValue(object, ['issuerName', 'issuer_name']);
 
-    if (!issuer && !isMicrosoftCertificationName(name) && !/(terraform|vault|consul|nomad)/i.test(name)) {
+    if (
+      !issuer &&
+      !isMicrosoftCertificationName(name) &&
+      !/(terraform|vault|consul|nomad)/i.test(name)
+    ) {
       return;
     }
 
@@ -263,12 +234,7 @@ function extractCredlyFromJson(payload) {
     found.push({
       name,
       issuer,
-      issued: firstValue(object, [
-        'issued_at',
-        'issuedAt',
-        'issue_date',
-        'issueDate',
-      ]),
+      issued: firstValue(object, ['issued_at', 'issuedAt', 'issue_date', 'issueDate']),
       expires: firstValue(object, [
         'expires_at',
         'expiresAt',
@@ -298,7 +264,6 @@ async function dismissCookies(page) {
     /continue without accepting/i,
   ]) {
     const button = page.getByRole('button', { name: label }).first();
-
     if (await button.isVisible().catch(() => false)) {
       await button.click().catch(() => {});
       break;
@@ -314,7 +279,6 @@ async function scrollPage(page) {
     const height = await page.evaluate(() => document.body.scrollHeight);
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.waitForTimeout(750);
-
     stable = height === previousHeight ? stable + 1 : 0;
     previousHeight = height;
   }
@@ -322,17 +286,15 @@ async function scrollPage(page) {
 
 async function collectPage(page, url) {
   const jsonPayloads = [];
+
   const onResponse = async (response) => {
     const contentType = response.headers()['content-type'] || '';
-
-    if (!contentType.includes('application/json')) {
-      return;
-    }
+    if (!contentType.includes('application/json')) return;
 
     try {
       jsonPayloads.push({ url: response.url(), data: await response.json() });
     } catch {
-      // Some responses claim JSON but contain no usable body.
+      // Ignore empty or malformed JSON responses.
     }
   };
 
@@ -351,27 +313,40 @@ async function collectPage(page, url) {
   return jsonPayloads;
 }
 
+async function saveDebugPage(page, prefix) {
+  await fs.mkdir(ARTIFACT_DIR, { recursive: true });
+  await page.screenshot({
+    path: path.join(ARTIFACT_DIR, `${prefix}.png`),
+    fullPage: true,
+  });
+  await fs.writeFile(
+    path.join(ARTIFACT_DIR, `${prefix}.html`),
+    await page.content(),
+    'utf8',
+  );
+}
+
 async function scrapeMicrosoft(page) {
   const payloads = await collectPage(page, MICROSOFT_URL);
-  const fromJson = payloads.flatMap(({ data, url }) => extractMicrosoftFromJson(data, url));
+  const fromJson = payloads.flatMap(({ data, url }) =>
+    extractMicrosoftFromJson(data, url),
+  );
 
   const fromDom = await page.evaluate(() => {
     const tidy = (value = '') => String(value).replace(/\s+/g, ' ').trim();
     const validName = (value) => {
-      const product = /(azure|microsoft 365|windows server|security|identity|power platform|fabric|dynamics 365|devops|cybersecurity)/i;
-      const level = /(expert|associate|specialty|fundamentals?|administrator|engineer|architect|developer)/i;
+      const product =
+        /(azure|microsoft 365|windows server|security|identity|power platform|fabric|dynamics 365|devops|cybersecurity)/i;
+      const level =
+        /(expert|associate|specialty|fundamentals?|administrator|engineer|architect|developer)/i;
       return value.length <= 180 && product.test(value) && level.test(value);
     };
 
     const results = [];
-    const headings = [...document.querySelectorAll('h1, h2, h3, h4, h5, a')];
 
-    for (const heading of headings) {
+    for (const heading of document.querySelectorAll('h1, h2, h3, h4, h5, a')) {
       const name = tidy(heading.textContent || '');
-
-      if (!validName(name)) {
-        continue;
-      }
+      if (!validName(name)) continue;
 
       let container = heading;
 
@@ -379,7 +354,11 @@ async function scrapeMicrosoft(page) {
         container = container.parentElement;
         const text = tidy(container.innerText || '');
 
-        if (text.length >= name.length && text.length <= 1800 && /(earned|issued|expires?|renew|active|credential)/i.test(text)) {
+        if (
+          text.length >= name.length &&
+          text.length <= 1800 &&
+          /(earned|issued|expires?|renew|active|credential)/i.test(text)
+        ) {
           const image = container.querySelector('img');
           const link = container.querySelector('a[href]');
           results.push({
@@ -414,19 +393,15 @@ async function scrapeMicrosoft(page) {
     })),
   ];
 
-  const certifications = deduplicate(combined).filter((item) => isMicrosoftCertificationName(item.name));
+  const certifications = deduplicate(combined).filter((item) =>
+    isMicrosoftCertificationName(item.name),
+  );
 
-  if (certifications.length === 0) {
-    await page.screenshot({
-      path: path.join(ARTIFACT_DIR, 'microsoft-learn.png'),
-      fullPage: true,
-    });
-    await fs.writeFile(
-      path.join(ARTIFACT_DIR, 'microsoft-learn.html'),
-      await page.content(),
-      'utf8',
+  if (!certifications.length) {
+    await saveDebugPage(page, 'microsoft-learn');
+    throw new Error(
+      'No Microsoft certifications were found. Debug HTML and screenshot were saved.',
     );
-    throw new Error('No Microsoft certifications found. Debug HTML and screenshot were saved.');
   }
 
   return certifications;
@@ -440,7 +415,9 @@ async function scrapeCredly(page) {
     ...new Set(
       anchors
         .map((anchor) => anchor.href)
-        .filter((href) => /^https:\/\/www\.credly\.com\/badges\/[^/?#]+(?:\/public_url)?$/i.test(href))
+        .filter((href) =>
+          /^https:\/\/www\.credly\.com\/badges\/[^/?#]+(?:\/public_url)?$/i.test(href),
+        )
         .map((href) => href.replace(/\/public_url$/, '')),
     ),
   ]);
@@ -461,15 +438,22 @@ async function scrapeCredly(page) {
         '',
     }));
 
-    if (!detail.name) {
-      continue;
-    }
+    if (!detail.name) continue;
 
     fromDetails.push({
       name: clean(detail.name),
-      issuer: firstMatch(detail.body, [/Issued by\s+([^\n]+)/i, /Issuer\s*:?\s*([^\n]+)/i]),
-      issued: firstMatch(detail.body, [/Issued(?:\s+on)?\s*:?\s*([^\n]+)/i, /Issue date\s*:?\s*([^\n]+)/i]),
-      expires: firstMatch(detail.body, [/Expires?(?:\s+on)?\s*:?\s*([^\n]+)/i, /Expiration date\s*:?\s*([^\n]+)/i]),
+      issuer: firstMatch(detail.body, [
+        /Issued by\s+([^\n]+)/i,
+        /Issuer\s*:?\s*([^\n]+)/i,
+      ]),
+      issued: firstMatch(detail.body, [
+        /Issued(?:\s+on)?\s*:?\s*([^\n]+)/i,
+        /Issue date\s*:?\s*([^\n]+)/i,
+      ]),
+      expires: firstMatch(detail.body, [
+        /Expires?(?:\s+on)?\s*:?\s*([^\n]+)/i,
+        /Expiration date\s*:?\s*([^\n]+)/i,
+      ]),
       status: /expired|revoked/i.test(detail.body) ? 'Expired' : 'Active',
       imageUrl: detail.imageUrl,
       url,
@@ -481,184 +465,315 @@ async function scrapeCredly(page) {
     (item) => isHashiCorpCredential(item) || isMicrosoftCredential(item),
   );
 
-  if (badges.length === 0) {
+  if (!badges.length) {
     await page.goto(CREDLY_URL, { waitUntil: 'domcontentloaded', timeout: 90_000 });
-    await page.screenshot({ path: path.join(ARTIFACT_DIR, 'credly.png'), fullPage: true });
-    await fs.writeFile(path.join(ARTIFACT_DIR, 'credly.html'), await page.content(), 'utf8');
-    throw new Error('No relevant Credly badges found. Debug HTML and screenshot were saved.');
+    await saveDebugPage(page, 'credly');
+    throw new Error('No relevant Credly badges found. Debug files were saved.');
   }
 
   return badges;
 }
 
-function existingCertificates(data) {
-  const result = new Map();
-
-  for (const section of data.sections || []) {
-    for (const cert of section.certs || []) {
-      result.set(normaliseName(cert.name), cert);
-    }
-  }
-
-  for (const cert of data.legacy || []) {
-    result.set(normaliseName(cert.name), cert);
-  }
-
-  return result;
-}
-
-function displayCertificate(item, existing) {
-  const output = {
-    name: item.name,
-    level: existing?.level || inferLevel(item.name),
-    date: displayDate(item.issued) || existing?.date || '',
-    status: item.status || 'Active',
-    source: item.source,
-    url: item.url,
+function imageExtension(contentType, imageUrl) {
+  const byType = {
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/webp': 'webp',
+    'image/svg+xml': 'svg',
   };
 
-  if (item.expires) output.expires = displayDate(item.expires);
-  if (existing?.image) output.image = existing.image;
-  else if (item.imageUrl) output.image_url = item.imageUrl;
+  if (byType[contentType]) return byType[contentType];
 
-  return output;
+  const pathname = new URL(imageUrl).pathname;
+  const extension = path.extname(pathname).replace('.', '').toLowerCase();
+  return ['png', 'jpg', 'jpeg', 'webp', 'svg'].includes(extension)
+    ? extension.replace('jpeg', 'jpg')
+    : 'png';
 }
 
-function buildOutput(current, microsoft, credly) {
-  const existing = existingCertificates(current);
+function imageSlug(name) {
+  return displayName(name)
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+async function ensureLocalImage(item) {
+  if (!item.imageUrl) return '';
+
+  await fs.mkdir(IMAGE_DIR, { recursive: true });
+
+  const response = await fetch(item.imageUrl, {
+    headers: {
+      'User-Agent': 'RAWRitsCloud certification sync',
+    },
+  });
+
+  if (!response.ok) return '';
+
+  const contentType = (response.headers.get('content-type') || '')
+    .split(';')[0]
+    .trim()
+    .toLowerCase();
+  const extension = imageExtension(contentType, item.imageUrl);
+  const filename = `${imageSlug(item.name)}.${extension}`;
+  const destination = path.join(IMAGE_DIR, filename);
+
+  try {
+    await fs.access(destination);
+    return filename;
+  } catch {
+    await fs.writeFile(destination, Buffer.from(await response.arrayBuffer()));
+    return filename;
+  }
+}
+
+function validateSchema(current) {
+  if (!Array.isArray(current?.sections)) {
+    throw new Error('certifications.yml must contain a top-level sections array.');
+  }
+
+  if (!Array.isArray(current?.legacy)) {
+    throw new Error('certifications.yml must contain a top-level legacy array.');
+  }
+
+  for (const section of current.sections) {
+    if (!section?.title || !Array.isArray(section.certs)) {
+      throw new Error('Every certification section must contain title and certs.');
+    }
+  }
+}
+
+async function buildOutput(current, microsoft, credly) {
+  validateSchema(current);
+
+  // Preserve the exact site schema and existing section order.
+  const sections = structuredClone(current.sections);
+  const legacy = structuredClone(current.legacy);
+
   const microsoftKeys = new Set(microsoft.map((item) => normaliseName(item.name)));
-
-  const activeMicrosoft = microsoft.filter((item) => !isExpired(item));
-  const historicalMicrosoft = microsoft.filter(isExpired);
-
   const hashicorp = credly.filter(isHashiCorpCredential);
   const credlyMicrosoft = credly.filter(isMicrosoftCredential);
 
-  for (const item of credlyMicrosoft) {
-    if (!microsoftKeys.has(normaliseName(item.name))) {
-      historicalMicrosoft.push(item);
-    }
-  }
+  const activeItems = deduplicate([
+    ...microsoft.filter((item) => !isExpired(item)),
+    ...hashicorp.filter((item) => !isExpired(item)),
+  ]);
 
-  const groups = new Map();
-
-  for (const item of activeMicrosoft) {
-    const title = microsoftSection(item.name);
-    const cert = displayCertificate(item, existing.get(normaliseName(item.name)));
-    groups.set(title, [...(groups.get(title) || []), cert]);
-  }
-
-  const titleOrder = [
-    'Microsoft Azure — Expert',
-    'Microsoft Azure — Associate',
-    'Microsoft Azure — Specialty',
-    'Microsoft — Fundamentals',
-    'Microsoft — Other',
-  ];
-
-  const sections = titleOrder
-    .filter((title) => groups.has(title))
-    .map((title) => ({
-      title,
-      certs: groups.get(title).sort((a, b) => a.name.localeCompare(b.name)),
-    }));
-
-  const activeHashiCorp = hashicorp
-    .filter((item) => !isExpired(item))
-    .map((item) => displayCertificate(item, existing.get(normaliseName(item.name))))
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  if (activeHashiCorp.length) {
-    sections.push({ title: 'HashiCorp', certs: activeHashiCorp });
-  }
-
-  const preservedSections = (current.sections || []).filter(
-    (section) => !/^Microsoft/i.test(section.title || '') && !/^HashiCorp$/i.test(section.title || ''),
-  );
-  sections.push(...preservedSections);
-
-  const manualLegacy = (current.legacy || []).filter(
-    (item) => !['Credly', 'Microsoft Learn'].includes(item.source),
-  );
-  const usedLegacy = new Set(manualLegacy.map((item) => normaliseName(item.name)));
-
-  const generatedLegacy = deduplicate([
-    ...historicalMicrosoft,
+  const historicalItems = deduplicate([
+    ...microsoft.filter(isExpired),
     ...hashicorp.filter(isExpired),
-  ])
-    .filter((item) => {
-      const itemKey = normaliseName(item.name);
-      if (usedLegacy.has(itemKey)) return false;
-      usedLegacy.add(itemKey);
-      return true;
-    })
-    .map((item) => ({
-      name: item.name,
+    ...credlyMicrosoft.filter(
+      (item) => !microsoftKeys.has(normaliseName(item.name)),
+    ),
+  ]);
+
+  const activeByName = new Map(
+    activeItems.map((item) => [normaliseName(item.name), item]),
+  );
+  const historicalByName = new Map(
+    historicalItems.map((item) => [normaliseName(item.name), item]),
+  );
+
+  const matchedActive = new Set();
+  const movedToLegacy = [];
+
+  // Update existing certificates in place. Never rebuild or remove a section.
+  for (const section of sections) {
+    const retained = [];
+
+    for (const certificate of section.certs) {
+      const certificateKey = normaliseName(certificate.name);
+      const live = activeByName.get(certificateKey);
+      const historical = historicalByName.get(certificateKey);
+
+      if (live) {
+        matchedActive.add(certificateKey);
+        retained.push({
+          ...certificate,
+          date: displayDate(live.issued) || certificate.date || '',
+        });
+        continue;
+      }
+
+      if (historical) {
+        movedToLegacy.push({
+          name: certificate.name,
+          date: displayDate(historical.issued) || certificate.date || '',
+          status: isExpired(historical) ? 'Expired' : 'Historical',
+        });
+        continue;
+      }
+
+      // A missing scrape result is not evidence that a certificate vanished.
+      retained.push(certificate);
+    }
+
+    section.certs = retained;
+  }
+
+  const skipped = [];
+
+  // Add genuinely new active credentials to an existing section only.
+  for (const item of activeItems) {
+    const itemKey = normaliseName(item.name);
+    if (matchedActive.has(itemKey)) continue;
+
+    const sectionTitle = targetSection(item);
+    const section = sections.find((entry) => entry.title === sectionTitle);
+
+    if (!section) {
+      skipped.push({
+        name: item.name,
+        reason: `No existing section named ${sectionTitle || '(unclassified)'}`,
+      });
+      continue;
+    }
+
+    const image = await ensureLocalImage(item);
+
+    if (!image) {
+      skipped.push({ name: item.name, reason: 'No usable badge image was found' });
+      continue;
+    }
+
+    section.certs.push({
+      name: displayName(item.name),
+      image,
+      level: inferLevel(item.name),
       date: displayDate(item.issued),
-      status: item.status || 'Historical',
-      source: item.source,
-      url: item.url,
-    }));
+    });
+    matchedActive.add(itemKey);
+  }
 
-  return { sections, legacy: [...manualLegacy, ...generatedLegacy] };
-}
+  const legacyKeys = new Set(legacy.map((item) => normaliseName(item.name)));
 
-function comparable(data) {
-  const copy = structuredClone(data || {});
-  delete copy.last_synced;
-  return JSON.stringify(copy);
+  for (const item of [...movedToLegacy, ...historicalItems]) {
+    const itemKey = normaliseName(item.name);
+    if (!itemKey || legacyKeys.has(itemKey)) continue;
+
+    legacy.push({
+      name: displayName(item.name),
+      date: displayDate(item.issued || item.date),
+      status:
+        item.status === 'Expired' || isExpired(item)
+          ? 'Expired'
+          : item.status || 'Historical',
+    });
+    legacyKeys.add(itemKey);
+  }
+
+  if (skipped.length) {
+    await fs.mkdir(ARTIFACT_DIR, { recursive: true });
+    await fs.writeFile(
+      path.join(ARTIFACT_DIR, 'unmapped-certifications.json'),
+      `${JSON.stringify(skipped, null, 2)}\n`,
+      'utf8',
+    );
+    console.warn('Some new certifications need manual mapping:');
+    for (const item of skipped) console.warn(`- ${item.name}: ${item.reason}`);
+  }
+
+  // Deliberately return only the schema consumed by the Jekyll page.
+  return { sections, legacy };
 }
 
 function runSelfTest() {
-  const microsoftJson = {
-    credentials: [
+  const current = {
+    sections: [
       {
-        certificationName: 'Microsoft Certified: Azure Solutions Architect Expert',
-        achievementDate: '2025-01-10',
-        expirationDate: '2027-01-10',
-        status: 'Active',
+        title: 'Microsoft Azure — Expert',
+        certs: [
+          {
+            name: 'Azure Solutions Architect Expert',
+            image: 'architect.png',
+            level: 'Expert',
+            date: 'Nov 2019',
+          },
+        ],
+      },
+      {
+        title: 'Microsoft Azure — Associate',
+        certs: [],
+      },
+      {
+        title: 'Microsoft Azure — Specialty',
+        certs: [],
+      },
+      {
+        title: 'Microsoft — Fundamentals',
+        certs: [],
+      },
+      {
+        title: 'HashiCorp',
+        certs: [
+          {
+            name: 'Terraform Associate',
+            image: 'terraform.png',
+            level: 'Associate',
+            date: '',
+          },
+        ],
       },
     ],
+    legacy: [{ name: 'MCSE: SharePoint', date: 'Jul 2014' }],
   };
 
-  const credlyJson = {
-    data: [
-      {
-        id: 'abc',
-        issued_at: '2025-02-01',
-        state: 'accepted',
-        badge_template: {
-          name: 'HashiCorp Certified: Terraform Associate (003)',
-          image_url: 'https://example.test/terraform.png',
-          issuer: { entities: [{ entity: { name: 'HashiCorp' } }] },
-        },
-      },
-    ],
-  };
+  const microsoft = [
+    {
+      name: 'Microsoft Certified: Azure Solutions Architect Expert',
+      issuer: 'Microsoft',
+      issued: '2025-01-10',
+      expires: '2027-01-10',
+      status: 'Active',
+      source: 'Microsoft Learn',
+    },
+  ];
 
-  const microsoft = extractMicrosoftFromJson(microsoftJson, MICROSOFT_URL);
-  const credly = extractCredlyFromJson(credlyJson);
+  const credly = [
+    {
+      name: 'HashiCorp Certified: Terraform Associate (003)',
+      issuer: 'HashiCorp',
+      issued: '2025-02-01',
+      status: 'Active',
+      source: 'Credly',
+    },
+  ];
 
-  if (microsoft.length !== 1 || microsoft[0].name !== 'Microsoft Certified: Azure Solutions Architect Expert') {
-    throw new Error('Microsoft JSON extraction self-test failed.');
-  }
+  return buildOutput(current, microsoft, credly).then((output) => {
+    if (output.sections.length !== current.sections.length) {
+      throw new Error('Self-test failed: section count changed.');
+    }
 
-  if (credly.length !== 1 || !isHashiCorpCredential(credly[0])) {
-    throw new Error('Credly JSON extraction self-test failed.');
-  }
+    if (
+      output.sections.map((section) => section.title).join('|') !==
+      current.sections.map((section) => section.title).join('|')
+    ) {
+      throw new Error('Self-test failed: section titles or order changed.');
+    }
 
-  const output = buildOutput({ sections: [], legacy: [] }, microsoft, credly);
+    const architect = output.sections[0].certs[0];
+    if (architect.image !== 'architect.png' || architect.level !== 'Expert') {
+      throw new Error('Self-test failed: existing certificate schema was not preserved.');
+    }
 
-  if (output.sections.length !== 2) {
-    throw new Error('Output merge self-test failed.');
-  }
+    const terraform = output.sections[4].certs[0];
+    if (terraform.image !== 'terraform.png') {
+      throw new Error('Self-test failed: HashiCorp certificate was duplicated or replaced.');
+    }
 
-  console.log('Self-test passed.');
+    if (output.legacy.length !== 1 || output.legacy[0].name !== 'MCSE: SharePoint') {
+      throw new Error('Self-test failed: manual legacy entries changed.');
+    }
+
+    console.log('Self-test passed: sections and YAML schema were preserved.');
+  });
 }
 
 async function main() {
   if (process.argv.includes('--self-test')) {
-    runSelfTest();
+    await runSelfTest();
     return;
   }
 
@@ -684,20 +799,21 @@ async function main() {
   try {
     const microsoft = await scrapeMicrosoft(page);
     const credly = await scrapeCredly(page);
-    const generated = buildOutput(current, microsoft, credly);
+    const output = await buildOutput(current, microsoft, credly);
 
     console.log(`Microsoft Learn certifications: ${microsoft.length}`);
     console.log(`Relevant Credly badges: ${credly.length}`);
 
-    if (comparable(current) === comparable(generated)) {
+    const currentComparable = JSON.stringify({
+      sections: current.sections,
+      legacy: current.legacy,
+    });
+    const outputComparable = JSON.stringify(output);
+
+    if (currentComparable === outputComparable) {
       console.log('No certification changes detected.');
       return;
     }
-
-    const output = {
-      last_synced: new Date().toISOString(),
-      ...generated,
-    };
 
     await fs.writeFile(
       DATA_FILE,
