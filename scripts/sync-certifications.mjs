@@ -15,6 +15,11 @@ const IMAGE_DIR = path.resolve('assets/images/certs');
 const ARTIFACT_DIR = path.resolve('artifacts/cert-sync');
 const MAX_CREDLY_DETAIL_PAGES = 100;
 
+const EXCLUDED_BADGE_PATTERNS = [
+  /^Exam Contributor:/i,
+  /^Alpha Tester:/i,
+];
+
 const clean = (value = '') => String(value).replace(/\s+/g, ' ').trim();
 
 function displayName(value = '') {
@@ -115,7 +120,14 @@ function isMicrosoftCertificationName(name) {
   return product.test(value) && level.test(value);
 }
 
+function isExcludedBadge(item) {
+  const name = typeof item === 'string' ? item : item?.name || '';
+  return EXCLUDED_BADGE_PATTERNS.some((pattern) => pattern.test(clean(name)));
+}
+
 function isHashiCorpCredential(item) {
+  if (isExcludedBadge(item)) return false;
+
   return (
     /hashicorp/i.test(item.issuer || '') ||
     /(terraform|vault|consul|nomad)\b/i.test(item.name || '')
@@ -123,6 +135,7 @@ function isHashiCorpCredential(item) {
 }
 
 function isMicrosoftCredential(item) {
+  if (isExcludedBadge(item)) return false;
   return /microsoft/i.test(item.issuer || '') || isMicrosoftCertificationName(item.name);
 }
 
@@ -209,7 +222,7 @@ function extractCredlyFromJson(payload) {
       firstValue(template, ['name', 'title']) ||
       firstValue(object, ['badgeName', 'name', 'title']);
 
-    if (!name || name.length > 180) return;
+    if (!name || name.length > 180 || isExcludedBadge(name)) return;
 
     const issuerObject =
       template?.issuer?.entities?.[0]?.entity ||
@@ -438,7 +451,7 @@ async function scrapeCredly(page) {
         '',
     }));
 
-    if (!detail.name) continue;
+    if (!detail.name || isExcludedBadge(detail.name)) continue;
 
     fromDetails.push({
       name: clean(detail.name),
@@ -549,23 +562,30 @@ async function buildOutput(current, microsoft, credly) {
   validateSchema(current);
 
   // Preserve the exact site schema and existing section order.
-  const sections = structuredClone(current.sections);
-  const legacy = structuredClone(current.legacy);
+  const sections = structuredClone(current.sections).map((section) => ({
+    ...section,
+    certs: section.certs.filter((certificate) => !isExcludedBadge(certificate)),
+  }));
+  const legacy = structuredClone(current.legacy).filter(
+    (certificate) => !isExcludedBadge(certificate),
+  );
 
   const microsoftKeys = new Set(microsoft.map((item) => normaliseName(item.name)));
   const hashicorp = credly.filter(isHashiCorpCredential);
   const credlyMicrosoft = credly.filter(isMicrosoftCredential);
 
   const activeItems = deduplicate([
-    ...microsoft.filter((item) => !isExpired(item)),
-    ...hashicorp.filter((item) => !isExpired(item)),
+    ...microsoft.filter((item) => !isExpired(item) && !isExcludedBadge(item)),
+    ...hashicorp.filter((item) => !isExpired(item) && !isExcludedBadge(item)),
   ]);
 
   const historicalItems = deduplicate([
-    ...microsoft.filter(isExpired),
-    ...hashicorp.filter(isExpired),
+    ...microsoft.filter((item) => isExpired(item) && !isExcludedBadge(item)),
+    ...hashicorp.filter((item) => isExpired(item) && !isExcludedBadge(item)),
     ...credlyMicrosoft.filter(
-      (item) => !microsoftKeys.has(normaliseName(item.name)),
+      (item) =>
+        !isExcludedBadge(item) &&
+        !microsoftKeys.has(normaliseName(item.name)),
     ),
   ]);
 
@@ -679,6 +699,72 @@ async function buildOutput(current, microsoft, credly) {
   return { sections, legacy };
 }
 
+function yamlScalar(value) {
+  if (typeof value === 'string') return JSON.stringify(value);
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+  if (value == null) return 'null';
+  return JSON.stringify(value);
+}
+
+function orderedKeys(record, preferredOrder) {
+  const preferred = preferredOrder.filter((key) => Object.hasOwn(record, key));
+  const remaining = Object.keys(record).filter((key) => !preferred.includes(key));
+  return [...preferred, ...remaining];
+}
+
+function appendRecord(lines, record, indent, preferredOrder) {
+  const keys = orderedKeys(record, preferredOrder);
+
+  if (!keys.length) {
+    lines.push(`${indent}- {}`);
+    return;
+  }
+
+  const [firstKey, ...otherKeys] = keys;
+  lines.push(`${indent}- ${firstKey}: ${yamlScalar(record[firstKey])}`);
+
+  for (const key of otherKeys) {
+    lines.push(`${indent}  ${key}: ${yamlScalar(record[key])}`);
+  }
+}
+
+function dumpCertificationsYaml(data) {
+  const lines = ['sections:'];
+
+  for (const section of data.sections) {
+    lines.push(`  - title: ${yamlScalar(section.title)}`);
+
+    if (!section.certs.length) {
+      lines.push('    certs: []');
+    } else {
+      lines.push('    certs:');
+      for (const certificate of section.certs) {
+        appendRecord(lines, certificate, '      ', [
+          'name',
+          'image',
+          'level',
+          'date',
+          'status',
+        ]);
+      }
+    }
+
+    lines.push('');
+  }
+
+  lines.push('legacy:');
+
+  if (!data.legacy.length) {
+    lines[lines.length - 1] = 'legacy: []';
+  } else {
+    for (const certificate of data.legacy) {
+      appendRecord(lines, certificate, '  ', ['name', 'date', 'status']);
+    }
+  }
+
+  return `${lines.join('\n')}\n`;
+}
+
 function runSelfTest() {
   const current = {
     sections: [
@@ -714,6 +800,18 @@ function runSelfTest() {
             level: 'Associate',
             date: '',
           },
+          {
+            name: 'Exam Contributor: Terraform Associate',
+            image: 'exam-contributor.png',
+            level: 'Associate',
+            date: '',
+          },
+          {
+            name: 'Alpha Tester: Terraform Authoring and Operations Professional',
+            image: 'alpha-tester.png',
+            level: 'Professional',
+            date: '',
+          },
         ],
       },
     ],
@@ -739,6 +837,20 @@ function runSelfTest() {
       status: 'Active',
       source: 'Credly',
     },
+    {
+      name: 'Exam Contributor: Terraform Associate',
+      issuer: 'HashiCorp',
+      issued: '2025-02-01',
+      status: 'Active',
+      source: 'Credly',
+    },
+    {
+      name: 'Alpha Tester: Terraform Authoring and Operations Professional',
+      issuer: 'HashiCorp',
+      issued: '2025-02-01',
+      status: 'Active',
+      source: 'Credly',
+    },
   ];
 
   return buildOutput(current, microsoft, credly).then((output) => {
@@ -758,16 +870,32 @@ function runSelfTest() {
       throw new Error('Self-test failed: existing certificate schema was not preserved.');
     }
 
-    const terraform = output.sections[4].certs[0];
+    const hashicorpCertificates = output.sections[4].certs;
+    const terraform = hashicorpCertificates[0];
     if (terraform.image !== 'terraform.png') {
       throw new Error('Self-test failed: HashiCorp certificate was duplicated or replaced.');
+    }
+
+    if (hashicorpCertificates.some(isExcludedBadge)) {
+      throw new Error('Self-test failed: contributor or alpha-tester badges were retained.');
+    }
+
+    if (output.legacy.some(isExcludedBadge)) {
+      throw new Error('Self-test failed: excluded badges were moved to legacy.');
+    }
+
+    const serialised = dumpCertificationsYaml(output);
+    if (!serialised.includes('title: "Microsoft Azure — Expert"')) {
+      throw new Error('Self-test failed: YAML strings were not double quoted.');
     }
 
     if (output.legacy.length !== 1 || output.legacy[0].name !== 'MCSE: SharePoint') {
       throw new Error('Self-test failed: manual legacy entries changed.');
     }
 
-    console.log('Self-test passed: sections and YAML schema were preserved.');
+    console.log(
+      'Self-test passed: sections, exclusions and double-quoted YAML were preserved.',
+    );
   });
 }
 
@@ -817,12 +945,7 @@ async function main() {
 
     await fs.writeFile(
       DATA_FILE,
-      yaml.dump(output, {
-        lineWidth: 120,
-        noRefs: true,
-        quoteStyle: 'double',
-        forceQuotes: true,
-      }),
+      dumpCertificationsYaml(output),
       'utf8',
     );
 
