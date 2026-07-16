@@ -1,105 +1,418 @@
+last_synced: '2026-07-16T10:48:42.750Z'
 sections:
-  - title: "Microsoft Azure — Expert"
+  - title: Microsoft Azure — Expert
     certs:
-      - name: "Azure Solutions Architect Expert"
-        image: "azure-solutions-architect-expert-600x600.png"
-        level: "Expert"
-        date: "Nov 2019"
-      - name: "Cybersecurity Architect Expert"
-        image: "cybersecurity-architect-expert.png"
-        level: "Expert"
-        date: "Aug 2022"
-
-  - title: "Microsoft Azure — Associate"
+      - name: 'Microsoft Certified: Azure Solutions Architect Expert'
+        level: Expert
+        date: Nov 2019
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-solutions-architect-expert-600x600.png
+      - name: 'Microsoft Certified: Cybersecurity Architect Expert'
+        level: Expert
+        date: Aug 2022
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: cybersecurity-architect-expert.png
+  - title: Microsoft Azure — Associate
     certs:
-      - name: "Azure Administrator Associate"
-        image: "azure-administrator-associate.png"
-        level: "Associate"
-        date: "May 2019"
-      - name: "Azure Security Engineer Associate"
-        image: "azure-security-engineer-associate600x600.png"
-        level: "Associate"
-        date: "Sep 2021"
-      - name: "Azure Network Engineer Associate"
-        image: "azure-network-engineer-associate-600x600.png"
-        level: "Associate"
-        date: "Oct 2021"
-      - name: "Identity & Access Administrator Associate"
-        image: "identity-and-access-administrator-associate-600x600.png"
-        level: "Associate"
-        date: "Nov 2021"
-      - name: "Windows Server Hybrid Administrator Associate"
-        image: "windows-server-hybrid-admin.png"
-        level: "Associate"
-        date: "Jul 2022"
-
-  - title: "Microsoft Azure — Specialty"
+      - name: 'Microsoft Certified: Azure Administrator Associate'
+        level: Associate
+        date: May 2019
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-administrator-associate.png
+      - name: 'Microsoft Certified: Azure Network Engineer Associate'
+        level: Associate
+        date: Oct 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-network-engineer-associate-600x600.png
+      - name: 'Microsoft Certified: Azure Security Engineer Associate'
+        level: Associate
+        date: Sept 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-security-engineer-associate600x600.png
+      - name: 'Microsoft Certified: Identity and Access Administrator Associate'
+        level: Associate
+        date: Nov 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: identity-and-access-administrator-associate-600x600.png
+      - name: 'Microsoft Certified: Windows Server Hybrid Administrator Associate'
+        level: Associate
+        date: Jul 2022
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: windows-server-hybrid-admin.png
+      - name: 'Microsoft® Certified Solutions Associate: Windows Server 2008'
+        level: Associate
+        date: Apr 2012
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+  - title: Microsoft Azure — Specialty
     certs:
-      - name: "Azure Virtual Desktop Specialty"
-        image: "azure-virtual-desktop-specialty-600x600.png"
-        level: "Specialty"
-        date: "Jun 2021"
-
-  - title: "Microsoft — Fundamentals"
+      - name: 'Microsoft Certified: Azure Virtual Desktop Specialty'
+        level: Specialty
+        date: Jun 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-virtual-desktop-specialty-600x600.png
+  - title: Microsoft — Fundamentals
     certs:
-      - name: "Azure Fundamentals"
-        image: "azure-fundamentals-600x600.png"
-        level: "Fundamental"
-        date: "Jul 2021"
-      - name: "Azure AI Fundamentals"
-        image: "azure-ai-fundamentals-600x600.png"
-        level: "Fundamental"
-        date: "Sep 2021"
-      - name: "Azure Data Fundamentals"
-        image: "azure-data-fundamentals-600x600.png"
-        level: "Fundamental"
-        date: "Aug 2021"
-      - name: "Microsoft 365 Fundamentals"
-        image: "microsoft365-fundamentals-600x600.png"
-        level: "Fundamental"
-        date: "Jul 2021"
-      - name: "Security, Compliance & Identity Fundamentals"
-        image: "security-compliance-and-identity-fundamentals-600x600.png"
-        level: "Fundamental"
-        date: "Jul 2021"
-
-  - title: "HashiCorp"
+      - name: 'Microsoft 365 Certified: Fundamentals'
+        level: Fundamental
+        date: Jul 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+      - name: 'Microsoft Certified: Azure AI Fundamentals'
+        level: Fundamental
+        date: Sept 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-ai-fundamentals-600x600.png
+      - name: 'Microsoft Certified: Azure Data Fundamentals'
+        level: Fundamental
+        date: Aug 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-data-fundamentals-600x600.png
+      - name: 'Microsoft Certified: Azure Fundamentals'
+        level: Fundamental
+        date: Jul 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: azure-fundamentals-600x600.png
+      - name: 'Microsoft Certified: Security, Compliance, and Identity Fundamentals'
+        level: Fundamental
+        date: Jul 2021
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+        image: security-compliance-and-identity-fundamentals-600x600.png
+  - title: Microsoft — Other
     certs:
-      - name: "Terraform Associate"
-        image: "hashicorp-certified-terraform-associate.png"
-        level: "Associate"
-        date: ""
-      - name: "Terraform Authoring & Operations Professional"
-        image: "hashicorp-terraform-professional.png"
-        level: "Professional"
-        date: ""
-
+      - name: Introduction to the Microsoft Azure Well-Architected Framework
+        level: Certification
+        date: ''
+        status: Active
+        source: Microsoft Learn
+        url: /training/modules/azure-well-architected-introduction/
+      - name: 'Microsoft® Certified IT Professional: Enterprise Administrator on Windows Server 2008'
+        level: Professional
+        date: Jan 2011
+        status: Active
+        source: Microsoft Learn
+        url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+  - title: HashiCorp
+    certs:
+      - name: 'Alpha Tester: Terraform Authoring and Operations Professional'
+        level: Professional
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/org/hashicorp/badge/alpha-tester-terraform-authoring-and-operations-pro
+        image_url: https://images.credly.com/images/8b5a2cd2-3cd6-4deb-bb7a-bd0ccb131594/image.png
+      - name: 'Exam Contributor: Terraform Associate (002)'
+        level: Associate
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/org/hashicorp/badge/exam-contributor-terraform-associate-002.1
+        image_url: https://images.credly.com/images/09e81254-4ad3-400b-a86c-3cd88eb77628/blob
+      - name: 'HashiCorp Certified: Terraform Associate (002)'
+        level: Associate
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/org/hashicorp/badge/hashicorp-certified-terraform-associate-002
+        image_url: https://images.credly.com/images/cd038261-9d1c-4792-bc62-3a3b5bda175c/blob
+      - name: 'HashiCorp Certified: Terraform Authoring and Operations Professional'
+        level: Professional
+        date: Nov 2025
+        status: Active
+        source: Credly
+        url: https://www.credly.com/org/hashicorp/badge/hashicorp-certified-terraform-authoring-and-operati.1
+        expires: Nov 2027
+        image_url: https://images.credly.com/images/a4c6650b-58c3-4be5-bdb0-4d1f437d4e40/blob
+      - name: HCP Terraform
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/dc725caf-0662-4146-a113-d58b207eaeeb
+      - name: 'Score a passing grade on the HashiCorp Certified: Terraform Associate multiple choice exam'
+        level: Associate
+        date: ''
+        status: Active
+        source: Credly
+        url: https://hashicorp-education.s3.us-west-2.amazonaws.com/Certifications/TA003+onepager.pdf
+      - name: 'Score a passing grade on the HashiCorp Certified: Terraform Authoring and Operations Professional exam.'
+        level: Professional
+        date: ''
+        status: Active
+        source: Credly
+        url: >-
+          https://developer.hashicorp.com/certifications/infrastructure-automation#terraform-authoring-and-operations-professional-details
+      - name: Terraform
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/ee0255b9-2489-45c9-ac67-93cf57116e0c
+      - name: Terraform Basics
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/aa567021-bdca-48aa-88f3-454d7a6550bf
+      - name: Terraform CLI
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/04defbeb-ff3f-44f9-9a0d-b7fb7f299264
+      - name: Terraform Cloud
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/b5b99c5a-5be1-4889-bf32-e51cbf1f8e25
+      - name: Terraform Configuration
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/97199fd8-3bf4-4cf0-b44e-6ce67d49d1df
+      - name: Terraform Configuration Language
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/180163aa-85a8-4377-8731-dd7b670fbe8f
+      - name: Terraform dynamic configuration
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/373fdc9f-3c4f-437a-920f-9de5512dd0ed
+      - name: Terraform Enterprise Awareness
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/375468ad-f1cf-4289-9bda-dcf93e095124
+      - name: Terraform Modules
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/8c116f15-867a-4c99-b186-9924587e7e72
+      - name: Terraform Providers
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/156800f8-4c77-4c9e-b082-ee9e78767560
+      - name: Terraform Purpose
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/28487fc0-0485-4898-b904-f52fcfad07f5
+      - name: Terraform resource lifecycle
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/2e56b61d-1ba6-4aff-9bb5-9e25d41414a8
+      - name: Terraform State
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/414b1b54-96b6-400f-a57b-d7e07c82eb6d
+      - name: Terraform Workflow
+        level: Certification
+        date: ''
+        status: Active
+        source: Credly
+        url: https://www.credly.com/badges/2aea53a3-cc5c-47e2-b913-53de76f10ce3
 legacy:
-  - name: "MCSE: Cloud Platform and Infrastructure"
-    date: "Aug 2017"
-  - name: "MCSA: Cloud Platform"
-    date: "Oct 2017"
-  - name: "MCSE: Productivity Charter Member"
-    date: "Sep 2016"
-  - name: "MCSE: SharePoint"
-    date: "Jul 2014"
-  - name: "MCSA: Windows Server 2012"
-    date: "Jul 2014"
-  - name: "MCP: Server Virtualisation with Hyper-V & System Center"
-    date: "Mar 2014"
-  - name: "Microsoft Certified Professional"
-    date: "Oct 2013"
-  - name: "MCSA: Windows Server 2008"
-    date: "Apr 2012"
-  - name: "MCITP: Enterprise Administrator on Windows Server 2008"
-    date: "Jan 2011"
-  - name: "MCTS: Windows Server 2008 (Network, AD & Applications)"
-    date: "Dec 2009"
-  - name: "MCAD: Microsoft .NET"
-    date: "Jun 2007"
-  - name: "AWS Certified Solutions Architect — Associate"
-    date: ""
-    status: "Expired"
-  - name: "AWS Certified Cloud Practitioner"
-    date: ""
-    status: "Expired"
+  - name: 'MCSE: Cloud Platform and Infrastructure'
+    date: Aug 2017
+  - name: 'MCSA: Cloud Platform'
+    date: Oct 2017
+  - name: 'MCSE: Productivity Charter Member'
+    date: Sep 2016
+  - name: 'MCSE: SharePoint'
+    date: Jul 2014
+  - name: 'MCSA: Windows Server 2012'
+    date: Jul 2014
+  - name: 'MCP: Server Virtualisation with Hyper-V & System Center'
+    date: Mar 2014
+  - name: Microsoft Certified Professional
+    date: Oct 2013
+  - name: 'MCSA: Windows Server 2008'
+    date: Apr 2012
+  - name: 'MCITP: Enterprise Administrator on Windows Server 2008'
+    date: Jan 2011
+  - name: 'MCTS: Windows Server 2008 (Network, AD & Applications)'
+    date: Dec 2009
+  - name: 'MCAD: Microsoft .NET'
+    date: Jun 2007
+  - name: AWS Certified Solutions Architect — Associate
+    date: ''
+    status: Expired
+  - name: AWS Certified Cloud Practitioner
+    date: ''
+    status: Expired
+  - name: 'Microsoft Certified: Azure for SAP Workloads Specialty'
+    date: Nov 2022
+    status: Expired
+    source: Microsoft Learn
+    url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+  - name: 'Microsoft Certified: Azure Solutions Architect Expert (Legacy)'
+    date: Nov 2019
+    status: Expired
+    source: Microsoft Learn
+    url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+  - name: 'Microsoft Certified: Azure Administrator Associate (Legacy)'
+    date: May 2019
+    status: Expired
+    source: Microsoft Learn
+    url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+  - name: 'Microsoft Certified Systems Administrator: Messaging on Windows Server 2003'
+    date: Jul 2009
+    status: Retired
+    source: Microsoft Learn
+    url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+  - name: 'Microsoft Certified Systems Administrator: Windows Server 2003'
+    date: Jul 2009
+    status: Retired
+    source: Microsoft Learn
+    url: https://learn.microsoft.com/api/profiles/transcript/share/71rywhwqmgnym3r?locale=en-gb
+  - name: 'Pass Exam AI-900: Microsoft Azure AI Fundamentals'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/ai-900
+  - name: 'Microsoft Certified: Power Platform Fundamentals'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://www.credly.com/org/microsoft-certification/badge/microsoft-certified-power-platform-fundamentals
+  - name: 'Pass Exam DP-900: Azure Data Fundamentals'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/dp-900
+  - name: Azure Database Administrator
+    date: ''
+    status: Active
+    source: Credly
+    url: https://www.credly.com/badges/88a6ba43-498c-4286-a5d6-cb7e358ebb2e
+  - name: Azure Data Engineer
+    date: ''
+    status: Active
+    source: Credly
+    url: https://www.credly.com/badges/ff428efe-ff57-4929-a0c3-f85afcae6988
+  - name: 'Pass Exam AZ-900: Microsoft Azure Fundamentals'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-900
+  - name: 'Pass Exam MS-900: Microsoft 365 Fundamentals'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/ms-900
+  - name: '- Exam AZ-104: Microsoft Azure Administrator'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-104
+  - name: '- Exam AZ-103: Microsoft Azure Administrator (*Exam now retired)'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-103
+  - name: '- Exam AZ-102: Microsoft Azure Administrator Certification Transition (*Exam now retired)'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/en-us/learn/certifications/exams/az-102
+  - name: Azure Administrator
+    date: ''
+    status: Active
+    source: Credly
+    url: https://www.credly.com/badges/6720d529-d798-4291-a2e5-a9f9a3b95ff4
+  - name: '- Exam AZ-304: Microsoft Azure Architect Design (*Exam now retired.)'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-304
+  - name: '- Exam AZ-303: Microsoft Azure Architect Technologies (*Exam now retired.)'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-303
+  - name: '- Exam 535: Architecting Microsoft Azure Solutions (*Exam now retired.)'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://www.credly.com/badges/d93183ff-79a3-4e1c-8fe5-ae1a429cdd92
+  - name: '- Exam AZ-102: Microsoft Azure Administrator Certification Transition'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-102
+  - name: '- Exam AZ-301: Microsoft Azure Architect Design (*Exam now retired.)'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-301
+  - name: '- Exam AZ-300: Microsoft Azure Architect Technologies (*Exam now retired.)'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/az-300
+  - name: Azure Security Engineer
+    date: ''
+    status: Active
+    source: Credly
+    url: https://www.credly.com/badges/f03beb24-f206-4e6f-a8e2-1a9152448d47
+  - name: '- Exam SC-100: Microsoft Cybersecurity Architect'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/exams/sc-100
+  - name: 'Microsoft Certified: Security Operations Analyst Associate'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/security-operations-analyst/
+  - name: 'Microsoft 365 Certified: Security Administrator Associate'
+    date: ''
+    status: Active
+    source: Credly
+    url: https://docs.microsoft.com/learn/certifications/m365-security-administrator/
+  - name: 'HashiCorp Certified: Terraform Associate (003)'
+    date: Aug 2023
+    status: Active
+    source: Credly
+    url: https://www.credly.com/org/hashicorp/badge/hashicorp-certified-terraform-associate-003
