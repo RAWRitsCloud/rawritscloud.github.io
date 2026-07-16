@@ -820,7 +820,7 @@ async function main() {
       yaml.dump(output, {
         lineWidth: 120,
         noRefs: true,
-        quotingType: '"',
+        quoteStyle: 'double',
         forceQuotes: true,
       }),
       'utf8',
