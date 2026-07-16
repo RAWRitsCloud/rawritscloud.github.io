@@ -821,7 +821,7 @@ async function main() {
         lineWidth: 120,
         noRefs: true,
         quotingType: '"',
-        forceQuotes: false,
+        forceQuotes: true,
       }),
       'utf8',
     );
