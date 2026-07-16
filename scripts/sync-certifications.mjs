@@ -18,6 +18,7 @@ const MAX_CREDLY_DETAIL_PAGES = 100;
 const EXCLUDED_BADGE_PATTERNS = [
   /^Exam Contributor:/i,
   /^Alpha Tester:/i,
+  /^\s*-?\s*(?:Pass\s+)?Exam\b/i,
 ];
 
 const clean = (value = '') => String(value).replace(/\s+/g, ' ').trim();
