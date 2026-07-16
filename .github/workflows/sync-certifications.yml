@@ -3,7 +3,6 @@ name: Sync certifications
 on:
   workflow_dispatch:
   schedule:
-    # Every Monday at 06:15 UTC
     - cron: "15 6 * * 1"
 
 permissions:
@@ -27,6 +26,12 @@ jobs:
         with:
           node-version: 22
 
+      - name: Check scraper syntax
+        run: node --check scripts/sync-certifications.mjs
+
+      - name: Run scraper self-test
+        run: node scripts/sync-certifications.mjs --self-test
+
       - name: Install scraper dependencies
         run: |
           npm install \
@@ -41,7 +46,7 @@ jobs:
       - name: Scrape Microsoft Learn and Credly
         run: node scripts/sync-certifications.mjs
 
-      - name: Upload screenshots when scraping fails
+      - name: Upload scraper diagnostics on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -56,21 +61,13 @@ jobs:
           branch: automation/sync-certifications
           delete-branch: true
           draft: true
-
           commit-message: Update certifications from public transcripts
           title: Update certifications
           body: |
-            Automated certification refresh.
+            Automated certification refresh from Microsoft Learn and Credly.
 
-            Sources:
-            - Microsoft Learn public transcript
-            - Credly public badge profile
-
-            Microsoft Learn is preferred for current Microsoft
-            certifications. Credly supplies HashiCorp and historical
-            Microsoft digital badges.
-
-            Manual legacy entries have been preserved.
-
+            Microsoft Learn is preferred for current Microsoft certifications.
+            Credly supplies HashiCorp and historical Microsoft digital badges.
+            Manual legacy entries are preserved.
           add-paths: |
             _data/certifications.yml
