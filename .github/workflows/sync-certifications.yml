@@ -1,0 +1,76 @@
+name: Sync certifications
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Monday at 06:15 UTC
+    - cron: "15 6 * * 1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-certifications:
+    name: Scrape certification transcripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Install scraper dependencies
+        run: |
+          npm install \
+            --no-save \
+            --package-lock=false \
+            playwright \
+            js-yaml
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Scrape Microsoft Learn and Credly
+        run: node scripts/sync-certifications.mjs
+
+      - name: Upload screenshots when scraping fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: certification-sync-debug
+          path: artifacts/cert-sync/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Create certification update pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: automation/sync-certifications
+          delete-branch: true
+          draft: true
+
+          commit-message: Update certifications from public transcripts
+          title: Update certifications
+          body: |
+            Automated certification refresh.
+
+            Sources:
+            - Microsoft Learn public transcript
+            - Credly public badge profile
+
+            Microsoft Learn is preferred for current Microsoft
+            certifications. Credly supplies HashiCorp and historical
+            Microsoft digital badges.
+
+            Manual legacy entries have been preserved.
+
+          add-paths: |
+            _data/certifications.yml
