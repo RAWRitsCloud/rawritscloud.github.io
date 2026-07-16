@@ -1,6 +1,9 @@
 name: Sync certifications
 
 on:
+  push:
+      paths:
+        - "scripts/sync-certifications.mjs"
   workflow_dispatch:
   schedule:
     - cron: "15 6 * * 1"
