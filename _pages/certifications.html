@@ -11,40 +11,140 @@ permalink: /certifications
   <div class="page-header">
     <h1>Certifications</h1>
     <p>
-      Active Microsoft certifications + HashiCorp. Also on
-      <a href="https://www.credly.com/users/james.murray-ferris/badges" target="_blank" rel="noopener">Credly</a>
-      and <a href="https://learn.microsoft.com/en-us/users/rawritscloud/transcript" target="_blank" rel="noopener">Microsoft Learn</a>.
+      Active Microsoft and HashiCorp certifications. Verified through
+      <a
+        href="https://www.credly.com/users/james.murray-ferris/badges/credly"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Credly</a>
+      and
+      <a
+        href="https://learn.microsoft.com/en-gb/users/rawritscloud/transcript/71rywhwqmgnym3r?tab=credentials-tab"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Microsoft Learn</a>.
     </p>
   </div>
 
   {% for section in certs.sections %}
-  <p class="cert-category-title">{{ section.title }}</p>
-  <div class="cert-grid-full">
-    {% for cert in section.certs %}
-    <div class="cert-item-full">
-      <img src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}" alt="{{ cert.name }}">
-      <div class="cert-name">{{ cert.name }}</div>
-      <div class="cert-level">{{ cert.level }}</div>
-      <div class="cert-date">{{ cert.date }}</div>
+    <p class="cert-category-title">{{ section.title }}</p>
+
+    <div class="cert-grid-full">
+      {% for cert in section.certs %}
+        <div class="cert-item-full">
+
+          {% if cert.url %}
+            <a
+              href="{{ cert.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View {{ cert.name }} credential"
+            >
+          {% endif %}
+
+          {% if cert.image %}
+            <img
+              src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}"
+              alt="{{ cert.name }}"
+              loading="lazy"
+            >
+          {% elsif cert.image_url %}
+            <img
+              src="{{ cert.image_url }}"
+              alt="{{ cert.name }}"
+              loading="lazy"
+            >
+          {% endif %}
+
+          {% if cert.url %}
+            </a>
+          {% endif %}
+
+          <div class="cert-name">
+            {% if cert.url %}
+              <a
+                href="{{ cert.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ cert.name }}
+              </a>
+            {% else %}
+              {{ cert.name }}
+            {% endif %}
+          </div>
+
+          <div class="cert-level">
+            {{ cert.level }}
+          </div>
+
+          <div class="cert-date">
+            {% if cert.date and cert.date != "" %}
+              Earned {{ cert.date }}
+            {% endif %}
+
+            {% if cert.expires and cert.expires != "" %}
+              <br>
+              Expires {{ cert.expires }}
+            {% endif %}
+          </div>
+
+        </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
   {% endfor %}
 
-  <p class="cert-category-title" style="margin-top:3rem;">Legacy &amp; Historical</p>
-  <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;">
-    Older certifications earned before the digital badge era — no longer active but part of the journey.
+  <p
+    class="cert-category-title"
+    style="margin-top:3rem;"
+  >
+    Legacy &amp; Historical
+  </p>
+
+  <p
+    style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;"
+  >
+    Older certifications that are retired, expired or no longer part of
+    Microsoft's current credential programme.
   </p>
 
   <div class="cert-legacy-list">
     {% for cert in certs.legacy %}
-    <div class="cert-legacy-item{% unless forloop.last %} cert-legacy-item--bordered{% endunless %}">
-      <div class="cert-legacy-name">{{ cert.name }}</div>
-      <div class="cert-legacy-meta">
-        <span class="cert-legacy-date">{% if cert.date != "" %}{{ cert.date }}{% else %}—{% endif %}</span>
-        <span class="cert-legacy-status">{% if cert.status %}{{ cert.status }}{% else %}Retired{% endif %}</span>
+      <div class="cert-legacy-item{% unless forloop.last %} cert-legacy-item--bordered{% endunless %}">
+
+        <div class="cert-legacy-name">
+          {% if cert.url %}
+            <a
+              href="{{ cert.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ cert.name }}
+            </a>
+          {% else %}
+            {{ cert.name }}
+          {% endif %}
+        </div>
+
+        <div class="cert-legacy-meta">
+          <span class="cert-legacy-date">
+            {% if cert.date and cert.date != "" %}
+              {{ cert.date }}
+            {% else %}
+              —
+            {% endif %}
+          </span>
+
+          <span class="cert-legacy-status">
+            {% if cert.status %}
+              {{ cert.status }}
+            {% else %}
+              Retired
+            {% endif %}
+          </span>
+        </div>
+
       </div>
-    </div>
     {% endfor %}
   </div>
 
