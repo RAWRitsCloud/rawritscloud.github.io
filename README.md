@@ -1,6 +1,6 @@
 # RAWRitsCloud
 
-![RAWRitsCloud logo](assets/images/logo.png)
+![RAWRitsCloud logo](assets/images/logo.png = 250x)
 
 Practical articles about Microsoft Azure, Terraform, cloud automation and cost optimisation.
 
