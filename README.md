@@ -1,7 +1,5 @@
 # RAWRitsCloud
 
-![RAWRitsCloud logo](assets/images/logo.png = 250x)
-
 Practical articles about Microsoft Azure, Terraform, cloud automation and cost optimisation.
 
 [Visit RAWRitsCloud](https://www.rawritscloud.com) · [Browse articles](https://www.rawritscloud.com/articles) · [View certifications](https://www.rawritscloud.com/certifications)
