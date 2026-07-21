@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Azure Bastion: Is It Worth It?"
-date: 2026-07-24 00:00:00 +0000
+date: 2026-07-31 00:00:00 +0000
 categories: [Azure]
 tags: [Azure Bastion, Azure Networking, Azure Virtual Machines, Terraform, Security]
 author: james

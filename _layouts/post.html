@@ -209,3 +209,22 @@ layout: default
     });
   });
 </script>
+
+<!-- Mermaid client-side rendering for fenced mermaid blocks -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre > code.language-mermaid, code.language-mermaid').forEach(function(block) {
+      var pre = block.parentElement.tagName.toLowerCase() === 'pre' ? block.parentElement : block;
+      var div = document.createElement('div');
+      div.className = 'mermaid';
+      div.textContent = block.textContent;
+      pre.replaceWith(div);
+    });
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: true });
+    } else {
+      console.warn('Mermaid failed to load.');
+    }
+  });
+</script>
