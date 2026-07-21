@@ -48,8 +48,8 @@ flowchart TB
   Variables[Variables] --> TerraformConfig[Terraform Configuration]
   TerraformConfig --> Count[count]
   TerraformConfig --> ForEach[for_each]
-  Count --> Index[Index Number<br>(0,1,2,3...)]
-  ForEach --> NamedKey[Named Key<br>(dev, prod)]
+  Count --> Index[Index Number - 0-3]
+  ForEach --> NamedKey[Named Key - dev prod]
   Index --> State1[Terraform State]
   NamedKey --> State2[Terraform State]
   State1 --> AzureResources[Azure Resources]
@@ -257,14 +257,14 @@ flowchart TB
     A1[Index 1 → Test]
     A2[Index 2 → Prod]
     A1 -. Delete Test .-> A2_after[Index 1 → Prod]
-    A2_after --> Replace[Terraform: Destroy Prod\nRecreate Prod]
+    A2_after --> Replace[Terraform: Destroy Prod - Recreate Prod]
   end
 
   subgraph ForEachExample[Using for_each]
     Fdev[dev → Dev]
     Ftest[test → Test]
     Fprod[prod → Prod]
-    Ftest -. Delete test .-> Fprod_after[dev → Dev\nprod → Prod]
+    Ftest -. Delete test .-> Fprod_after[dev → Dev / prod → Prod]
     Fprod_after --> Replace2[Terraform: Destroy Test only]
   end
 ```
@@ -275,9 +275,9 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-  Changes[Resource list changes] --> Identify[Is resource identified by index or by key?]
-  Identify --> IndexNode[Index (count)]
-  Identify --> KeyNode[Key (for_each)]
+  Changes[Resource list changes] --> Identify[Is resource identified by index or key]
+  Identify --> IndexNode[Index - count]
+  Identify --> KeyNode[Key - for_each]
   IndexNode --> Renumber[Resources renumber]
   KeyNode --> Identity[Resource identity stays]
   Renumber --> MoreChanges[More changes]

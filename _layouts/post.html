@@ -214,15 +214,38 @@ layout: default
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('pre > code.language-mermaid, code.language-mermaid').forEach(function(block) {
+    document.querySelectorAll('pre > code.language-mermaid, code.language-mermaid').forEach(function(block, idx) {
       var pre = block.parentElement.tagName.toLowerCase() === 'pre' ? block.parentElement : block;
       var div = document.createElement('div');
       div.className = 'mermaid';
-      div.textContent = block.textContent;
-      pre.replaceWith(div);
+      // Decode innerHTML then extract text to preserve line breaks reliably
+      var _tmp = document.createElement('div');
+      _tmp.innerHTML = block.innerHTML;
+      var mermaidSource = _tmp.innerText || _tmp.textContent || block.textContent;
+      div.textContent = mermaidSource;
+
+      // Replace the original code block with the Mermaid div
+      pre.parentNode.insertBefore(div, pre);
+      pre.remove();
     });
     if (window.mermaid) {
-      mermaid.initialize({ startOnLoad: true });
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'dark',
+        themeVariables: {
+          primaryColor: '#21262d',
+          secondaryColor: '#161b22',
+          borderColor: '#30363d',
+          lineColor: '#8b949e',
+          textColor: '#e6edf3',
+          clusterBkg: '#161b22',
+          clusterBorder: '#8b949e',
+          clusterTextColor: '#e6edf3',
+          flowchartNodeBkg: '#21262d',
+          flowchartNodeBorder: '#8b949e',
+          flowchartNodeTextColor: '#e6edf3'
+        }
+      });
     } else {
       console.warn('Mermaid failed to load.');
     }
