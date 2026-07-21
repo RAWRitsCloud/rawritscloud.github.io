@@ -379,38 +379,13 @@ There's a good chance that'll be you.
 
 The relationship between variables, locals and outputs is actually quite simple.
 
-```text
-                    Module Consumer
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │    Variables    │
-                  │  Public Inputs  │
-                  └─────────────────┘
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │     Locals      │
-                  │ Internal Logic  │
-                  │ Naming          │
-                  │ Tags            │
-                  │ Defaults        │
-                  │ Transformations │
-                  └─────────────────┘
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │    Resources    │
-                  └─────────────────┘
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │     Outputs     │
-                  │ Public Results  │
-                  └─────────────────┘
-                           │
-                           ▼
-                    Calling Module
+```mermaid
+flowchart TB
+  ModuleConsumer[Module Consumer] --> Variables[Variables\nPublic Inputs]
+  Variables --> Locals[Locals\nInternal Logic\nNaming\nTags\nDefaults\nTransformations]
+  Locals --> Resources[Resources]
+  Resources --> Outputs[Outputs\nPublic Results]
+  Outputs --> CallingModule[Calling Module]
 ```
 
 Once you start thinking about modules this way, Terraform becomes much easier to structure.

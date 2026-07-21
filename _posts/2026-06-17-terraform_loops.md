@@ -43,26 +43,17 @@ That is where choosing the right iteration method becomes important.
 ---
 
 # High-Level Architecture
-
-```text
-             Variables
-                 │
-                 ▼
-        Terraform Configuration
-                 │
-        ┌────────┴────────┐
-        │                 │
-      count            for_each
-        │                 │
-    Index Number      Named Key
-   (0,1,2,3...)     ("dev","prod")
-        │                 │
-        ▼                 ▼
- Terraform State     Terraform State
-        │                 │
-        └────────┬────────┘
-                 ▼
-         Azure Resources
+```mermaid
+flowchart TB
+  Variables[Variables] --> TerraformConfig[Terraform Configuration]
+  TerraformConfig --> Count[count]
+  TerraformConfig --> ForEach[for_each]
+  Count --> Index[Index Number\n(0,1,2,3...)]
+  ForEach --> NamedKey[Named Key\n("dev","prod")]
+  Index --> State1[Terraform State]
+  NamedKey --> State2[Terraform State]
+  State1 --> AzureResources[Azure Resources]
+  State2 --> AzureResources
 ```
 
 ---
@@ -259,59 +250,38 @@ Your Terraform state remains predictable, which is exactly what you want when se
 
 ## Before vs After
 
-```text
-Using count
+```mermaid
+flowchart TB
+  subgraph CountExample[Using count]
+    A0[Index 0 → Dev]
+    A1[Index 1 → Test]
+    A2[Index 2 → Prod]
+    A1 -. Delete Test .-> A2_after[Index 1 → Prod]
+    A2_after --> Replace[Terraform: Destroy Prod\nRecreate Prod]
+  end
 
-Index 0 → Dev
-Index 1 → Test
-Index 2 → Prod
-
-Delete Test
-
-Index 0 → Dev
-Index 1 → Prod
-
-Terraform:
-Destroy Prod
-Recreate Prod
-
-──────────────────────────────
-
-Using for_each
-
-dev  → Dev
-test → Test
-prod → Prod
-
-Delete test
-
-dev  → Dev
-prod → Prod
-
-Terraform:
-Destroy Test only
+  subgraph ForEachExample[Using for_each]
+    Fdev[dev → Dev]
+    Ftest[test → Test]
+    Fprod[prod → Prod]
+    Ftest -. Delete test .-> Fprod_after[dev → Dev\nprod → Prod]
+    Fprod_after --> Replace2[Terraform: Destroy Test only]
+  end
 ```
 
 ---
 
 ## Process Flow
 
-```text
-Resource list changes
-          │
-          ▼
- Is resource identified
-by index or by key?
-          │
-   ┌──────┴───────┐
-   │              │
- Index          Key
-(count)     (for_each)
-   │              │
-Resources      Resource
-renumber      identity stays
-   │              │
-More changes   Minimal changes
+```mermaid
+flowchart TB
+  Changes[Resource list changes] --> Identify[Is resource identified by index or by key?]
+  Identify --> IndexNode[Index (count)]
+  Identify --> KeyNode[Key (for_each)]
+  IndexNode --> Renumber[Resources renumber]
+  KeyNode --> Identity[Resource identity stays]
+  Renumber --> MoreChanges[More changes]
+  Identity --> MinimalChanges[Minimal changes]
 ```
 
 ---

@@ -99,14 +99,11 @@ That scope can be:
 
 The hierarchy looks like this:
 
-```text
-Policy Definition
-        ↓
-    Initiative
-        ↓
-    Assignment
-        ↓
-      Scope
+```mermaid
+flowchart TB
+  A[Policy Definition] --> B[Initiative]
+  B --> C[Assignment]
+  C --> D[Scope]
 ```
 
 In practice, most organisations assign initiatives at Management Group level and inherit them downwards.

@@ -26,40 +26,16 @@ In this article we'll look at what data sources actually are, when to use them, 
 
 # High-Level Architecture
 
-```text
-                   Azure Subscription
-+------------------------------------------------+
+```mermaid
+flowchart TB
+  subgraph AzureSubscription[Azure Subscription]
+    direction TB
+    ResourceGroup[Resource Group] --> VirtualNetwork[Virtual Network]
+    VirtualNetwork --> KeyVault[Key Vault]
+  end
 
- Existing Resources
-
- ┌─────────────┐
- │ Resource    │
- │ Group       │
- └─────┬───────┘
-       │
- ┌─────▼───────┐
- │ Virtual     │
- │ Network     │
- └─────┬───────┘
-       │
- ┌─────▼────────┐
- │ Key Vault    │
- └──────────────┘
-
-          ▲
-          │ Read Only
-          │
-
-      Terraform
-      Data Sources
-
-          │
-
-          ▼
-
- New Terraform Resources
- consume existing IDs,
- names and properties
+  TerraformData[Terraform Data Sources] --> NewResources[New Terraform Resources\nconsume existing IDs, names and properties]
+  ResourceGroup --> TerraformData
 ```
 
 ---
@@ -272,41 +248,16 @@ If Azure can't find the resource, planning fails before anything is deployed.
 
 That's usually a good thing because it tells you immediately that something isn't configured correctly.
 
+
 ---
 
-# Before vs After
+## Before vs After
 
-```text
-Before
-
-Variable
-  │
-  ▼
-
-Hardcoded Resource ID
-
-/subscriptions/...
-/resourceGroups/...
-
-Problems
-
-✖ Easy to mistype
-✖ Difficult to reuse
-✖ Breaks between environments
-
-
-After
-
-Terraform Data Source
-        │
-        ▼
-
-Automatically discover
-existing infrastructure
-
-✔ Reusable
-✔ Cleaner code
-✔ Environment independent
+```mermaid
+flowchart LR
+  Before[Before]\n --> Hardcoded[Hardcoded Resource ID\n/subscriptions/...\n/resourceGroups/...]\n  Hardcoded --> Problems[Problems\n✖ Easy to mistype\n✖ Difficult to reuse\n✖ Breaks between environments]
+  
+  After[After] --> DataSource[Terraform Data Source]\n  DataSource --> Discover[Automatically discover existing infrastructure\n✔ Reusable\n✔ Cleaner code\n✔ Environment independent]
 ```
 
 ---
