@@ -381,10 +381,10 @@ The relationship between variables, locals and outputs is actually quite simple.
 
 ```mermaid
 flowchart TB
-  ModuleConsumer[Module Consumer] --> Variables[Variables\nPublic Inputs]
-  Variables --> Locals[Locals\nInternal Logic\nNaming\nTags\nDefaults\nTransformations]
+  ModuleConsumer[Module Consumer] --> Variables[Variables<br>Public Inputs]
+  Variables --> Locals[Locals<br>Internal Logic<br>Naming<br>Tags<br>Defaults<br>Transformations]
   Locals --> Resources[Resources]
-  Resources --> Outputs[Outputs\nPublic Results]
+  Resources --> Outputs[Outputs<br>Public Results]
   Outputs --> CallingModule[Calling Module]
 ```
 

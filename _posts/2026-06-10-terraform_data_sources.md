@@ -34,7 +34,7 @@ flowchart TB
     VirtualNetwork --> KeyVault[Key Vault]
   end
 
-  TerraformData[Terraform Data Sources] --> NewResources[New Terraform Resources\nconsume existing IDs, names and properties]
+  TerraformData[Terraform Data Sources] --> NewResources[New Terraform Resources<br>consume existing IDs, names and properties]
   ResourceGroup --> TerraformData
 ```
 
@@ -255,9 +255,11 @@ That's usually a good thing because it tells you immediately that something isn'
 
 ```mermaid
 flowchart LR
-  Before[Before]\n --> Hardcoded[Hardcoded Resource ID\n/subscriptions/...\n/resourceGroups/...]\n  Hardcoded --> Problems[Problems\n✖ Easy to mistype\n✖ Difficult to reuse\n✖ Breaks between environments]
-  
-  After[After] --> DataSource[Terraform Data Source]\n  DataSource --> Discover[Automatically discover existing infrastructure\n✔ Reusable\n✔ Cleaner code\n✔ Environment independent]
+  Before[Before] --> Hardcoded[Hardcoded Resource ID<br>/subscriptions/...<br>/resourceGroups/...]
+  Hardcoded --> Problems[Problems<br>✖ Easy to mistype<br>✖ Difficult to reuse<br>✖ Breaks between environments]
+
+  After[After] --> DataSource[Terraform Data Source]
+  DataSource --> Discover[Automatically discover existing infrastructure<br>✔ Reusable<br>✔ Cleaner code<br>✔ Environment independent]
 ```
 
 ---
