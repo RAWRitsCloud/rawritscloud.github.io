@@ -9,33 +9,127 @@ permalink: /planetzoo
     <h1>Planet Zoo</h1>
   </div>
 
-  <nav class="page-subnav" aria-label="Planet Zoo sections">
-    <span class="page-subnav-title">Jump to</span>
-    <ul class="page-subnav-list">
-      <li><a href="#oceania-zoo">Oceania Zoo</a></li>
-      <li><a href="#tropical-zoo">Tropical Zoo</a></li>
-    </ul>
-  </nav>
-
   <section class="planetzoo-section" id="oceania-zoo">
-    <h2>Oceania Zoo</h2>
-    <img src="/assets/images/zoo/Screenshot 2026-07-22 185701.png" alt="Planet Zoo" width="100%">
-    <h3>Oceania Themed Staff Village</h3>
-    <img src="/assets/images/zoo/Screenshot 2026-07-22 185718.png" alt="Planet Zoo" width="100%">
-    <h3>Crocodile Habitat</h3>
-    <img src="/assets/images/zoo/Screenshot 2026-07-22 185732.png" alt="Planet Zoo" width="100%">
-    <h3>Emu, Platypus and Cassowary Habitats</h3>
-    <img src="/assets/images/zoo/Screenshot 2026-07-22 185751.png" alt="Planet Zoo" width="100%">
-    <h3>My New World Style Staff Village</h3>
-    <img src="/assets/images/zoo/Screenshot 2026-07-22 185816.png" alt="Planet Zoo" width="100%">
+    <div class="planetzoo-section-header">
+      <h2>Oceania Zoo</h2>
+    </div>
+    <div class="planetzoo-gallery">
+      <a href="#" class="planetzoo-thumb" data-bs-toggle="modal" data-bs-target="#planetzooLightbox" data-img="/assets/images/zoo/Screenshot 2026-07-22 185701.png" data-title="Oceania Zoo" data-caption="Overview of the Oceania Zoo.">
+        <img src="/assets/images/zoo/Screenshot 2026-07-22 185701.png" alt="Oceania Zoo thumbnail">
+        <span>Oceania Zoo</span>
+      </a>
+      <a href="#" class="planetzoo-thumb" data-bs-toggle="modal" data-bs-target="#planetzooLightbox" data-img="/assets/images/zoo/Screenshot 2026-07-22 185718.png" data-title="Oceania Themed Staff Village" data-caption="Oceania-themed staff village.">
+        <img src="/assets/images/zoo/Screenshot 2026-07-22 185718.png" alt="Oceania Themed Staff Village thumbnail">
+        <span>Staff Village</span>
+      </a>
+      <a href="#" class="planetzoo-thumb" data-bs-toggle="modal" data-bs-target="#planetzooLightbox" data-img="/assets/images/zoo/Screenshot 2026-07-22 185732.png" data-title="Crocodile Habitat" data-caption="Crocodile habitat with water features.">
+        <img src="/assets/images/zoo/Screenshot 2026-07-22 185732.png" alt="Crocodile Habitat thumbnail">
+        <span>Crocodile Habitat</span>
+      </a>
+      <a href="#" class="planetzoo-thumb" data-bs-toggle="modal" data-bs-target="#planetzooLightbox" data-img="/assets/images/zoo/Screenshot 2026-07-22 185751.png" data-title="Emu, Platypus and Cassowary Habitats" data-caption="Emu, platypus and cassowary habitats.">
+        <img src="/assets/images/zoo/Screenshot 2026-07-22 185751.png" alt="Emu, Platypus and Cassowary Habitats thumbnail">
+        <span>Emu & Cassowary</span>
+      </a>
+      <a href="#" class="planetzoo-thumb" data-bs-toggle="modal" data-bs-target="#planetzooLightbox" data-img="/assets/images/zoo/Screenshot 2026-07-22 185816.png" data-title="New World Style Staff Village" data-caption="New World style staff village.">
+        <img src="/assets/images/zoo/Screenshot 2026-07-22 185816.png" alt="New World Style Staff Village thumbnail">
+        <span>New World Village</span>
+      </a>
+    </div>
   </section>
 
   <section class="planetzoo-section" id="tropical-zoo">
-    <h2>Tropical Zoo</h2>
-    <h3>Entrance with Flamingos and Peacock Walkthroughs</h3>
-    <img src="/assets/images/zoo/Screenshot 2026-07-22 190445.png" alt="Planet Zoo" width="100%">
-    <h3>Exhitbits and Sunken Enclosures</h3>
-    <img src="/assets/images/zoo/Screenshot 2026-07-22 190458.png" alt="Planet Zoo" width="100%">
+    <div class="planetzoo-section-header">
+      <h2>Tropical Zoo</h2>
+    </div>
+    <div class="planetzoo-gallery">
+      <a href="#" class="planetzoo-thumb" data-bs-toggle="modal" data-bs-target="#planetzooLightbox" data-img="/assets/images/zoo/Screenshot 2026-07-22 190445.png" data-title="Tropical Zoo Entrance" data-caption="Flamingo and peacock walkthrough entrance.">
+        <img src="/assets/images/zoo/Screenshot 2026-07-22 190445.png" alt="Tropical Zoo Entrance thumbnail">
+        <span>Flamingo Entrance</span>
+      </a>
+      <a href="#" class="planetzoo-thumb" data-bs-toggle="modal" data-bs-target="#planetzooLightbox" data-img="/assets/images/zoo/Screenshot 2026-07-22 190458.png" data-title="Sunken Exhibits" data-caption="Sunken exhibits and walkthroughs.">
+        <img src="/assets/images/zoo/Screenshot 2026-07-22 190458.png" alt="Sunken Exhibits thumbnail">
+        <span>Sunken Exhibits</span>
+      </a>
+    </div>
   </section>
+
+  <div class="modal fade" id="planetzooLightbox" tabindex="-1" aria-labelledby="planetzooLightboxLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white" id="planetzooLightboxLabel"></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0 position-relative">
+          <img src="" class="img-fluid w-100 planetzoo-lightbox-image" alt="">
+          <button type="button" class="planetzoo-lightbox-nav planetzoo-lightbox-prev" aria-label="Previous image">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button type="button" class="planetzoo-lightbox-nav planetzoo-lightbox-next" aria-label="Next image">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <p class="planetzoo-lightbox-caption"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var currentGallery = [];
+      var currentIndex = 0;
+      var modal = document.getElementById('planetzooLightbox');
+      var modalLabel = modal.querySelector('.modal-title');
+      var modalImage = modal.querySelector('.planetzoo-lightbox-image');
+      var modalCaption = modal.querySelector('.planetzoo-lightbox-caption');
+      var prevButton = modal.querySelector('.planetzoo-lightbox-prev');
+      var nextButton = modal.querySelector('.planetzoo-lightbox-next');
+
+      function updateLightbox(index) {
+        currentIndex = index;
+        var thumb = currentGallery[currentIndex];
+        var img = thumb.getAttribute('data-img');
+        var title = thumb.getAttribute('data-title');
+        var caption = thumb.getAttribute('data-caption');
+
+        modalLabel.textContent = title;
+        modalImage.src = img;
+        modalImage.alt = title;
+
+        if (!caption || caption.trim() === '' || caption.trim() === title.trim()) {
+          modalCaption.style.display = 'none';
+          modalCaption.textContent = '';
+        } else {
+          modalCaption.style.display = 'block';
+          modalCaption.textContent = caption;
+        }
+
+        prevButton.style.display = currentGallery.length > 1 ? 'flex' : 'none';
+        nextButton.style.display = currentGallery.length > 1 ? 'flex' : 'none';
+      }
+
+      document.querySelectorAll('.planetzoo-thumb').forEach(function (thumb) {
+        thumb.addEventListener('click', function (event) {
+          event.preventDefault();
+          var gallery = thumb.closest('.planetzoo-gallery');
+          currentGallery = Array.from(gallery.querySelectorAll('.planetzoo-thumb'));
+          currentIndex = currentGallery.indexOf(thumb);
+          updateLightbox(currentIndex);
+        });
+      });
+
+      prevButton.addEventListener('click', function () {
+        if (currentGallery.length > 1) {
+          updateLightbox((currentIndex - 1 + currentGallery.length) % currentGallery.length);
+        }
+      });
+
+      nextButton.addEventListener('click', function () {
+        if (currentGallery.length > 1) {
+          updateLightbox((currentIndex + 1) % currentGallery.length);
+        }
+      });
+    })();
+  </script>
 
 </div>

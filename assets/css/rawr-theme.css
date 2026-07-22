@@ -1481,6 +1481,114 @@ button { font-family: inherit; }
   outline-offset: 2px;
 }
 
+.planetzoo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.planetzoo-thumb {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.planetzoo-thumb:hover,
+.planetzoo-thumb:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
+}
+
+.planetzoo-thumb img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.planetzoo-thumb span {
+  display: block;
+  padding: 0.75rem 0.85rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.planetzoo-section-header p {
+  margin-top: 0.35rem;
+  color: var(--text-secondary);
+  max-width: 48rem;
+}
+
+.planetzoo-lightbox-caption {
+  margin: 0;
+  padding: 1rem 1.25rem 1.5rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: none;
+}
+
+.planetzoo-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.planetzoo-lightbox-prev {
+  left: 12px;
+}
+
+.planetzoo-lightbox-next {
+  right: 12px;
+}
+
+.planetzoo-lightbox-nav:hover,
+.planetzoo-lightbox-nav:focus {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+#planetzooLightbox .modal-content {
+  background: rgba(0, 0, 0, 0.92);
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+#planetzooLightbox .modal-body {
+  background: #000;
+}
+
+#planetzooLightbox .modal-header {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#planetzooLightbox .modal-title {
+  color: #fff;
+}
+
 .planetzoo-section {
   margin-bottom: 3rem;
   padding: 1.25rem 1.5rem;
