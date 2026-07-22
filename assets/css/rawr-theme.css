@@ -1427,9 +1427,10 @@ button { font-family: inherit; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 2rem;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.5rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg-card);
@@ -1441,12 +1442,16 @@ button { font-family: inherit; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
+  flex-shrink: 0;
 }
 
 .page-subnav-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .page-subnav-list li {
@@ -1455,25 +1460,49 @@ button { font-family: inherit; }
 
 .page-subnav-list a {
   font-size: 0.95rem;
-  color: var(--accent-blue);
+  color: var(--text-primary);
   font-weight: 600;
   border: 1px solid transparent;
   border-radius: calc(var(--radius-sm) - 2px);
-  padding: 0.45rem 0.85rem;
-  background: transparent;
+  padding: 0.65rem 1rem;
+  background: rgba(63, 185, 80, 0.08);
   transition: all var(--transition);
 }
 
 .page-subnav-list a:hover,
 .page-subnav-list a:focus {
   color: var(--text-primary);
-  border-color: var(--border);
-  background: var(--bg-secondary);
+  border-color: var(--accent-blue);
+  background: rgba(63, 185, 80, 0.12);
 }
 
 .page-subnav-list a:focus-visible {
   outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
+}
+
+.planetzoo-section {
+  margin-bottom: 3rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+}
+
+.planetzoo-section h2 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  margin-bottom: 1rem;
+}
+
+.planetzoo-section h3 {
+  font-size: 1.15rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.planetzoo-section img {
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
 }
 
 .page-subnav-anchor {
