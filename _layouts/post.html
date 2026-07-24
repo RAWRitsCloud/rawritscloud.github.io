@@ -181,8 +181,36 @@ layout: default
 </div>
 
 <style>
+  .article-hero-banner {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .article-hero-content {
+    padding: 3.5rem 0;
+    position: relative;
+  }
+  .article-hero-content .rawr-container {
+    /* uses existing container styles */
+  }
+  .article-hero-title {
+    margin: 0;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    line-height: 1.1;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+    word-break: break-word;
+  }
+  .article-hero-crumb {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
   @media (max-width: 768px) {
     #toc-mobile { display: block !important; margin-bottom: 1.5rem; }
+    .article-hero-content { padding: 2rem 0; }
+    .article-hero-title { font-size: 1.6rem; }
   }
 </style>
 
