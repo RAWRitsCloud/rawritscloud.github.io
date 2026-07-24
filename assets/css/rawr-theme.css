@@ -1126,9 +1126,7 @@ button { font-family: inherit; }
 .article-hero-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3.5rem;
   align-items: start;
-  padding: 2.5rem 0 3rem;
 }
 
 .article-main,
