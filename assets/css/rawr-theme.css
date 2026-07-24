@@ -1174,6 +1174,7 @@ button { font-family: inherit; }
   line-height: 1.15;
   margin: 0;
   text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  padding-bottom: 25px
 }
 
 @media (max-width: 768px) {
