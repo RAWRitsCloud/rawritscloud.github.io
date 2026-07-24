@@ -1189,7 +1189,7 @@ button { font-family: inherit; }
   }
 }
 
-@media (min-width: 768px) and (max-width: 1180px) and (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 1180px) {
   .article-hero-banner {
     background-position: top;
   }
