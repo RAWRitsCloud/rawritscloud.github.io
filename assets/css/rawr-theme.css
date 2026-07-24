@@ -1179,6 +1179,7 @@ button { font-family: inherit; }
   .article-hero-banner {
     min-height: 220px;
     align-items: flex-end;
+    background-position: top;
   }
   .article-hero-content {
     padding: 1.25rem 1rem;
