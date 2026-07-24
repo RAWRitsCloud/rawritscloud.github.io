@@ -2464,3 +2464,54 @@ button { font-family: inherit; }
   .about-building-grid { grid-template-columns: 1fr; }
   .about-building-card--more { min-height: 110px; }
 }
+
+/* Hero: constrain title to article column while background stays full-width */
+.article-hero-content {
+  padding: 2.5rem 3rem;
+}
+
+.article-hero-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  /* matches .article-layout */
+  gap: 3.5rem;
+  align-items: end;
+  /* keep title toward bottom like before */
+}
+
+.article-hero-left {
+  align-self: end;
+}
+
+.article-hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.article-hero-crumb {
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .article-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .article-hero-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .article-hero-title {
+    font-size: 1.6rem;
+  }
+}
