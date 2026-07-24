@@ -32,9 +32,8 @@ layout: default
 
 <!-- Full-width hero banner -->
 <div class="article-hero-banner" style="background-image: url('{{ site.baseurl }}{{ hero_src }}');">
-  <div class="article-hero-content">
-    <div class="article-hero-inner">
-      <div class="article-hero-left">
+  <div class="rawr-container">
+    <div class="article-hero-layout">
         <div class="article-hero-crumb">
           <a href="{{ site.baseurl }}/articles">Articles</a>
           {% for cat in page.categories %}
@@ -44,7 +43,6 @@ layout: default
         </div>
         <h1 class="article-hero-title">{{ page.title }}</h1>
       </div>
-      <div class="article-hero-right"><!-- intentionally empty; aligns with sidebar --></div>
     </div>
   </div>
 </div>
@@ -138,13 +136,6 @@ layout: default
         </a>
         {% endif %}
       </nav>
-
-      <!-- Comments -->
-      {% if page.comments != false %}
-      <div id="comments" style="margin-top:3rem;">
-        {% include disqus.html %}
-      </div>
-      {% endif %}
 
     </article>
 
