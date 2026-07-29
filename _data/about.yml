@@ -52,10 +52,10 @@ services:
 
 featured_cert_names:
   - "Azure Solutions Architect Expert"
-  - "Azure Administrator Associate"
-  - "Azure Fundamentals"
   - "Cybersecurity Architect Expert"
   - "Terraform Authoring & Operations Professional"
+  - "Azure Fundamentals"
+  - "Azure Administrator Associate"
 
 building:
   intro: "I tend to build things because they sound fun. Some become genuinely useful, some teach me something new, and a few are simply an excuse to see if I can. These are the projects currently occupying my spare time."
