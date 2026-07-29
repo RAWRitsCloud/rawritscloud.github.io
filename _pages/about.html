@@ -101,15 +101,7 @@ permalink: /about
         <a href="{{ site.baseurl }}/certifications" class="about-certs-view-all">View all certifications →</a>
       </div>
       <div class="about-certs-list">
-        {% for cert in about.cert_sidebar %}
-        <div class="about-cert-list-item">
-          <img src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}" alt="{{ cert.name }}">
-          <div class="about-cert-list-info">
-            <div class="about-cert-list-name">{{ cert.name }}</div>
-            <div class="about-cert-list-issuer">{{ cert.issuer }}</div>
-          </div>
-        </div>
-        {% endfor %}
+        {% include about-featured-certs.html variant="sidebar" limit=5 %}
       </div>
       <a href="{{ site.baseurl }}/certifications" class="about-certs-btn">View all certifications →</a>
     </aside>
@@ -182,13 +174,7 @@ permalink: /about
         <a href="{{ site.baseurl }}/certifications" class="about-tablet-certs-view-all">View all certifications →</a>
       </div>
       <div class="about-tablet-certs-grid">
-        {% for cert in about.cert_highlights %}
-        <div class="about-tablet-cert-item">
-          <img src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}" alt="{{ cert.name }}">
-          <div class="about-tablet-cert-name">{{ cert.name }}</div>
-          <div class="about-tablet-cert-issuer">{{ cert.issuer }}</div>
-        </div>
-        {% endfor %}
+        {% include about-featured-certs.html variant="tablet" limit=4 %}
       </div>
 
       {% include building-panel.html %}
@@ -277,13 +263,7 @@ permalink: /about
         <a href="{{ site.baseurl }}/certifications" class="cert-view-all">View all →</a>
       </div>
       <div class="cert-grid">
-        {% for cert in about.cert_highlights %}
-        <div class="cert-item">
-          <img src="{{ site.baseurl }}/assets/images/certs/{{ cert.image }}" alt="{{ cert.name }}">
-          <div class="cert-item-name">{{ cert.name }}</div>
-          <div class="cert-item-issuer">{{ cert.issuer }}</div>
-        </div>
-        {% endfor %}
+        {% include about-featured-certs.html variant="mobile" limit=4 %}
       </div>
     </section>
 

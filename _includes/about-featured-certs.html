@@ -1,0 +1,51 @@
+{% assign cert_limit = include.limit | default: 4 %}
+{% assign cert_variant = include.variant | default: "mobile" %}
+
+{% for featured_cert_name in site.data.about.featured_cert_names limit: cert_limit %}
+  {% assign featured_cert = nil %}
+  {% assign featured_section = nil %}
+
+  {% for section in site.data.certifications.sections %}
+    {% for section_cert in section.certs %}
+      {% if section_cert.name == featured_cert_name %}
+        {% assign featured_cert = section_cert %}
+        {% assign featured_section = section %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if featured_cert %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if featured_cert %}
+    {% if featured_section.title contains "HashiCorp" %}
+      {% assign featured_issuer = "HashiCorp" %}
+    {% else %}
+      {% assign featured_issuer = "Microsoft" %}
+    {% endif %}
+
+    {% if cert_variant == "sidebar" %}
+      <div class="about-cert-list-item">
+        <img src="{{ site.baseurl }}/assets/images/certs/{{ featured_cert.image }}" alt="{{ featured_cert.name }}">
+        <div class="about-cert-list-info">
+          <div class="about-cert-list-name">{{ featured_cert.name }}</div>
+          <div class="about-cert-list-issuer">{{ featured_issuer }}</div>
+        </div>
+      </div>
+    {% elsif cert_variant == "tablet" %}
+      <div class="about-tablet-cert-item">
+        <img src="{{ site.baseurl }}/assets/images/certs/{{ featured_cert.image }}" alt="{{ featured_cert.name }}">
+        <div class="about-tablet-cert-name">{{ featured_cert.name }}</div>
+        <div class="about-tablet-cert-issuer">{{ featured_issuer }}</div>
+      </div>
+    {% else %}
+      <div class="cert-item">
+        <img src="{{ site.baseurl }}/assets/images/certs/{{ featured_cert.image }}" alt="{{ featured_cert.name }}">
+        <div class="cert-item-name">{{ featured_cert.name }}</div>
+        <div class="cert-item-issuer">{{ featured_issuer }}</div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endfor %}
