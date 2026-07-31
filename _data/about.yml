@@ -81,5 +81,5 @@ building:
       image: "our-family-money.png"
       description: "A small, GitHub-backed family expense tracker for expected monthly child costs, payer splits and payment history."
       link_type: "url"
-      link_url: "https://lively-moss-0115bc403.7.azurestaticapps.net"
+      link_url: "https://expenses-demo.rawritscloud.com/"
       link_label: "View Demo"
