@@ -86,7 +86,7 @@ Variables and outputs form your module’s public contract. Changing them can af
 
 Start with strongly typed inputs:
 
-```hcl id="2fs02h"
+```hcl
 variable "storage_account" {
   description = "Configuration for the workload storage account."
 
@@ -124,7 +124,7 @@ Your input should express what the caller wants, not mirror every field in the p
 
 For example, this makes the caller understand your platform design:
 
-```hcl id="dsg4tr"
+```hcl
 module "storage" {
   source  = "app.terraform.io/rawritscloud/storage/azurerm"
   version = "3.2.0"
@@ -172,7 +172,7 @@ A reusable module distributes decisions across your organisation. If the default
 
 A Storage Account module might enforce these baseline controls:
 
-```hcl id="1vjsco"
+```hcl
 resource "azurerm_storage_account" "this" {
   name                     = var.storage_account.name
   resource_group_name      = var.storage_account.resource_group_name
@@ -221,7 +221,7 @@ The sensitive flag reduces accidental display in normal output. It does not prev
 
 Your module should usually accept a Key Vault secret identifier rather than the secret value itself:
 
-```hcl id="ny14yb"
+```hcl
 variable "database_password_secret_id" {
   description = "Resource ID of the Key Vault secret containing the database password."
   type        = string
@@ -239,7 +239,7 @@ Provider configurations belong in the root module. Reusable child modules should
 
 Configure aliases in the root:
 
-```hcl id="gip6vo"
+```hcl
 provider "azurerm" {
   subscription_id = var.workload_subscription_id
 
@@ -256,7 +256,7 @@ provider "azurerm" {
 
 Pass the required provider to the relevant module:
 
-```hcl id="0qt2pi"
+```hcl
 module "private_dns_link" {
   source  = "app.terraform.io/rawritscloud/private-dns-link/azurerm"
   version = "1.4.0"
@@ -274,7 +274,7 @@ This keeps subscription selection visible in the root configuration. The module 
 
 For a module that genuinely needs two AzureRM configurations, declare configuration aliases:
 
-```hcl id="97jjz2"
+```hcl
 terraform {
   required_providers {
     azurerm = {
@@ -299,7 +299,7 @@ It needs documentation, examples, automated tests, release notes and versions. W
 
 I normally use this structure:
 
-```text id="vr45ic"
+```text
 terraform-azurerm-private-storage/
 ├── examples/
 │   ├── basic/
@@ -317,7 +317,7 @@ terraform-azurerm-private-storage/
 
 Terraform’s test framework supports `run` blocks and assertions, allowing you to test module behaviour rather than only checking syntax.
 
-```hcl id="y29b3p"
+```hcl
 mock_provider "azurerm" {}
 
 run "secure_defaults" {
@@ -359,7 +359,7 @@ Renaming a resource changes its Terraform address. Without guidance, Terraform m
 
 Use `moved` blocks when refactoring:
 
-```hcl id="x2mb5g"
+```hcl
 moved {
   from = azurerm_storage_account.storage
   to   = azurerm_storage_account.this
