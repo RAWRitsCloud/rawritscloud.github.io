@@ -18,7 +18,7 @@ When I have led Terraform design across enterprise Azure Landing Zones, the most
 
 This article covers how to choose the right abstraction, design useful inputs and outputs, support multiple Azure environments, apply secure defaults and evolve modules without breaking every workload that consumes them.
 
-```mermaid id="0yfhps"
+```mermaid
 flowchart LR
     A[Platform standards] --> B[Reusable Terraform module]
     B --> C[Development root module]
@@ -62,7 +62,7 @@ Microsoft’s current Azure Landing Zone Terraform approach also uses a more mod
 
 Keep the module tree relatively flat:
 
-```mermaid id="2u4usf"
+```mermaid
 flowchart TD
     A[Root module] --> B[Spoke network module]
     A --> C[Workload identity module]
@@ -376,7 +376,7 @@ Follow semantic versioning:
 
 Pin module versions in production root modules. A registry module without a version constraint is less reuse and more subscription-based suspense.
 
-```mermaid id="k5onwr"
+```mermaid
 flowchart LR
     A[Change proposed] --> B[Format and validate]
     B --> C[Run module tests]
@@ -391,7 +391,7 @@ Before building your own module, check whether an Azure Verified Module already 
 
 You may still need a small wrapper to apply your organisation’s conventions. That is usually easier to maintain than recreating the entire Azure resource module.
 
-```mermaid id="nc61i3"
+```mermaid
 flowchart LR
     subgraph Before
         A1[Copied resource blocks]
