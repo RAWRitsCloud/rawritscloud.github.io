@@ -98,6 +98,13 @@ sections:
         expires: "Nov 2027"
         source: "Credly"
         url: "https://www.credly.com/org/ibm-professional-certification-program/badge/hashicorp-certified-terraform-authoring-and-operati.1"
+      - name: "Terraform Authoring and Operations Advanced"
+        image: "terraform-authoring-and-operations-advanced.png"
+        level: "Certification"
+        date: "Nov 2025"
+        expires: "Nov 2027"
+        source: "Credly"
+        url: "https://www.credly.com/org/ibm-professional-certification-program/badge/hashicorp-certified-terraform-authoring-and-operati.1"
 
 legacy:
   - name: "MCSE: Cloud Platform and Infrastructure"
