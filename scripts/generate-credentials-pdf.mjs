@@ -15,7 +15,7 @@ const FIRST_NAME = 'James';
 const LAST_NAME = 'Murray-Ferris';
 const CREDLY_URL = 'https://www.credly.com/users/james.murray-ferris/badges/credly';
 const MICROSOFT_URL =
-  'https://learn.microsoft.com/en-gb/users/rawritscloud/transcript/71rywhwqmgnym3r?tab=credentials-tab';
+  'https://learn.microsoft.com/en-gb/users/rawritscloud/transcript/71rywhwqmgnym3r';
 
 // Local fallback so the script also runs on a Mac without Playwright's Chromium.
 const LOCAL_BROWSERS = [
@@ -139,7 +139,8 @@ function renderHtml({ active, legacy, updated, qrMicrosoft, qrCredly }) {
 
   footer { margin-top: auto; display: flex; justify-content: flex-end; gap: 7mm; align-items: center; border-top: 0.25mm solid var(--rule); padding-top: 3mm; }
   .link { display: flex; align-items: center; gap: 2.5mm; }
-  .link img { width: 15mm; height: 15mm; }
+  .qr { width: 19mm; height: 19mm; flex: none; }
+  .qr svg { width: 100%; height: 100%; display: block; shape-rendering: crispEdges; }
   .link b { display: block; font-size: 8pt; color: var(--blue); }
   .link span { display: block; font-size: 6.4pt; color: var(--muted); max-width: 33mm; line-height: 1.35; margin-top: 0.5mm; }
   footer .meta { margin-right: auto; font-size: 6.2pt; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
@@ -172,8 +173,8 @@ function renderHtml({ active, legacy, updated, qrMicrosoft, qrCredly }) {
 
   <footer>
     <div class="meta">${escapeHtml(FIRST_NAME)} ${escapeHtml(LAST_NAME)} &nbsp;|&nbsp; Certifications &amp; Credentials<br>Last updated ${escapeHtml(updated)}</div>
-    <div class="link"><img src="${qrMicrosoft}" alt=""><div><b>Microsoft Learn Transcript</b><span>View my full, up-to-date Microsoft certification transcript.</span></div></div>
-    <div class="link"><img src="${qrCredly}" alt=""><div><b>Credly</b><span>View and verify my credentials on Credly.</span></div></div>
+    <div class="link"><div class="qr">${qrMicrosoft}</div><div><b>Microsoft Learn Transcript</b><span>View my full, up-to-date Microsoft certification transcript.</span></div></div>
+    <div class="link"><div class="qr">${qrCredly}</div><div><b>Credly</b><span>View and verify my credentials on Credly.</span></div></div>
   </footer>
 </body></html>`;
 }
@@ -193,13 +194,13 @@ async function main() {
   const data = yaml.load(await fs.readFile(DATA_FILE, 'utf8'));
   const { active, legacy } = buildRows(data);
 
-  const qrOptions = { margin: 0, width: 240, color: { dark: '#0b1b3a', light: '#ffffff' } };
+  const qrOptions = { type: 'svg', errorCorrectionLevel: 'L', margin: 1, color: { dark: '#0b1b3a', light: '#ffffff' } };
   const html = renderHtml({
     active,
     legacy,
     updated: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
-    qrMicrosoft: await QRCode.toDataURL(MICROSOFT_URL, qrOptions),
-    qrCredly: await QRCode.toDataURL(CREDLY_URL, qrOptions),
+    qrMicrosoft: await QRCode.toString(MICROSOFT_URL, qrOptions),
+    qrCredly: await QRCode.toString(CREDLY_URL, qrOptions),
   });
 
   await fs.mkdir(path.dirname(OUT_FILE), { recursive: true });
