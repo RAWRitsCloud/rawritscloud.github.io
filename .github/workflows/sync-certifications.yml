@@ -4,6 +4,7 @@ on:
   push:
       paths:
         - "scripts/sync-certifications.mjs"
+        - "scripts/generate-credentials-pdf.mjs"
   workflow_dispatch:
   schedule:
     - cron: "15 6 * * 1"
@@ -41,13 +42,17 @@ jobs:
             --no-save \
             --package-lock=false \
             playwright \
-            js-yaml
+            js-yaml \
+            qrcode
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
       - name: Scrape Microsoft Learn and Credly
         run: node scripts/sync-certifications.mjs
+
+      - name: Generate credentials PDF
+        run: node scripts/generate-credentials-pdf.mjs
 
       - name: Upload scraper diagnostics on failure
         if: failure()
@@ -74,3 +79,4 @@ jobs:
             Manual legacy entries are preserved.
           add-paths: |
             _data/certifications.yml
+            assets/JamesM-Credentials.pdf
