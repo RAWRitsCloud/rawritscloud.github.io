@@ -13,7 +13,7 @@
 
   --text-primary: #e6edf3;
   --text-secondary: #8b949e;
-  --text-muted: #6e7681;
+  --text-muted: #848d97;
 
   --accent: #3fb950;
   --accent-blue: #58a6ff;
@@ -45,7 +45,7 @@
   --border-subtle: #e8ebef;
   --text-primary: #1f2328;
   --text-secondary: #636c76;
-  --text-muted: #9198a1;
+  --text-muted: #59636e;
   --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.05);
 }
 
@@ -167,12 +167,12 @@ button { font-family: inherit; }
   padding: 0.38rem 1rem 0.38rem 2.25rem;
   font-size: 0.82rem;
   width: 190px;
-  outline: none;
   transition: all var(--transition);
 }
 
 .rawr-search::placeholder { color: var(--text-muted); }
 .rawr-search:focus { border-color: var(--accent-blue); width: 230px; }
+.rawr-search:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
 
 .rawr-search-icon {
   position: absolute;
@@ -2476,4 +2476,43 @@ button { font-family: inherit; }
   .about-building-panel { margin-top: 0; border-top: none; padding-top: 0; }
   .about-building-grid { grid-template-columns: 1fr; }
   .about-building-card--more { min-height: 110px; }
+}
+/* ---------- Keyboard focus ---------- */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- User preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .rawr-card:hover,
+  .btn-primary-rawr:hover,
+  .btn-outline-rawr:hover,
+  .about-building-card:hover,
+  .planetzoo-thumb:hover,
+  .planetzoo-thumb:focus-visible,
+  .article-card:hover .article-card-image img {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .rawr-nav {
+    background: var(--bg-primary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root { --border: #8b949e; --text-muted: #9ea7b1; }
+  [data-theme="light"] { --border: #57606a; --text-muted: #424a53; }
+  .rawr-nav { background: var(--bg-primary); backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
