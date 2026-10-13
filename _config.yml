@@ -1,10 +1,31 @@
 # Site
 name: "RAWRitsCloud"
 title: "RAWRitsCloud"
-description: "A guy blogging cloud!"
-logo: "assets/images/logo.png"
+tagline: "Azure, Terraform and cloud architecture articles"
+description: "Practical Azure, Terraform and cloud architecture articles by James Murray-Ferris, a Cloud Solutions Consultant: landing zones, Azure Policy, infrastructure as code and cost optimisation."
+logo: "/assets/images/logo.png"
 favicon: "assets/images/logo.png"
+url: "https://www.rawritscloud.com"
 baseurl: ""
+lang: en_GB
+locale: en_GB
+author: James Murray-Ferris
+twitter:
+  username: rawritscloud
+social:
+  name: James Murray-Ferris
+  links:
+    - https://www.linkedin.com/in/jrmurray86
+    - https://github.com/rawritscloud
+    - https://bsky.app/profile/rawritscloud.com
+    - https://www.facebook.com/rawritscloud
+    - https://www.instagram.com/rawritscloud
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      image: /assets/images/social_logo.png
 disqus: "rawritscloud"
 include: ["_pages"]
 permalink: /:categories/:year/:month/:day/:title
@@ -62,4 +83,6 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - node_modules/
+  - scripts/
   - vendor/

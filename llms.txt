@@ -1,0 +1,23 @@
+---
+layout: null
+permalink: /llms.txt
+---
+# {{ site.name }}
+
+> {{ site.description }}
+
+Written by James Murray-Ferris, a Cloud Solutions Consultant at BT with nearly a decade of Azure experience. Topics: Azure, Terraform, Azure Policy, landing zones, infrastructure as code, cost optimisation, automation.
+
+## Key pages
+- [Articles]({{ site.url }}/articles/): all blog posts
+- [About]({{ site.url }}/about): who James is
+- [Experience]({{ site.url }}/experience): projects and career
+- [Certifications]({{ site.url }}/certifications): Azure and other credentials
+- [Learning Paths]({{ site.url }}/learning-paths): curated study routes
+- [Uses]({{ site.url }}/uses): tools and setup
+- [RSS feed]({{ site.url }}/feed.xml)
+- [Sitemap]({{ site.url }}/sitemap.xml)
+
+## Articles
+{% for post in site.posts %}- [{{ post.title }}]({{ post.url | prepend: site.url }}): {{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 220 }}
+{% endfor %}
