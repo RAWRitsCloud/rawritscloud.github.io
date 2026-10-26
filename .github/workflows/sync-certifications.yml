@@ -46,7 +46,9 @@ jobs:
             qrcode
 
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+        # No --with-deps: the runner already has Chromium's libraries, and the
+        # extra apt step (fonts, xvfb) took ~10 minutes on a slow mirror.
+        run: npx playwright install chromium
 
       - name: Scrape Microsoft Learn and Credly
         run: node scripts/sync-certifications.mjs
