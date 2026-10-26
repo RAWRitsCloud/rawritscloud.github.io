@@ -81,4 +81,5 @@ jobs:
             Manual legacy entries are preserved.
           add-paths: |
             _data/certifications.yml
+            assets/images/certs/
             assets/JamesM-Credentials.pdf

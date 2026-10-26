@@ -91,7 +91,7 @@ function inferLevel(name) {
   if (/associate/i.test(name)) return 'Associate';
   if (/specialty/i.test(name)) return 'Specialty';
   if (/fundamental/i.test(name)) return 'Fundamental';
-  if (/professional/i.test(name)) return 'Professional';
+  if (/professional|advanced/i.test(name)) return 'Professional';
   return 'Certification';
 }
 

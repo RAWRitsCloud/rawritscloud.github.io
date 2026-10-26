@@ -92,8 +92,8 @@ sections:
   - title: "HashiCorp"
     certs:
       - name: "Terraform Authoring and Operations Advanced"
-        image: "terraform-authoring-and-operations-advanced.png"
-        level: "Certification"
+        image: "hashicorp-terraform-professional.png"
+        level: "Professional"
         date: "Nov 2025"
         expires: "Nov 2027"
         source: "Credly"
