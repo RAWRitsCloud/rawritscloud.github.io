@@ -266,6 +266,18 @@ function extractMicrosoftFromJson(payload, sourceUrl) {
   return deduplicate(found);
 }
 
+// The earned badge's own page is credly.com/badges/<id>. A template's `url`
+// is the catalogue page for the badge type, which is not the user's badge.
+function credlyBadgeUrl(object, id) {
+  const candidate = firstValue(object, ['public_url', 'publicUrl', 'url']);
+
+  if (/^https:\/\/www\.credly\.com\/badges\//i.test(candidate)) {
+    return candidate.replace(/\/public_url$/, '');
+  }
+
+  return id ? `https://www.credly.com/badges/${id}` : CREDLY_URL;
+}
+
 function extractCredlyFromJson(payload) {
   const found = [];
 
@@ -274,6 +286,18 @@ function extractCredlyFromJson(payload) {
       object.badge_template ||
       object.badgeTemplate ||
       object.template;
+
+    // Only earned badges count. Badge templates and issuer objects also have
+    // names, ids and urls, but those point at Credly's catalogue pages.
+    const issuedAt = firstValue(object, [
+      'issued_at',
+      'issuedAt',
+      'issued_at_date',
+      'issue_date',
+      'issueDate',
+    ]);
+
+    if (!template && !issuedAt) return;
 
     const name =
       firstValue(template, ['name', 'title']) ||
@@ -318,9 +342,7 @@ function extractCredlyFromJson(payload) {
       imageUrl:
         firstValue(template, ['image_url', 'imageUrl']) ||
         firstValue(object, ['image_url', 'imageUrl']),
-      url:
-        firstValue(object, ['public_url', 'publicUrl', 'url']) ||
-        (id ? `https://www.credly.com/badges/${id}` : CREDLY_URL),
+      url: credlyBadgeUrl(object, id),
       source: 'Credly',
     });
   });
@@ -1263,6 +1285,30 @@ async function runSelfTest() {
       imageUrl: '',
     },
   ];
+
+  const extracted = extractCredlyFromJson({
+    data: [
+      {
+        id: 'f00d-badge',
+        issued_at: '2025-11-01',
+        badge_template: {
+          id: 'template-id',
+          name: 'Terraform Authoring and Operations Professional',
+          url: 'https://www.credly.com/org/ibm/badge/hashicorp-certified-x.1',
+          issuer: { name: 'HashiCorp' },
+        },
+      },
+    ],
+  });
+
+  if (
+    extracted.length !== 1 ||
+    extracted[0].url !== 'https://www.credly.com/badges/f00d-badge'
+  ) {
+    throw new Error(
+      'Self-test failed: Credly URL was not the earned badge page.',
+    );
+  }
 
   const output = await buildOutput(
     current,
