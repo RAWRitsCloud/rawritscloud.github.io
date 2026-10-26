@@ -201,6 +201,8 @@ function collapseByBadgeUrl(items, knownKeys = new Set()) {
   return result;
 }
 
+const isBadgeUrl = (url = '') => /\/badges?\//i.test(url);
+
 function walkJson(value, visitor, seen = new Set()) {
   if (!value || typeof value !== 'object' || seen.has(value)) return;
 
@@ -838,13 +840,30 @@ async function buildOutput(current, microsoft, credly) {
 
     const retained = [];
 
+    // A renamed badge keeps its URL, so fall back to matching on that.
+    const byBadgeUrl = (items, certificate) =>
+      isBadgeUrl(certificate.url)
+        ? items.find((item) => item.url === certificate.url)
+        : undefined;
+
     for (const certificate of section.certs) {
       const key = normaliseName(certificate.name);
-      const active = activeByName.get(key);
-      const historical = historicalByName.get(key);
+      const activeList =
+        source === 'microsoft' ? activeMicrosoft : activeCredly;
+      const historicalList =
+        source === 'microsoft' ? historicalMicrosoft : historicalCredly;
+      const active =
+        activeByName.get(key) ||
+        (source === 'credly' ? byBadgeUrl(activeList, certificate) : undefined);
+      const historical =
+        historicalByName.get(key) ||
+        (source === 'credly'
+          ? byBadgeUrl(historicalList, certificate)
+          : undefined);
 
       if (active) {
         matchedActive.add(key);
+        matchedActive.add(normaliseName(active.name));
 
         retained.push(
           credentialRecord(
@@ -1152,14 +1171,6 @@ async function runSelfTest() {
             url: 'https://www.credly.com/badges/abc-123',
           },
           {
-            name: 'Terraform Authoring and Operations Advanced',
-            image: 'tf-adv.png',
-            level: 'Certification',
-            date: 'Nov 2025',
-            source: 'Credly',
-            url: 'https://www.credly.com/badges/abc-123',
-          },
-          {
             name:
               'Exam Contributor: Terraform Associate',
             image: 'exam-contributor.png',
@@ -1242,17 +1253,10 @@ async function runSelfTest() {
       source: 'Credly',
     },
     {
-      name: 'Terraform Authoring and Operations Professional',
-      issuer: 'HashiCorp',
-      issued: '2025-11-01',
-      status: 'Active',
-      source: 'Credly',
-      url: 'https://www.credly.com/badges/abc-123',
-    },
-    {
       name: 'Terraform Authoring and Operations Advanced',
       issuer: 'HashiCorp',
       issued: '2025-11-01',
+      expires: '2027-11-01',
       status: 'Active',
       source: 'Credly',
       url: 'https://www.credly.com/badges/abc-123',
@@ -1303,6 +1307,18 @@ async function runSelfTest() {
   if (hashicorp.certs.some(isExcludedBadge)) {
     throw new Error(
       'Self-test failed: exam or testing badges were retained.',
+    );
+  }
+
+  // Credly renamed the badge ("Advanced"); the site still lists it as
+  // "Professional". They share a URL, so it must match, not duplicate.
+  const professional = hashicorp.certs.find((item) =>
+    /authoring and operations/i.test(item.name),
+  );
+
+  if (professional?.expires !== 'Nov 2027') {
+    throw new Error(
+      'Self-test failed: renamed Credly badge was not matched by URL.',
     );
   }
 
