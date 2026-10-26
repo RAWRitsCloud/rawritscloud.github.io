@@ -91,6 +91,13 @@ sections:
 
   - title: "HashiCorp"
     certs:
+      - name: "Terraform Authoring and Operations Advanced"
+        image: "terraform-authoring-and-operations-advanced.png"
+        level: "Certification"
+        date: "Nov 2025"
+        expires: "Nov 2027"
+        source: "Credly"
+        url: "https://www.credly.com/badges/3320fd34-96bc-4800-a159-60a5d4550db3"
 
 legacy:
   - name: "MCSE: Cloud Platform and Infrastructure"
