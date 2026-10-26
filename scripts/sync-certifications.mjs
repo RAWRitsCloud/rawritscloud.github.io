@@ -170,6 +170,37 @@ function deduplicate(items) {
   return [...result.values()];
 }
 
+// Credly JSON can describe one badge under several names (badge, template,
+// related entries). A badge-specific URL identifies the badge, so collapse
+// items sharing one, preferring a name we already track, then the most
+// specific level.
+function collapseByBadgeUrl(items, knownKeys = new Set()) {
+  const rank = (item) =>
+    (knownKeys.has(normaliseName(item.name)) ? 2 : 0) +
+    (inferLevel(item.name) !== 'Certification' ? 1 : 0);
+
+  const byUrl = new Map();
+  const result = [];
+
+  for (const item of items) {
+    const url = item.url || '';
+    if (!/\/badges?\//i.test(url)) {
+      result.push(item);
+      continue;
+    }
+
+    const index = byUrl.get(url);
+    if (index === undefined) {
+      byUrl.set(url, result.length);
+      result.push(item);
+    } else if (rank(item) > rank(result[index])) {
+      result[index] = item;
+    }
+  }
+
+  return result;
+}
+
 function walkJson(value, visitor, seen = new Set()) {
   if (!value || typeof value !== 'object' || seen.has(value)) return;
 
@@ -707,13 +738,24 @@ async function buildOutput(current, microsoft, credly) {
   );
 
   // Credly must never affect a Microsoft credential.
-  const nonMicrosoftCredlyItems = deduplicate(
-    credly.filter(
-      (item) =>
-        !isMicrosoftCredential(item) &&
-        isHashiCorpCredential(item) &&
-        !isExcludedBadge(item),
+  const trackedKeys = new Set(
+    sections.flatMap((section) =>
+      section.certs.map((certificate) =>
+        normaliseName(certificate.name),
+      ),
     ),
+  );
+
+  const nonMicrosoftCredlyItems = collapseByBadgeUrl(
+    deduplicate(
+      credly.filter(
+        (item) =>
+          !isMicrosoftCredential(item) &&
+          isHashiCorpCredential(item) &&
+          !isExcludedBadge(item),
+      ),
+    ),
+    trackedKeys,
   );
 
   const activeMicrosoft = microsoftItems.filter(
@@ -832,7 +874,11 @@ async function buildOutput(current, microsoft, credly) {
       retained.push(certificate);
     }
 
-    section.certs = retained;
+    // Drop duplicates left by earlier runs: Credly entries sharing a badge URL.
+    section.certs =
+      source === 'credly'
+        ? collapseByBadgeUrl(retained, trackedKeys)
+        : retained;
   }
 
   const activeItems = [
@@ -1098,6 +1144,22 @@ async function runSelfTest() {
             date: '',
           },
           {
+            name: 'Terraform Authoring and Operations Professional',
+            image: 'tf-pro.png',
+            level: 'Professional',
+            date: 'Nov 2025',
+            source: 'Credly',
+            url: 'https://www.credly.com/badges/abc-123',
+          },
+          {
+            name: 'Terraform Authoring and Operations Advanced',
+            image: 'tf-adv.png',
+            level: 'Certification',
+            date: 'Nov 2025',
+            source: 'Credly',
+            url: 'https://www.credly.com/badges/abc-123',
+          },
+          {
             name:
               'Exam Contributor: Terraform Associate',
             image: 'exam-contributor.png',
@@ -1179,6 +1241,23 @@ async function runSelfTest() {
       status: 'Active',
       source: 'Credly',
     },
+    {
+      name: 'Terraform Authoring and Operations Professional',
+      issuer: 'HashiCorp',
+      issued: '2025-11-01',
+      status: 'Active',
+      source: 'Credly',
+      url: 'https://www.credly.com/badges/abc-123',
+    },
+    {
+      name: 'Terraform Authoring and Operations Advanced',
+      issuer: 'HashiCorp',
+      issued: '2025-11-01',
+      status: 'Active',
+      source: 'Credly',
+      url: 'https://www.credly.com/badges/abc-123',
+      imageUrl: '',
+    },
   ];
 
   const output = await buildOutput(
@@ -1224,6 +1303,16 @@ async function runSelfTest() {
   if (hashicorp.certs.some(isExcludedBadge)) {
     throw new Error(
       'Self-test failed: exam or testing badges were retained.',
+    );
+  }
+
+  if (
+    hashicorp.certs.filter((item) =>
+      /authoring and operations/i.test(item.name),
+    ).length !== 1
+  ) {
+    throw new Error(
+      'Self-test failed: one Credly badge produced duplicate entries.',
     );
   }
 
