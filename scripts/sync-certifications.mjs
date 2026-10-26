@@ -862,11 +862,34 @@ async function buildOutput(current, microsoft, credly) {
 
     const retained = [];
 
-    // A renamed badge keeps its URL, so fall back to matching on that.
-    const byBadgeUrl = (items, certificate) =>
-      isBadgeUrl(certificate.url)
-        ? items.find((item) => item.url === certificate.url)
-        : undefined;
+    // A renamed badge keeps its URL, so fall back to matching on that. A
+    // stored non-badge URL (e.g. a catalogue page) can't be trusted, so also
+    // accept the same issue and expiry dates, unless the item is already
+    // claimed by another cert in this section by name.
+    const sectionKeys = new Set(
+      section.certs.map((entry) => normaliseName(entry.name)),
+    );
+
+    const byBadge = (items, certificate) =>
+      items.find((item) => {
+        if (
+          sectionKeys.has(normaliseName(item.name)) &&
+          normaliseName(item.name) !== normaliseName(certificate.name)
+        ) {
+          return false;
+        }
+
+        if (isBadgeUrl(certificate.url) && item.url === certificate.url) {
+          return true;
+        }
+
+        return Boolean(
+          certificate.date &&
+            certificate.expires &&
+            displayDate(item.issued) === certificate.date &&
+            displayDate(item.expires) === certificate.expires,
+        );
+      });
 
     for (const certificate of section.certs) {
       const key = normaliseName(certificate.name);
@@ -876,11 +899,11 @@ async function buildOutput(current, microsoft, credly) {
         source === 'microsoft' ? historicalMicrosoft : historicalCredly;
       const active =
         activeByName.get(key) ||
-        (source === 'credly' ? byBadgeUrl(activeList, certificate) : undefined);
+        (source === 'credly' ? byBadge(activeList, certificate) : undefined);
       const historical =
         historicalByName.get(key) ||
         (source === 'credly'
-          ? byBadgeUrl(historicalList, certificate)
+          ? byBadge(historicalList, certificate)
           : undefined);
 
       if (active) {
@@ -1189,8 +1212,9 @@ async function runSelfTest() {
             image: 'tf-pro.png',
             level: 'Professional',
             date: 'Nov 2025',
+            expires: 'Nov 2027',
             source: 'Credly',
-            url: 'https://www.credly.com/badges/abc-123',
+            url: 'https://www.credly.com/org/ibm/badge/hashicorp-certified-x.1',
           },
           {
             name:
@@ -1361,6 +1385,14 @@ async function runSelfTest() {
   const professional = hashicorp.certs.find((item) =>
     /authoring and operations/i.test(item.name),
   );
+
+  if (
+    professional?.url !== 'https://www.credly.com/badges/abc-123'
+  ) {
+    throw new Error(
+      'Self-test failed: stored catalogue URL was not replaced.',
+    );
+  }
 
   if (professional?.expires !== 'Nov 2027') {
     throw new Error(
