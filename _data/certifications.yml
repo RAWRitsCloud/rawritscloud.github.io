@@ -91,13 +91,6 @@ sections:
 
   - title: "HashiCorp"
     certs:
-      - name: "Terraform Authoring & Operations Professional"
-        image: "hashicorp-terraform-professional.png"
-        level: "Professional"
-        date: "Nov 2025"
-        expires: "Nov 2027"
-        source: "Credly"
-        url: "https://www.credly.com/org/ibm-professional-certification-program/badge/hashicorp-certified-terraform-authoring-and-operati.1"
 
 legacy:
   - name: "MCSE: Cloud Platform and Infrastructure"
