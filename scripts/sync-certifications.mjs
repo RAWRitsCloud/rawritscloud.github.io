@@ -697,7 +697,16 @@ async function ensureLocalImage(item) {
   }
 }
 
+// A section emptied by hand (`certs:` with nothing under it) loads as null.
+function normaliseSections(current) {
+  for (const section of current?.sections || []) {
+    if (section && section.certs == null) section.certs = [];
+  }
+}
+
 function validateSchema(current) {
+  normaliseSections(current);
+
   if (!Array.isArray(current?.sections)) {
     throw new Error(
       'certifications.yml must contain a top-level sections array.',
@@ -1181,7 +1190,7 @@ async function runSelfTest() {
       },
       {
         title: 'Microsoft Azure — Associate',
-        certs: [],
+        certs: null,
       },
       {
         title: 'Microsoft Azure — Specialty',
